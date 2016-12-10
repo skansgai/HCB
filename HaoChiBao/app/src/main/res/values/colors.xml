@@ -3,4 +3,23 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="mainRed">#E65005</color>//主色-红
+    <color name="mainBlue">#4D9CEC</color>//主色-蓝
+    <color name="bgGrayWhite">#F2F2F2</color>//主背景-灰白
+
+    <color name="borderGray">#DEDEDE</color>//描边-灰
+    <color name="lineGray">#DDDDDD</color>//线条-灰
+
+    <color name="textBlack">#3C3C3C</color>//标题色-黑
+    <color name="textGrayBlack">#969696</color>//正文颜色
+    <color name="white">#ffffff</color>//白色
+    <color name="textGray">#C9C3BD</color>//图片副标题
+    <!--图标色-->
+    <color name="iconBlue">#4d9cec</color>//
+    <color name="iconLightBlue">#3793CE</color>//QQ图标
+    <color name="iconWineColor">#D44C4C</color>//微博图标
+    <color name="iconLightGreen">#0cc517</color>//微信图标
+    <color name="iconGreen">#11cd6d</color>//探探图标
+    <color name="iconBlackGreen">#00ba9c</color>//陌陌图标
+    <color name="iconOrange">#f4c500</color>//空间图标
 </resources>
