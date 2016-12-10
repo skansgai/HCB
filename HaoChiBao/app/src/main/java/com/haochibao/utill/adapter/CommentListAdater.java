@@ -1,4 +1,4 @@
-package com.haochibao.adapter;
+package com.haochibao.utill.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
