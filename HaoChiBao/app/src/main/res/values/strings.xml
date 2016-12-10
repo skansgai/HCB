@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">好吃宝</string>
+    <string name="cq">重庆</string>
+    <string name="homepage_edittext">请输入地点、商家、美食</string>
+    <string name="weather">有雾20°</string>
+    <string name="tuijian">推荐</string>
+    <string name="hudong">互动</string>
+    <string name="qiuzhu">求助</string>
+    <string name="yule">娱乐</string>
+    <string name="jiudian">酒店</string>
+    <string name="jindian">景点</string>introduce
+    <string name="gouwu">购物</string>
+    <string name="tingchechang">停车场</string>
+    <string name="faxian">发现</string>
+    <string name="shouye">首页</string>
+    <string name="mine">我的</string>
+    <string name="boomshakalaka">BoomShakalaka</string>
+    <string name="time">30分钟前</string>
+    <string name="hp_evaluate">对于我们这些吃货来说，任何妄图把大盘鸡拉条子羊肉串烤包子馕包肉哈密瓜葡萄干</string>
+    <string name="shaxian">沙县大盘鸡</string>
+    <string name="qudianpu">去店铺</string>
+    <string name="introduce">大盘鸡是新疆的地区名菜，来源说法很多，真实的来源已无法考究...</string>
 </resources>
