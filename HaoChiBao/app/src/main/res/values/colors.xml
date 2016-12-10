@@ -22,4 +22,5 @@
     <color name="iconGreen">#11cd6d</color>//探探图标
     <color name="iconBlackGreen">#00ba9c</color>//陌陌图标
     <color name="iconOrange">#f4c500</color>//空间图标
+    <color name="registerOrange">#fd9438</color>//注册字体颜色
 </resources>

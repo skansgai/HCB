@@ -60,7 +60,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="我的收藏"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/font_32"
                     android:layout_alignParentLeft="true"/>
                 <ImageView
                     android:layout_width="wrap_content"
@@ -78,7 +78,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="我的足迹"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/font_32"
                     android:layout_alignParentLeft="true"/>
                 <ImageView
                     android:layout_width="wrap_content"
@@ -96,7 +96,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="我的主页"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/font_32"
                     android:layout_alignParentLeft="true"/>
                 <ImageView
                     android:layout_width="wrap_content"
@@ -122,10 +122,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="夜间模式"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/font_32"
                     android:layout_centerVertical="true"
                     android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true" />
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="10dp"/>
             </RelativeLayout>
             <RelativeLayout
                 android:layout_marginTop="8dp"
@@ -137,7 +138,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="设置"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/font_32"
                     android:layout_alignParentLeft="true"/>
                 <ImageView
                     android:layout_width="wrap_content"
