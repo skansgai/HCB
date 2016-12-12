@@ -168,6 +168,7 @@
                     android:layout_alignParentEnd="true"/>
             </RelativeLayout>
             <TextView
+                android:id="@+id/exit_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="退出当前账号"

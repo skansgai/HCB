@@ -32,8 +32,10 @@ public class Settingactivity extends Activity{
     private RelativeLayout aboutApp,advise,shareApp,cleanCache;
     private Intent intent;
     private Context context;
-    private TextView shareBtn,canceBtn,cleanBtn,cleanCancel;
-    AlertDialog shareDialog,cleanDialog;
+    private TextView shareBtn,canceBtn,cleanBtn,cleanCancel,exitLogin,ok,no;
+    AlertDialog shareDialog;
+    AlertDialog cleanDialog;
+    AlertDialog exitDialog;
     DialogUtill dialogUtill;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +49,14 @@ public class Settingactivity extends Activity{
         advise= (RelativeLayout) findViewById(R.id.advise);
         shareApp= (RelativeLayout) findViewById(R.id.share_app);
         cleanCache= (RelativeLayout) findViewById(R.id.clean_cache);
+        exitLogin= (TextView) findViewById(R.id.exit_login);
         context=this;
         backBtn.setOnClickListener(onClickListener);
         aboutApp.setOnClickListener(onClickListener);
         advise.setOnClickListener(onClickListener);
         shareApp.setOnClickListener(onClickListener);
         cleanCache.setOnClickListener(onClickListener);
+        exitLogin.setOnClickListener(onClickListener);
     }
 
     View.OnClickListener onClickListener=new View.OnClickListener() {
@@ -90,6 +94,16 @@ public class Settingactivity extends Activity{
                 case R.id.clean_cancel:
                     cleanDialog.dismiss();
                     break;
+                case R.id.exit_login:
+                    createExitDialog();
+                    break;
+                case R.id.ok:
+                    Toast.makeText(context,"成功退出",Toast.LENGTH_SHORT).show();
+                    exitDialog.dismiss();
+                    break;
+                case R.id.no:
+                    exitDialog.dismiss();
+                    break;
             }
         }
     };
@@ -114,5 +128,15 @@ public class Settingactivity extends Activity{
         cleanBtn.setOnClickListener(onClickListener);
         dialogUtill=new DialogUtill(context,cleanView,cleanDialog);
         cleanDialog=dialogUtill.createDialog();
+    }
+    public void createExitDialog(){
+        LayoutInflater inflater=LayoutInflater.from(context);
+        View cleanView=inflater.inflate(R.layout.dialog_login_exit,null);
+        ok= (TextView) cleanView.findViewById(R.id.ok);
+        no=(TextView)cleanView.findViewById(R.id.no);
+        ok.setOnClickListener(onClickListener);
+        no.setOnClickListener(onClickListener);
+        dialogUtill=new DialogUtill(context,cleanView,exitDialog);
+        exitDialog=dialogUtill.createDialog();
     }
 }
