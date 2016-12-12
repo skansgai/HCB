@@ -55,7 +55,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:padding="10dp">
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -73,7 +76,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:padding="10dp">
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -91,7 +97,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:padding="10dp">
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -105,11 +114,16 @@
                     android:layout_alignParentRight="true"/>
             </RelativeLayout>
             <RelativeLayout
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                >
                 <CheckBox
                     android:id="@+id/day_night_btn"
                     android:layout_width="40dp"
@@ -117,7 +131,7 @@
                     android:button="@null"
                     android:background="@drawable/checkbox_style"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="10dp"/>
+                    />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -125,15 +139,17 @@
                     android:textSize="@dimen/font_32"
                     android:layout_centerVertical="true"
                     android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginLeft="10dp"/>
+                    android:layout_alignParentStart="true"/>
             </RelativeLayout>
             <RelativeLayout
                 android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:padding="10dp">
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

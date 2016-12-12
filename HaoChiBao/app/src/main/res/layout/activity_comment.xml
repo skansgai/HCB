@@ -12,45 +12,89 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/left_arrow_white"
-            android:paddingLeft="10dp"
+            android:padding="10dp"
             android:layout_centerVertical="true"/>
         <RadioGroup
+            android:id="@+id/rg_top"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:layout_centerHorizontal="true">
             <RadioButton
+                android:id="@+id/rg_top_left"
                 android:layout_width="80dp"
                 android:layout_height="30dp"
                 android:button="@null"
-                android:text="评论"
+                android:text="点评"
                 android:textColor="@color/mainRed"
                 android:gravity="center"
+                android:textSize="@dimen/font_32"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/rb_top_left_selector"/>
-
-        </RadioGroup>
+            <RadioButton
+                android:id="@+id/rg_top_right"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:button="@null"
+                android:text="图评"
+                android:textColor="@color/mainRed"
+                android:gravity="center"
+                android:textSize="@dimen/font_32"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/rb_top_right_selector"/>
+    </RadioGroup>
         <TextView
             android:id="@+id/btn_top_search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="36dp"
+            android:layout_height="18dp"
+            android:gravity="center"
             android:text="搜索"
+            android:textSize="@dimen/font_24"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
             android:background="@drawable/bg_btn_top_right"
             android:layout_alignParentRight="true"
-            android:textColor="@color/mainRed"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:paddingBottom="2dp"
-            android:paddingTop="2dp"/>
+            android:textColor="@color/mainRed"/>
+    </RelativeLayout>
+    <com.haochibao.utill.view.FlowLayout
+        android:id="@+id/comment_search_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="6dp">
+
+    </com.haochibao.utill.view.FlowLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ListView
+            android:id="@+id/comment_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:dividerHeight="10dp"
+            android:background="@color/white">
+        </ListView>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#AAFFFFFF"
+            android:layout_alignParentBottom="true">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/font_28"
+                android:text="大坪正街"
+                android:layout_centerVertical="true"
+                android:padding="10dp"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:padding="10dp"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/review_refresh"/>
+        </RelativeLayout>
     </RelativeLayout>
 
-    <ListView
-        android:id="@+id/comment_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:dividerHeight="10dp"
-        android:background="@color/white">
-    </ListView>
 </LinearLayout>

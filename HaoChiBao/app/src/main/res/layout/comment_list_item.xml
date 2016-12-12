@@ -13,15 +13,17 @@
             android:layout_height="wrap_content"
             android:src="@mipmap/my_head_portrait"/>
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="32dp"
+            android:layout_height="15dp"
             android:text="LV4"
             android:background="@drawable/bg_user_level"
-            android:padding="2dp"
+            android:textSize="11sp"
+            android:gravity="center"
             android:textColor="@color/white"
             android:layout_alignBottom="@+id/user_portrait"
             android:layout_toLeftOf="@+id/user_name"/>
         <TextView
+            android:layout_marginTop="10dp"
             android:id="@+id/user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -33,15 +35,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/user_portrait"
             android:layout_alignBottom="@+id/user_portrait">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="打分"/>
+                android:text="打分"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/textGrayBlack"
+                android:textSize="@dimen/font_20"
+                />
             <RatingBar
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                style="@style/roomRatingBar"
+                android:layout_margin="5dp"/>
+
         </LinearLayout>
     </RelativeLayout>
     <LinearLayout
@@ -114,4 +125,36 @@
             android:paddingTop="7dp"
             android:paddingBottom="7dp"/>
     </LinearLayout>
+    <com.haochibao.utill.view.FlowLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@color/bgGrayWhite">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/recommended_praise"/>
+    </com.haochibao.utill.view.FlowLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/bgGrayWhite">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="在此风花雪月"
+            android:textColor="@color/mainRed"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"
+            android:textColor="@color/mainRed"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/comment_content"/>
+    </LinearLayout>
+
+
 </LinearLayout>
