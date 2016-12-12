@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.haochibao.R;
+import com.haochibao.utill.dialog.DialogUtill;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,23 +29,15 @@ import java.util.Map;
 
 public class Settingactivity extends Activity{
     private ImageView backBtn;
-    private RelativeLayout aboutApp,advise,shareApp;
+    private RelativeLayout aboutApp,advise,shareApp,cleanCache;
     private Intent intent;
     private Context context;
-    TextView shareBtn,canceBtn;
-    AlertDialog alertDialog;
-   // private List<Map<String, Object>> iconList;
-    /*private int[] icon={
-            R.mipmap.my_qq,
-            R.mipmap.my_weixin,
-            R.mipmap.my_weibo,
-            R.mipmap.share_for_specifics,
-            R.mipmap.share_momo,
-            R.mipmap.share_space};*/
+    private TextView shareBtn,canceBtn,cleanBtn,cleanCancel;
+    AlertDialog shareDialog,cleanDialog;
+    DialogUtill dialogUtill;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //iconList=new ArrayList<Map<String,Object>>();
         setContentView(R.layout.activity_setting);
         init();
     }
@@ -53,11 +46,13 @@ public class Settingactivity extends Activity{
         aboutApp= (RelativeLayout) findViewById(R.id.about_app);
         advise= (RelativeLayout) findViewById(R.id.advise);
         shareApp= (RelativeLayout) findViewById(R.id.share_app);
+        cleanCache= (RelativeLayout) findViewById(R.id.clean_cache);
         context=this;
         backBtn.setOnClickListener(onClickListener);
         aboutApp.setOnClickListener(onClickListener);
         advise.setOnClickListener(onClickListener);
         shareApp.setOnClickListener(onClickListener);
+        cleanCache.setOnClickListener(onClickListener);
     }
 
     View.OnClickListener onClickListener=new View.OnClickListener() {
@@ -80,10 +75,20 @@ public class Settingactivity extends Activity{
                     break;
                 case R.id.share_btn:
                     Toast.makeText(context,"分享成功",Toast.LENGTH_SHORT).show();
-                    alertDialog.dismiss();
+                    shareDialog.dismiss();
                     break;
                 case R.id.cancel_btn:
-                    alertDialog.dismiss();
+                    shareDialog.dismiss();
+                    break;
+                case R.id.clean_cache:
+                    createCleanDialog();
+                    break;
+                case R.id.clean_btn:
+                    Toast.makeText(context,"缓存清除成功",Toast.LENGTH_SHORT).show();
+                    cleanDialog.dismiss();
+                    break;
+                case R.id.clean_cancel:
+                    cleanDialog.dismiss();
                     break;
             }
         }
@@ -97,9 +102,17 @@ public class Settingactivity extends Activity{
         canceBtn.setOnClickListener(onClickListener);
         AlertDialog.Builder builder=new AlertDialog.Builder(context);
         builder.setView(shareView);
-        alertDialog=builder.create();
-        alertDialog.show();
-
+        shareDialog=builder.create();
+        shareDialog.show();
     }
-
+    public void createCleanDialog(){
+        LayoutInflater inflater=LayoutInflater.from(context);
+        View cleanView=inflater.inflate(R.layout.dialog_clean_cache,null);
+        cleanBtn= (TextView) cleanView.findViewById(R.id.clean_btn);
+        cleanCancel=(TextView)cleanView.findViewById(R.id.clean_cancel);
+        cleanCancel.setOnClickListener(onClickListener);
+        cleanBtn.setOnClickListener(onClickListener);
+        dialogUtill=new DialogUtill(context,cleanView,cleanDialog);
+        cleanDialog=dialogUtill.createDialog();
+    }
 }
