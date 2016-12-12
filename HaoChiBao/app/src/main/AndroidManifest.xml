@@ -9,18 +9,23 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
+
+        </activity>
+        <activity android:name=".activity.NoLoginMineActivity"/><!--没有登陆是我的页面-->
+        <activity android:name=".activity.RegisterActivity"/><!--注册页面-->
+        <activity android:name=".activity.CommentActivity"/>
+        <activity android:name=".activity.ShopingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".activity.NoLoginMineActivity"/><!--没有登陆是我的页面-->
-        <activity android:name=".activity.RegisterActivity"/><!--注册页面-->
-        <activity android:name=".activity.CommentActivity"/><!---->
+        </activity><!--娱乐-->
         <activity android:name=".activity.MineCollectionActivity"/><!--我的收藏-->
         <activity android:name=".activity.MineHomePageActivity"/><!--个人主页-->
+
         <activity android:name=".activity.Guanzhu_listview"/><!--关注-->
         <activity android:name=".activity.Tuijian_listview"/><!--推荐-->
+        <activity android:name=".activity.SearchActivity"/><!--搜索-->
 
     </application>
 </manifest>

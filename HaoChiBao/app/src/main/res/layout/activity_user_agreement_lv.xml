@@ -23,30 +23,36 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="我的收藏"
+            android:text="用户协议"
             android:layout_centerVertical="true"
             android:textColor="@color/textBlack"
             android:textSize="@dimen/font_40"
             android:layout_centerInParent="true"
             />
-        <ImageView
-            android:id="@+id/clean_collection"
-            android:layout_centerVertical="true"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerInParent="true"
-            android:src="@mipmap/my_delete"
-            android:layout_marginRight="10dp"/>
     </RelativeLayout>
-    <ListView
-        android:dividerHeight="8dp"
-        android:layout_marginTop="5dp"
-        android:id="@+id/my_collection_lv"
-        android:layout_weight="1"
+    <LinearLayout
+        android:layout_marginTop="1dp"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@color/white">
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingTop="10dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="好吃宝许可及服务协议"
+            android:textColor="@color/textBlack"
+            android:textSize="@dimen/font_36"
+            android:paddingBottom="10dp"/>
+        <ListView
+            android:padding="10dp"
+            android:dividerHeight="0dp"
+            android:id="@+id/user_agreement_lv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
+        </ListView>
+    </LinearLayout>
 
-    </ListView>
 </LinearLayout>

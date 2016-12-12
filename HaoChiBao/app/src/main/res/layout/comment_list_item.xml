@@ -4,114 +4,251 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="10dp">
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
+
         <ImageView
             android:id="@+id/user_portrait"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/my_head_portrait"/>
+            android:src="@mipmap/my_head_portrait" />
+
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="LV4"
-            android:background="@drawable/bg_user_level"
-            android:padding="2dp"
-            android:textColor="@color/white"
+            android:layout_width="32dp"
+            android:layout_height="15dp"
             android:layout_alignBottom="@+id/user_portrait"
-            android:layout_toLeftOf="@+id/user_name"/>
+            android:layout_toLeftOf="@+id/user_name"
+            android:background="@drawable/bg_user_level"
+            android:gravity="center"
+            android:text="LV4"
+            android:textColor="@color/white"
+            android:textSize="11sp" />
+
         <TextView
             android:id="@+id/user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="BoomShakalaka"
             android:layout_marginLeft="10dp"
-            android:textColor="@color/textBlack"
-            android:layout_toRightOf="@+id/user_portrait"/>
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/user_portrait"
+            android:text="BoomShakalaka"
+            android:textColor="@color/textBlack" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_alignBottom="@+id/user_portrait"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/user_portrait"
-            android:layout_alignBottom="@+id/user_portrait">
+            android:orientation="horizontal">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="打分"/>
+                android:layout_gravity="center_vertical"
+                android:text="打分"
+                android:textColor="@color/textGrayBlack"
+                android:textSize="@dimen/font_20" />
+
             <RatingBar
+                style="@style/roomRatingBar"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp" />
+
         </LinearLayout>
     </RelativeLayout>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="5dp">
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/comment_content"/>
+            android:text="@string/comment_content" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="全文"/>
+            android:text="全文" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="5dp">
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/my_beauty_photo"/>
+            android:src="@mipmap/my_beauty_photo" />
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/my_beauty_photo"
-            android:layout_marginLeft="10dp"/>
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/my_beauty_photo" />
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/my_beauty_photo"
-            android:layout_marginLeft="10dp"/>
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/my_beauty_photo" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="昨天"/>
+            android:text="昨天" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="浏览"/>
+            android:text="浏览" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="362"/>
+            android:text="362" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="次"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginRight="10dp"
+            android:text="次" />
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/remark_praise"
-            android:padding="7dp"/>
+            android:padding="7dp"
+            android:src="@mipmap/remark_praise" />
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/review_comments"
+            android:paddingBottom="7dp"
             android:paddingLeft="10dp"
             android:paddingTop="7dp"
-            android:paddingBottom="7dp"/>
+            android:src="@mipmap/review_comments" />
     </LinearLayout>
+
+    <com.haochibao.utill.view.FlowLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bgGrayWhite"
+        android:padding="5dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:src="@mipmap/recommended_praise" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="在此风花雪月"
+            android:textColor="@color/mainRed" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="问你奶奶个腿"
+            android:textColor="@color/mainRed" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="日川冈坂"
+            android:textColor="@color/mainRed" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="紫电"
+            android:textColor="@color/mainRed" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="异域至尊"
+            android:textColor="@color/mainRed" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="奇味椒盐酥"
+            android:textColor="@color/mainRed" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="在此风花雪月"
+            android:textColor="@color/mainRed" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="你爹临死前"
+            android:textColor="@color/mainRed" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="在此风花雪月"
+            android:textColor="@color/mainRed" />
+
+
+    </com.haochibao.utill.view.FlowLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bgGrayWhite"
+        android:orientation="horizontal"
+        android:paddingBottom="15dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="在此风花雪月"
+            android:textColor="@color/mainRed" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"
+            android:textColor="@color/mainRed" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/comment_content" />
+    </LinearLayout>
+
 </LinearLayout>
