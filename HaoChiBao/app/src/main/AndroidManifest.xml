@@ -22,13 +22,16 @@
         </activity><!--娱乐-->
         <activity android:name=".activity.MineCollectionActivity"/><!--我的收藏-->
         <activity android:name=".activity.MineHomePageActivity"/><!--个人主页-->
-        <activity android:name=".activity.HomeViewPagerActivity"/>
-        <activity android:name=".activity.ShopingActivity"/>
-        <activity android:name=".activity.ParkingActivity"/>
-        <activity android:name=".activity.HotelActivity"/>
+        <activity android:name=".activity.HomeViewPagerActivity"/><!--首页-->
+        <activity android:name=".activity.ShopingActivity"/><!--购物-->
+        <activity android:name=".activity.ParkingActivity"/><!--停车场-->
+        <activity android:name=".activity.HotelActivity"/><!--酒店-->
+        <activity android:name=".activity.EntertainmentActivity"/><!--娱乐-->
+        <activity android:name=".activity.AttractionActivity"/><!--景点-->
+        <activity android:name=".activity.InterctionActivity"/><!--互动-->
         <activity android:name=".activity.RecommendActivity"/><!--热门推荐-->
         <activity android:name=".activity.HotPotDetailsActivity"/><!--推荐详情-->
-
+        <activity android:name=".activity.SeekHelpActivity"/><!--帮助-->
 
 
     </application>
