@@ -8,7 +8,6 @@
         android:layout_height="wrap_content"
         android:background="@color/mainRed">
         <ImageView
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/left_arrow_white"
@@ -17,8 +16,8 @@
         <EditText
             android:layout_width="190dp"
             android:layout_height="30dp"
-            android:text="输入地点、商户名、美食"
-            android:textColor="#D6D5D5"
+            android:hint="输入地点、商户名、美食"
+            android:textColor="@color/textBlack"
             android:textSize="@dimen/font_28"
             android:background="@drawable/search"
             android:layout_margin="12dp"

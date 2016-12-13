@@ -10,7 +10,6 @@
         android:focusableInTouchMode="true"
         android:touchscreenBlocksFocus="true"
         android:background="@color/mainRed">
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
