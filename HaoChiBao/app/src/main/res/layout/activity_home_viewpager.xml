@@ -3,38 +3,58 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<android.support.v4.view.ViewPager
-    android:id="@+id/home_viewpager"
-    android:layout_weight="1"
-    android:layout_width="match_parent"
-    android:layout_height="0dp">
-</android.support.v4.view.ViewPager>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/borderGray" />
-    <RelativeLayout
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/home_viewpager"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+    </android.support.v4.view.ViewPager>
+
+    <RadioGroup
+        android:id="@+id/home_viewpager_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="17dp">
-        <TextView
-            android:layout_width="wrap_content"
+        android:layout_marginTop="17dp"
+        android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/home_btn"
+            android:button="@null"
+            android:gravity="center_horizontal"
+            android:layout_weight="1"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:drawableTop="@mipmap/home_location"
-            android:text="@string/shouye" />
-        <TextView
-            android:layout_width="wrap_content"
+            android:checked="true"
+            android:drawablePadding="5dp"
+            android:textColor="@color/mainRed"
+            android:drawableTop="@drawable/home_radiubutton_sytle"
+            android:text="@string/shouye"/>
+        <RadioButton
+            android:id="@+id/discover_btn"
+            android:button="@null"
+            android:gravity="center_horizontal"
+            android:layout_weight="1"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:drawableTop="@mipmap/discover"
-            android:text="@string/faxian" />
-        <TextView
-            android:layout_width="wrap_content"
+            android:drawablePadding="5dp"
+            android:textColor="@color/textBlack"
+            android:drawableTop="@drawable/discover_checkbox_style"
+            android:text="@string/shouye"/>
+        <RadioButton
+            android:id="@+id/mine_btn"
+            android:button="@null"
+            android:gravity="center_horizontal"
+            android:layout_weight="1"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="50dp"
-            android:drawableTop="@mipmap/my"
-            android:text="@string/mine" />
-    </RelativeLayout>
+            android:drawablePadding="5dp"
+            android:textColor="@color/textBlack"
+            android:drawableTop="@drawable/mine_checkbox_style"
+            android:text="@string/shouye"/>
+    </RadioGroup>
 </LinearLayout>

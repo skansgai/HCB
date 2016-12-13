@@ -19,10 +19,8 @@ import com.haochibao.activity.Settingactivity;
  */
 
 public class HomeFragment extends Fragment {
-    private RelativeLayout minePage,setting,mineCollection;
-    private Intent intent;
-    private Context context;
     private View view;
+    private Context context;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,35 +32,7 @@ public class HomeFragment extends Fragment {
             LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.activity_homepage,null);
         context=getActivity();
-        init();
         return view;
     }
-    //初始化
-    public void init(){
-        minePage= (RelativeLayout) view.findViewById(R.id.mine_page_btn);
-        setting= (RelativeLayout)view. findViewById(R.id.setting);
-        mineCollection= (RelativeLayout)view. findViewById(R.id.mine_collection);
-        minePage.setOnClickListener(onClickListener);
-        setting.setOnClickListener(onClickListener);
-        mineCollection.setOnClickListener(onClickListener);
-    }
-    View.OnClickListener onClickListener=new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()){
-                case R.id.mine_page_btn:
-                    intent=new Intent(context,MineInformationActivity.class);
-                    startActivity(intent);
-                    break;
-                case R.id.setting:
-                    intent=new Intent(context,Settingactivity.class);
-                    startActivity(intent);
-                    break;
-                case R.id.mine_collection:
-                    intent=new Intent(context,MineCollectionActivity.class);
-                    startActivity(intent);
-                    break;
-            }
-        }
-    };
+
 }
