@@ -27,7 +27,7 @@ public class HomeViewPagerActivity extends FragmentActivity {
     private RadioButton homeBtn,discoverBtn,mineBtn;
     private ViewPager viewPager;
     private List<Fragment> fragmentList;
-    private boolean isLogin=false;
+    private boolean isLogin=false; 
     private Fragment mineFragment;
     private Fragment homeFragment;
     private List<RadioButton> radioButtonList;
