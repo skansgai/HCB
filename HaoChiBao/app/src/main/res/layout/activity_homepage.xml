@@ -5,17 +5,20 @@
     android:background="@color/white"
     android:orientation="vertical">
 
+    <!--顶部导航栏-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/mainRed">
+        android:background="@color/mainRed"
+        android:focusableInTouchMode="true"
+        >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="16dp"
             android:drawablePadding="5dp"
             android:drawableRight="@mipmap/home_sw_resize"
             android:text="@string/cq"
@@ -37,9 +40,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_marginBottom="12dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="16dp"
             android:text="@string/weather"
             android:textColor="@color/white"
             android:textSize="16sp" />
@@ -47,11 +50,12 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <ImageView
@@ -71,6 +75,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/home_recommend"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -81,6 +86,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/home_interaction"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -91,6 +97,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/home_seek_help"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -101,6 +108,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/home_recreation"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -120,6 +128,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/home_grogshop"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -130,6 +139,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/home_scenic_spots"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -140,6 +150,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/home_shopping"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -150,6 +161,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/home_park"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -165,31 +177,36 @@
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
                 android:background="@color/bgGrayWhite" />
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="12dp"
-                android:text="@string/faxian"
-                android:textSize="18sp"
-                android:id="@+id/textView" />
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/e_resize"
-                android:layout_alignTop="@+id/textView"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
-        </RelativeLayout>
-            <ListView
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1">
-            </ListView>
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/faxian"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignTop="@+id/textView"
+                    android:layout_marginRight="12dp"
+                    android:src="@mipmap/e_resize" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/borderGray" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -308,36 +325,53 @@
         </LinearLayout>
     </ScrollView>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/borderGray" />
-
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="17dp">
+        android:background="@color/bgGrayWhite"
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:drawableTop="@mipmap/home_location"
-            android:text="@string/shouye" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/lineGray" />
 
-        <TextView
-            android:layout_width="wrap_content"
+        <RadioGroup
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:drawableTop="@mipmap/discover"
-            android:text="@string/faxian" />
+            android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="50dp"
-            android:drawableTop="@mipmap/my"
-            android:text="@string/mine" />
-    </RelativeLayout>
+            <RadioButton
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:paddingTop="17dp"
+                android:button="@null"
+                android:gravity="center_horizontal"
+                android:drawableTop="@mipmap/home_location"
+                android:text="@string/shouye" />
+
+            <RadioButton
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:button="@null"
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:paddingTop="17dp"
+                android:layout_centerInParent="true"
+                android:drawableTop="@mipmap/discover"
+                android:text="@string/faxian" />
+
+            <RadioButton
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:button="@null"
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:paddingTop="17dp"
+                android:layout_alignParentRight="true"
+                android:drawableTop="@mipmap/my"
+                android:text="@string/mine" />
+        </RadioGroup>
+    </LinearLayout>
 </LinearLayout>

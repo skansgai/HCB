@@ -21,4 +21,17 @@
     <string name="qudianpu">去店铺</string>
     <string name="introduce">大盘鸡是新疆的地区名菜，来源说法很多，真实的来源已无法考究...</string>
     <string name="comment_content">重庆火锅的材料就只有 盐蒜香菜醋香油 可是他们混在一起我就觉得完美 我以前调的都是什么鬼 晚上是的人还挺多的 地方还算大</string>
+    <string name="chaffy_dish">火锅</string>
+    <string name="self_help">自助</string>
+    <string name="sichuan_dish">川菜</string>
+    <string name="snack">小吃</string>
+    <string name="nearby">附近</string>
+    <string name="rank">排序</string>
+    <string name="praise">好评</string>
+    <string name="chenyanjinghuoguo">陈眼镜火锅(石油路店)</string>
+    <string name="ziranweidaohuogou">自然谓道火锅</string>
+    <string name="daping">大坪</string>
+    <string name="gengduohuoguo">更多火锅</string>
+    <string name="quguangguang">去逛逛</string>
+    <string name="chenyanjing">陈眼镜火锅</string>
 </resources>
