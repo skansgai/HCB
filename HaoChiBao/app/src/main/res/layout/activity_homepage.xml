@@ -75,6 +75,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/home_recommend"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -85,6 +86,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/home_interaction"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -95,6 +97,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/home_seek_help"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -105,6 +108,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/home_recreation"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -124,6 +128,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/home_grogshop"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -134,6 +139,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/home_scenic_spots"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -144,6 +150,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/home_shopping"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -154,6 +161,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/home_park"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -328,33 +336,42 @@
             android:layout_height="1dp"
             android:background="@color/lineGray" />
 
-        <RelativeLayout
+        <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="17dp"
             android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <RadioButton
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
+                android:paddingTop="17dp"
+                android:button="@null"
+                android:gravity="center_horizontal"
                 android:drawableTop="@mipmap/home_location"
                 android:text="@string/shouye" />
 
-            <TextView
-                android:layout_width="wrap_content"
+            <RadioButton
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:button="@null"
+                android:gravity="center_horizontal"
                 android:layout_height="wrap_content"
+                android:paddingTop="17dp"
                 android:layout_centerInParent="true"
                 android:drawableTop="@mipmap/discover"
                 android:text="@string/faxian" />
 
-            <TextView
-                android:layout_width="wrap_content"
+            <RadioButton
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:button="@null"
+                android:gravity="center_horizontal"
                 android:layout_height="wrap_content"
+                android:paddingTop="17dp"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="50dp"
                 android:drawableTop="@mipmap/my"
                 android:text="@string/mine" />
-        </RelativeLayout>
+        </RadioGroup>
     </LinearLayout>
 </LinearLayout>

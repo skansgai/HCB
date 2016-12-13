@@ -19,6 +19,7 @@
         <activity android:name=".activity.NoLoginMineActivity"/>
         <activity android:name=".activity.RegisterActivity"/>
         <activity android:name=".activity.CommentActivity"/>
+        <activity android:name=".activity.RecommendActivity"/>
 
     </application>
 </manifest>
