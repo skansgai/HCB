@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <!--顶部导航栏-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/mainRed"
-        android:focusableInTouchMode="true"
-        >
+        android:focusableInTouchMode="true">
 
         <TextView
             android:layout_width="wrap_content"
@@ -50,8 +49,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
         android:layout_marginBottom="16dp"
+        android:layout_marginTop="18dp"
         android:orientation="horizontal">
 
         <TextView
@@ -95,169 +94,182 @@
             android:textSize="@dimen/font_32" />
 
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="10dp"
-        android:background="@color/lineGray"/>
+        android:background="@color/lineGray" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
+        android:background="@color/white"
         android:orientation="horizontal"
-        android:background="@color/white">
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp">
+
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
             android:orientation="horizontal"
-            android:padding="5dp"
-            android:gravity="center">
+            android:padding="5dp">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/nearby"
-                android:textSize="@dimen/font_32"
-                android:textColor="@color/textBlack"/>
+                android:textColor="@color/textBlack"
+                android:textSize="@dimen/font_32" />
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:src="@mipmap/entertainment_small_arrow"/>
+                android:src="@mipmap/entertainment_small_arrow" />
         </LinearLayout>
 
         <View
             android:layout_width="1dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
             android:layout_height="match_parent"
-            android:background="@color/lineGray"/>
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/lineGray" />
+
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:padding="5dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
             android:orientation="horizontal"
-            android:gravity="center">
+            android:padding="5dp">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/chaffy_dish"
-                android:textSize="@dimen/font_32"
-                android:textColor="@color/textBlack"/>
+                android:textColor="@color/textBlack"
+                android:textSize="@dimen/font_32" />
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:src="@mipmap/entertainment_small_arrow"/>
+                android:src="@mipmap/entertainment_small_arrow" />
         </LinearLayout>
 
         <View
             android:layout_width="1dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
             android:layout_height="match_parent"
-            android:background="@color/lineGray"/>
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/lineGray" />
+
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:padding="5dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
             android:orientation="horizontal"
-            android:gravity="center">
+            android:padding="5dp">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/rank"
-                android:textSize="@dimen/font_32"
-                android:textColor="@color/textBlack"/>
+                android:textColor="@color/textBlack"
+                android:textSize="@dimen/font_32" />
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:src="@mipmap/entertainment_small_arrow"/>
+                android:src="@mipmap/entertainment_small_arrow" />
         </LinearLayout>
 
         <View
             android:layout_width="1dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
             android:layout_height="match_parent"
-            android:background="@color/lineGray"/>
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/lineGray" />
+
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:padding="5dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
             android:orientation="horizontal"
-            android:gravity="center">
+            android:padding="5dp">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/praise"
-                android:textSize="@dimen/font_32"
-                android:textColor="@color/textBlack"/>
+                android:textColor="@color/textBlack"
+                android:textSize="@dimen/font_32" />
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:src="@mipmap/entertainment_small_arrow"/>
+                android:src="@mipmap/entertainment_small_arrow" />
         </LinearLayout>
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/lineGray"/>
+        android:background="@color/lineGray" />
 
     <ListView
         android:id="@+id/recommend_list_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        >
+        android:layout_weight="1">
 
     </ListView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/bgGrayWhite"
-        android:orientation="vertical">
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:background="@color/bgGrayWhite"-->
+    <!--android:orientation="vertical">-->
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@color/lineGray" />
+    <!--<View-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="2dp"-->
+    <!--android:background="@color/lineGray" />-->
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="17dp"
-            android:layout_marginBottom="3dp"
-            android:orientation="horizontal">
+    <!--<RelativeLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="17dp"-->
+    <!--android:layout_marginBottom="3dp"-->
+    <!--android:orientation="horizontal">-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
-                android:drawableTop="@mipmap/home_location"
-                android:text="@string/shouye" />
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginLeft="50dp"-->
+    <!--android:drawableTop="@mipmap/home_location"-->
+    <!--android:text="@string/shouye" />-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:drawableTop="@mipmap/discover"
-                android:text="@string/faxian" />
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_centerInParent="true"-->
+    <!--android:drawableTop="@mipmap/discover"-->
+    <!--android:text="@string/faxian" />-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="50dp"
-                android:drawableTop="@mipmap/my"
-                android:text="@string/mine" />
-        </RelativeLayout>
-    </LinearLayout>
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:layout_marginRight="50dp"-->
+    <!--android:drawableTop="@mipmap/my"-->
+    <!--android:text="@string/mine" />-->
+    <!--</RelativeLayout>-->
+    <!--</LinearLayout>-->
 </LinearLayout>
