@@ -89,7 +89,7 @@
             android:layout_height="60dp"
             android:text="分享"
             android:gravity="center"
-            android:textSize="@dimen/font_44"
+            android:textSize="@dimen/font_32"
             android:textColor="#74afef"
             />
         <View
@@ -103,7 +103,7 @@
             android:layout_height="60dp"
             android:text="取消"
             android:gravity="center"
-            android:textSize="@dimen/font_44"
+            android:textSize="@dimen/font_32"
             android:textColor="#74afef"
             />
     </LinearLayout>
