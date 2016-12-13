@@ -21,8 +21,10 @@
         <activity android:name=".activity.MineCollectionActivity"/><!--我的收藏-->
         <activity android:name=".activity.MineHomePageActivity"/><!--个人主页-->
         <activity android:name=".activity.MineInformationActivity"/><!--我的资料-->
-        <activity android:name=".activity.Guanzhu_listview"/><!--关注-->
-        <activity android:name=".activity.Tuijian_listview"/><!--推荐-->
+        <activity android:name=".activity.GuanzhuListview"/><!--关注-->
+        <activity android:name=".activity.TuijianListview"/><!--推荐-->
+        <activity android:name=".activity.FindListview"/><!--发现-->
+        <activity android:name=".activity.MyTuijianListview"/><!--我的推荐-->
         <activity android:name=".activity.SearchActivity"/><!--搜索-->
         <activity android:name=".activity.Settingactivity"/><!--我的设置-->
         <activity android:name=".activity.AboutAppActivity"/><!--关于App-->
