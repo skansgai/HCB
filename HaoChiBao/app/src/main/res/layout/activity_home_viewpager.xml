@@ -4,10 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/borderGray" />
+
 
     <android.support.v4.view.ViewPager
         android:id="@+id/home_viewpager"
@@ -16,11 +13,15 @@
         android:layout_height="0dp">
     </android.support.v4.view.ViewPager>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/borderGray" />
+
     <RadioGroup
         android:id="@+id/home_viewpager_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
         android:orientation="horizontal">
         <RadioButton
             android:id="@+id/home_btn"
@@ -30,7 +31,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:drawablePadding="5dp"
+            android:drawablePadding="4dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="4dp"
             android:textColor="@color/mainRed"
             android:drawableTop="@drawable/home_radiubutton_sytle"
             android:text="@string/shouye"/>
@@ -41,10 +44,12 @@
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:drawablePadding="5dp"
+            android:drawablePadding="4dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="4dp"
             android:textColor="@color/textBlack"
             android:drawableTop="@drawable/discover_checkbox_style"
-            android:text="@string/shouye"/>
+            android:text="@string/faxian"/>
         <RadioButton
             android:id="@+id/mine_btn"
             android:button="@null"
@@ -52,9 +57,11 @@
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:drawablePadding="5dp"
+            android:drawablePadding="4dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="4dp"
             android:textColor="@color/textBlack"
             android:drawableTop="@drawable/mine_checkbox_style"
-            android:text="@string/shouye"/>
+            android:text="@string/mine"/>
     </RadioGroup>
 </LinearLayout>
