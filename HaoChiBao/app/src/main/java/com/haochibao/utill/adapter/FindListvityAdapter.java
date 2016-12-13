@@ -9,11 +9,11 @@ import android.widget.BaseAdapter;
 import com.haochibao.R;
 
 /**
- * Created by Administrator on 2016/12/12.
+ * Created by Administrator on 2016/12/13.
  */
-public class TuijianListAdapter extends BaseAdapter {
+public class FindListvityAdapter extends BaseAdapter {
     Context context;
-    public TuijianListAdapter(Context context){this.context=context;}
+    public FindListvityAdapter(Context context){this.context=context;}
     @Override
     public int getCount() {
         return 5;
@@ -32,7 +32,7 @@ public class TuijianListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater layoutInflater=LayoutInflater.from(context);
-        convertView=layoutInflater.inflate(R.layout.activity_tuijian_listview,null);
+        convertView=layoutInflater.inflate(R.layout.activity_find_listview,null);
         return convertView;
     }
 }
