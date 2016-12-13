@@ -8,25 +8,24 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MineHomePageActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <activity android:name=".MainActivity">
+
         </activity>
         <activity android:name=".activity.NoLoginMineActivity"/><!--没有登陆是我的页面-->
         <activity android:name=".activity.RegisterActivity"/><!--注册页面-->
         <activity android:name=".activity.CommentActivity"/>
-        <activity android:name=".activity.ShopingActivity"/>
+        <activity android:name=".activity.ParkingActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity><!--娱乐-->
         <activity android:name=".activity.MineCollectionActivity"/><!--我的收藏-->
-        <activity android:name=".MainActivity"/><!--个人主页-->
         <activity android:name=".activity.MineInformationActivity"/><!--我的资料-->
-
-
-        <activity android:name=".activity.Guanzhu_listview"/><!--关注-->
-        <activity android:name=".activity.Tuijian_listview"/><!--推荐-->
+        <activity android:name=".activity.GuanzhuListview"/><!--关注-->
+        <activity android:name=".activity.TuijianListview"/><!--推荐-->
         <activity android:name=".activity.SearchActivity"/><!--搜索-->
-        <activity android:name=".activity.MyTuijian_listview"/><!--我的推荐-->
+        <activity android:name=".activity.MyTuijianListview"/><!--我的推荐-->
         <activity android:name=".activity.Find_listvity"/><!--发现-->
 
 
@@ -35,7 +34,8 @@
         <activity android:name=".activity.AttractionActivity"/>
         <activity android:name=".activity.UseragreementActivity"/>
         <activity android:name=".activity.UserAdviseActvity"/>
-        <activity android:name=".activity.ParkingActivity"/>
+        <activity android:name=".activity.MineHomePageActivity"/><!--个人主页-->
+
 
     </application>
 </manifest>
