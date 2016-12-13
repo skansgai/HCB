@@ -54,6 +54,7 @@
         android:orientation="horizontal"
         android:background="@color/white">
         <LinearLayout
+            android:id="@+id/entertainment_nearby"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
@@ -61,6 +62,7 @@
             android:padding="5dp"
             android:gravity="center">
             <TextView
+                android:id="@+id/text_nearby"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="附近"
@@ -80,6 +82,7 @@
             android:layout_height="match_parent"
             android:background="@color/lineGray"/>
         <LinearLayout
+            android:id="@+id/entertainment_content"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:padding="5dp"
@@ -87,6 +90,7 @@
             android:orientation="horizontal"
             android:gravity="center">
             <TextView
+                android:id="@+id/text_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="娱乐"
@@ -106,6 +110,7 @@
             android:layout_height="match_parent"
             android:background="@color/lineGray"/>
         <LinearLayout
+            android:id="@+id/entertainment_rank"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:padding="5dp"
@@ -113,6 +118,7 @@
             android:orientation="horizontal"
             android:gravity="center">
             <TextView
+                android:id="@+id/text_rank"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="排序"
@@ -132,6 +138,7 @@
             android:layout_height="match_parent"
             android:background="@color/lineGray"/>
         <LinearLayout
+            android:id="@+id/entertainment_good_reputation"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:padding="5dp"
@@ -139,6 +146,7 @@
             android:orientation="horizontal"
             android:gravity="center">
             <TextView
+                android:id="@+id/text_good_reputation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="好评"
@@ -151,12 +159,9 @@
                 android:src="@mipmap/entertainment_small_arrow"/>
         </LinearLayout>
     </LinearLayout>
-    <ListView
-        android:id="@+id/entertainment_list"
-        android:layout_marginTop="1dp"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/entertainment_view_pager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:dividerHeight="5dp">
+        android:layout_height="wrap_content" />
 
-    </ListView>
 </LinearLayout>

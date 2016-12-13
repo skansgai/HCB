@@ -51,6 +51,7 @@
                     />
             </LinearLayout>
             <RelativeLayout
+                android:id="@+id/mine_collection"
                 android:layout_marginTop="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -72,6 +73,7 @@
                     android:layout_alignParentRight="true"/>
             </RelativeLayout>
             <RelativeLayout
+                android:id="@+id/mine_spoor"
                 android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -93,6 +95,7 @@
                     android:layout_alignParentRight="true"/>
             </RelativeLayout>
             <RelativeLayout
+                android:id="@+id/mine_page_btn"
                 android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -142,6 +145,7 @@
                     android:layout_alignParentStart="true"/>
             </RelativeLayout>
             <RelativeLayout
+                android:id="@+id/setting"
                 android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
