@@ -24,7 +24,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     private PagerAdapter mAdapter;
     private List<View> mViews = new ArrayList<View>();
     private Button mEnterButton, mPassButton;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,14 +31,11 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_login);
 
         initView();
-
         initEvents();
 
     }
 
     private void initEvents() {
-
-
         mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
             @Override
@@ -116,11 +112,11 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.imgbtn_pass:
-                    intent = new Intent(LoginActivity.this, HomePageActivity.class);
+                    intent = new Intent(LoginActivity.this, HomeViewPagerActivity.class);
                     startActivity(intent);
                     break;
                 case R.id.imgbtn_enter:
-                    intent = new Intent(LoginActivity.this, HomePageActivity.class);
+                    intent = new Intent(LoginActivity.this, HomeViewPagerActivity.class);
                     startActivity(intent);
                     break;
             }
