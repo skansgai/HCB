@@ -34,7 +34,7 @@ public class GuanzhuListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater layoutInflater=LayoutInflater.from(context);
-        convertView=layoutInflater.inflate(R.layout.activity_guanzhu_listview ,null);
+        convertView=layoutInflater.inflate(R.layout.activity_find_lv_attention_item,null);
         return convertView;
 
     }

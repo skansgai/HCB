@@ -18,14 +18,15 @@
            android:padding="10dp"/>
         <RadioGroup
             android:id="@+id/push_group"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:orientation="horizontal">
             <RadioButton
+                android:layout_weight="1"
                 android:id="@+id/app_push"
                 android:button="@null"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:background="@drawable/tuijian_left_selector"
@@ -35,10 +36,11 @@
                 android:textColor="@color/mainRed"
                 android:textSize="@dimen/font_36" />
             <RadioButton
+                android:layout_weight="1"
                 android:id="@+id/mine_push"
                 android:button="@null"
                 android:padding="5dp"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:checked="false"
                 android:background="@drawable/tuijian_right_selector"

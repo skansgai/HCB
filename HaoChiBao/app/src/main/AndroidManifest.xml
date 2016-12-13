@@ -33,7 +33,7 @@
         <activity android:name=".activity.HomeViewPagerActivity"/><!--首页-->
         <activity android:name=".activity.FindActivity"/><!--发现-->
         <!--推荐-->
-        <activity android:name=".activity.GuanzhuActivity"/><!--关注-->
+        <!--关注-->
         <activity android:name=".activity.ShopingActivity"/>
         <activity android:name=".activity.HotelActivity"/>
         <activity android:name=".activity.RecommendActivity"/><!--热门推荐-->

@@ -11,9 +11,9 @@ import com.haochibao.R;
 /**
  * Created by Administrator on 2016/12/13.
  */
-public class FindListvityAdapter extends BaseAdapter {
+public class FindListViewAdapter extends BaseAdapter {
     Context context;
-    public FindListvityAdapter(Context context){this.context=context;}
+    public FindListViewAdapter(Context context){this.context=context;}
     @Override
     public int getCount() {
         return 5;
@@ -32,7 +32,7 @@ public class FindListvityAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater layoutInflater=LayoutInflater.from(context);
-        convertView=layoutInflater.inflate(R.layout.activity_find_listview,null);
+        convertView=layoutInflater.inflate(R.layout.activity_find_lv_item,null);
         return convertView;
     }
 }
