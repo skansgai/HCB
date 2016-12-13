@@ -9,7 +9,12 @@
     </style>
     <style name="roomRatingBar" parent="@android:style/Widget.RatingBar">
         <item name="android:progressDrawable">@drawable/mine_collection_rating_bar</item>
-        <item name="android:minHeight">16dp</item>
-        <item name="android:maxHeight">16dp</item>
+        <item name="android:minHeight">5dp</item>
+        <item name="android:maxHeight">20dp</item>
+    </style>
+    <style name="smollRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/smoll_xingxing</item>
+        <item name="android:minHeight">25dp</item>
+        <item name="android:maxHeight">25dp</item>
     </style>
 </resources>

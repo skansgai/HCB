@@ -11,11 +11,11 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/white"
-            android:layout_marginLeft="5dp"
+            android:layout_margin="5dp"
             android:orientation="vertical">
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
                 android:src="@mipmap/my_beauty_photo"
                 android:scaleType="fitXY"/>
             <LinearLayout
@@ -27,60 +27,26 @@
                     android:layout_height="wrap_content"
                     android:text="香菜丸子"
                     android:textColor="@color/textBlack"
-                    android:textSize="@dimen/font_28"/>
+                    android:textSize="@dimen/font_24"/>
                 <RatingBar
-                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    style="@style/roomRatingBar"
+                    style="@style/smollRatingBar"
                     android:numStars="5"
                     android:rating="4.5"/>
-
             </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/white"
-            android:layout_marginLeft="5dp"
-            android:orientation="vertical">
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/my_beauty_photo"
-                android:scaleType="fitXY"/>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="香菜丸子"
-                    android:textColor="@color/textBlack"
-                    android:textSize="@dimen/font_28"/>
-                <RatingBar
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/roomRatingBar"
-                    android:numStars="5"
-                    android:rating="4.5"/>
-
-            </LinearLayout>
-
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/white"
-            android:layout_marginLeft="5dp"
+            android:layout_margin="5dp"
             android:orientation="vertical">
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
                 android:src="@mipmap/my_beauty_photo"
                 android:scaleType="fitXY"/>
             <LinearLayout
@@ -92,19 +58,47 @@
                     android:layout_height="wrap_content"
                     android:text="香菜丸子"
                     android:textColor="@color/textBlack"
-                    android:textSize="@dimen/font_28"/>
+                    android:textSize="@dimen/font_24"/>
                 <RatingBar
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/smollRatingBar"
+                android:numStars="5"
+                android:rating="4.5"/>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:layout_margin="5dp"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:src="@mipmap/my_beauty_photo"
+                android:scaleType="fitXY"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/roomRatingBar"
+                    android:text="香菜丸子"
+                    android:textColor="@color/textBlack"
+                    android:textSize="@dimen/font_24"/>
+                <RatingBar
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    style="@style/smollRatingBar"
                     android:numStars="5"
                     android:rating="4.5"/>
-
             </LinearLayout>
-
         </LinearLayout>
-
-
     </LinearLayout>
 
 </LinearLayout>

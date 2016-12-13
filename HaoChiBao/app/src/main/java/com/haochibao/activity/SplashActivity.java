@@ -16,11 +16,10 @@ public class SplashActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         boolean mFirst = isFirstEnter(SplashActivity.this,SplashActivity.this.getClass().getName());
-        Toast.makeText(this,mFirst+"",Toast.LENGTH_SHORT).show();
         if (mFirst){
-            mHandler.sendEmptyMessageDelayed(SWITCH_GUIDACTIVITY,100);
+            mHandler.sendEmptyMessage(SWITCH_GUIDACTIVITY);
         }else {
-            mHandler.sendEmptyMessageDelayed(SWITCH_MAINACTIVITY,100);
+            mHandler.sendEmptyMessage(SWITCH_MAINACTIVITY);
         }
         SharedPreferences sharedPreferences = this.getSharedPreferences("my_pref",MODE_PRIVATE);
         sharedPreferences.edit().putString("guide_activity","false").commit();
@@ -55,7 +54,7 @@ public class SplashActivity extends Activity{
             switch (msg.what){
                 case SWITCH_MAINACTIVITY:
                     mIntent = new Intent();
-                    mIntent.setClass(SplashActivity.this, EntertainmentActivity.class);
+                    mIntent.setClass(SplashActivity.this, HomeViewPagerActivity.class);
                     SplashActivity.this.startActivity(mIntent);
                     SplashActivity.this.finish();
                     break;

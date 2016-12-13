@@ -1,6 +1,7 @@
 package com.haochibao.fragment;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import com.haochibao.R;
 import com.haochibao.activity.AttractionActivity;
 import com.haochibao.activity.EntertainmentActivity;
@@ -20,6 +20,7 @@ import com.haochibao.activity.RecommendActivity;
 import com.haochibao.activity.SeekHelpActivity;
 import com.haochibao.activity.ShopingActivity;
 
+
 /**
  * Created by Administrator on 2016/12/13.
  * 我的页面
@@ -29,6 +30,8 @@ public class HomeFragment extends Fragment {
     TextView home_recommend,home_interaction,home_seek_help,home_recreation,
             home_grogshop,home_scenic_spots,home_shopping,home_park;
     private View view;
+    private TextView homeRecommend;
+    private Context context;
     private Activity mactivity;
     Intent intent;
     @Override
@@ -41,8 +44,8 @@ public class HomeFragment extends Fragment {
     public View onCreateView(
             LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.activity_homepage,null);
-
-
+        context=getActivity();
+        init();
         home_recommend = (TextView) view.findViewById(R.id.home_recommend);
         home_interaction = (TextView) view.findViewById(R.id.home_interaction);
         home_seek_help = (TextView) view.findViewById(R.id.home_seek_help);
@@ -60,9 +63,13 @@ public class HomeFragment extends Fragment {
         home_scenic_spots.setOnClickListener(onClickListener);
         home_shopping.setOnClickListener(onClickListener);
         home_park.setOnClickListener(onClickListener);
-
         return view;
     }
+    public void init(){
+        homeRecommend= (TextView) view.findViewById(R.id.home_recommend);
+        homeRecommend.setOnClickListener(onClickListener);
+    }
+
     View.OnClickListener onClickListener = new View.OnClickListener() {
 
         @Override

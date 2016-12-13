@@ -5,10 +5,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.KeyEvent;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.haochibao.R;
+import com.haochibao.fragment.FindFragment;
 import com.haochibao.fragment.HomeFragment;
 import com.haochibao.fragment.MineFragment;
 import com.haochibao.fragment.NoLoginMineFragment;
@@ -29,6 +31,7 @@ public class HomeViewPagerActivity extends FragmentActivity {
     private boolean isLogin=false; 
     private Fragment mineFragment;
     private Fragment homeFragment;
+    private Fragment findFragment;
     private List<RadioButton> radioButtonList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +48,12 @@ public class HomeViewPagerActivity extends FragmentActivity {
 
         radioButtonList=new ArrayList<RadioButton>();
         radioButtonList.add(homeBtn);
+        radioButtonList.add(discoverBtn);
         radioButtonList.add(mineBtn);
 
         fragmentList=new ArrayList<Fragment>();
         homeFragment=new HomeFragment();
+        findFragment=new FindFragment();
         if (isLogin){
              mineFragment=new MineFragment();
         }else {
@@ -56,6 +61,9 @@ public class HomeViewPagerActivity extends FragmentActivity {
         }
         if (homeFragment!=null){
             fragmentList.add(homeFragment);
+        }
+        if (findFragment!=null){
+            fragmentList.add(findFragment);
         }
         if (mineFragment!=null){
          fragmentList.add(mineFragment);
@@ -94,6 +102,7 @@ public class HomeViewPagerActivity extends FragmentActivity {
                       mineBtn.setTextColor(getResources().getColor(R.color.textBlack));
                       discoverBtn.setChecked(true);
                       discoverBtn.setTextColor(getResources().getColor(R.color.mainRed));
+                      viewPager.setCurrentItem(1);
                       break;
                   case R.id.mine_btn:
                       homeBtn.setChecked(false);
@@ -102,7 +111,7 @@ public class HomeViewPagerActivity extends FragmentActivity {
                       mineBtn.setTextColor(getResources().getColor(R.color.mainRed));
                       discoverBtn.setChecked(false);
                       discoverBtn.setTextColor(getResources().getColor(R.color.textBlack));
-                      viewPager.setCurrentItem(1);
+                      viewPager.setCurrentItem(2);
                       break;
 
               }

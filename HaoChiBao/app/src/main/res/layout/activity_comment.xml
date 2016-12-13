@@ -9,6 +9,7 @@
         android:layout_height="wrap_content"
         android:background="@color/mainRed">
         <ImageView
+            android:id="@+id/btn_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/left_arrow_white"
@@ -58,13 +59,6 @@
             android:layout_alignParentRight="true"
             android:textColor="@color/mainRed"/>
     </RelativeLayout>
-    <com.haochibao.utill.view.FlowLayout
-        android:id="@+id/comment_search_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="6dp">
-
-    </com.haochibao.utill.view.FlowLayout>
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">

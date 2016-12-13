@@ -32,7 +32,7 @@ public class TuijianListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater layoutInflater=LayoutInflater.from(context);
-        convertView=layoutInflater.inflate(R.layout.activity_tuijian_listview,null);
+        convertView=layoutInflater.inflate(R.layout.activity_tuijian_lv_item_app,null);
         return convertView;
     }
 }
