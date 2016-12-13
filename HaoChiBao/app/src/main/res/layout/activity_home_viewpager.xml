@@ -4,10 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/borderGray" />
+
 
     <android.support.v4.view.ViewPager
         android:id="@+id/home_viewpager"
@@ -15,6 +12,11 @@
         android:layout_width="match_parent"
         android:layout_height="0dp">
     </android.support.v4.view.ViewPager>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/borderGray" />
 
     <RadioGroup
         android:id="@+id/home_viewpager_group"
@@ -44,7 +46,7 @@
             android:drawablePadding="5dp"
             android:textColor="@color/textBlack"
             android:drawableTop="@drawable/discover_checkbox_style"
-            android:text="@string/shouye"/>
+            android:text="@string/faxian"/>
         <RadioButton
             android:id="@+id/mine_btn"
             android:button="@null"
@@ -55,6 +57,6 @@
             android:drawablePadding="5dp"
             android:textColor="@color/textBlack"
             android:drawableTop="@drawable/mine_checkbox_style"
-            android:text="@string/shouye"/>
+            android:text="@string/mine"/>
     </RadioGroup>
 </LinearLayout>
