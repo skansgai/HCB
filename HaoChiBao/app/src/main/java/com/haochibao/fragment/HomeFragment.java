@@ -11,9 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.haochibao.R;
+import com.haochibao.activity.AttractionActivity;
+import com.haochibao.activity.EntertainmentActivity;
 import com.haochibao.activity.HotelActivity;
+import com.haochibao.activity.InterctionActivity;
 import com.haochibao.activity.ParkingActivity;
 import com.haochibao.activity.RecommendActivity;
+import com.haochibao.activity.SeekHelpActivity;
 import com.haochibao.activity.ShopingActivity;
 
 
@@ -76,17 +80,24 @@ public class HomeFragment extends Fragment {
                     startActivity(intent);
                     break;
                 case R.id.home_interaction:
-
+                    intent = new Intent(mactivity,InterctionActivity.class);
+                    startActivity(intent);
                     break;
                 case R.id.home_seek_help:
+                    intent = new Intent(mactivity,SeekHelpActivity.class);
+                    startActivity(intent);
                     break;
                 case R.id.home_recreation:
+                    intent = new Intent(mactivity,EntertainmentActivity.class);
+                    startActivity(intent);
                     break;
                 case R.id.home_grogshop:
                     intent = new Intent(mactivity,HotelActivity.class);
                     startActivity(intent);
                     break;
                 case R.id.home_scenic_spots:
+                    intent = new Intent(mactivity,AttractionActivity.class);
+                    startActivity(intent);
                     break;
                 case R.id.home_shopping:
                     intent = new Intent(mactivity,ShopingActivity.class);
