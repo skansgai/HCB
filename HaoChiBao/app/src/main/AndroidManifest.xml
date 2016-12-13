@@ -14,7 +14,7 @@
         <activity android:name=".activity.NoLoginMineActivity"/><!--没有登陆是我的页面-->
         <activity android:name=".activity.RegisterActivity"/><!--注册页面-->
         <activity android:name=".activity.CommentActivity"/>
-        <activity android:name=".activity.ParkingActivity">
+        <activity android:name=".activity.EntertainmentActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER" />
