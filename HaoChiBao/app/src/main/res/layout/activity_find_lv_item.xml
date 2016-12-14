@@ -25,7 +25,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="骚逼"
+                android:text="无极"
                 android:textColor="@color/textBlack"
                 android:textSize="@dimen/font_36" />
 
@@ -100,7 +100,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-                    android:text="沙县大骚逼"
+                    android:text="沙县大盘鸡"
                     android:textSize="@dimen/font_32" />
 
                 <TextView
