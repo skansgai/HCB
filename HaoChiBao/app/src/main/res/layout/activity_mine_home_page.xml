@@ -16,7 +16,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:paddingBottom="12dp"
+                android:paddingBottom="8dp"
                 >
                 <ImageView
                     android:id="@+id/back_btn"
@@ -34,8 +34,7 @@
                     android:layout_centerVertical="true"
                     android:textColor="@color/textBlack"
                     android:textSize="@dimen/font_40"
-                    android:layout_centerInParent="true"
-                    />
+                    android:layout_centerInParent="true"/>
             </RelativeLayout>
             <LinearLayout
                 android:layout_marginTop="12dp"
