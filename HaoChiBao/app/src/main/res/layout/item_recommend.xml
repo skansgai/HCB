@@ -55,6 +55,7 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="5dp"
                     style="@style/roomRatingBar"
+                    android:isIndicator="true"
                     android:rating="4.5"
                     android:numStars="5"/>
 
@@ -87,6 +88,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
+
                     android:background="@drawable/home_page_qudianpu"
                     android:paddingBottom="2dp"
                     android:paddingLeft="4dp"
@@ -103,13 +105,15 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
+        android:layout_marginTop="2dp"
         android:background="@color/lineGray" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        >
 
         <ImageView
             android:layout_width="wrap_content"
@@ -157,6 +161,7 @@
                     android:paddingBottom="5dp"
                     style="@style/roomRatingBar"
                     android:rating="4.5"
+                    android:isIndicator="true"
                     android:numStars="5"/>
                 <TextView
                     android:layout_width="wrap_content"
@@ -181,7 +186,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/gengduohuoguo" />
+                    android:text="@string/gengduohuoguo"
+                    android:paddingBottom="8dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"

@@ -3,14 +3,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="bottom"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:background="@drawable/bg_btn_top_right">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
-        android:background="@drawable/bg_hot_search"
         android:gravity="center_horizontal"
         android:paddingBottom="15dp"
         android:paddingTop="15dp"
@@ -26,14 +31,12 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
-        android:background="@drawable/bg_hot_search"
+
         android:gravity="center_horizontal"
         android:paddingBottom="15dp"
         android:paddingTop="15dp"
         android:text="023-68578555" />
-
+    </LinearLayout>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -43,6 +46,7 @@
         android:background="@drawable/bg_hot_search"
         android:gravity="center_horizontal"
         android:paddingBottom="15dp"
+        android:layout_marginBottom="30dp"
         android:paddingTop="15dp"
         android:text="取消" />
 </LinearLayout>
