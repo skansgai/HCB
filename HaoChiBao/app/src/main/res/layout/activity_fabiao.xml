@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/borderGray"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/mainRed">
+
+        <ImageView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="16dp"
+            android:src="@mipmap/left_arrow_white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="陈眼睛火锅店"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_36" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="15dp"
+            android:background="@drawable/tuijian_three"
+            android:text="发表"
+            android:textColor="@color/mainRed"
+            android:textSize="@dimen/font_36" />
+
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="总体"
+            android:textSize="@dimen/font_48"
+            android:textColor="@color/textBlack"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="11dp"
+            android:layout_marginBottom="18dp"/>
+        <RatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:rating="4.5"
+            style="@style/roomRatingBar"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="21dp"/>
+
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/textGray"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="131dp"
+        android:text="亲，菜品的口味如何，环境怎么样，服务满意吗"
+        android:textColor="@color/textGray"
+        android:textSize="@dimen/font_28"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/tianjia"
+        android:layout_margin="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="上传照片"
+            android:textColor="@color/textBlack"
+            android:textSize="@dimen/font_36"
+            android:layout_marginTop="25dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="推荐菜"
+            android:textColor="@color/textBlack"
+            android:textSize="@dimen/font_48"
+            android:layout_marginLeft="20dp"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="腰片"
+            android:textColor="@color/textGray"
+            android:layout_marginLeft="30dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3道推荐菜可以选"
+            android:textColor="@color/textGray"
+            android:drawableRight="@mipmap/published_arrowdown"
+            android:layout_marginRight="10dp"/>
+
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/textGray"
+        android:layout_marginTop="10dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="人均"
+            android:textSize="@dimen/font_48"
+            android:textColor="@color/textBlack"
+            android:layout_margin="20dp"/>
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¥请输入消费金额"
+            android:textColor="@color/textGray"
+            android:textSize="@dimen/font_32"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="20dp"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>
