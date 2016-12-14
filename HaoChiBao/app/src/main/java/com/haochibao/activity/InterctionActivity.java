@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.haochibao.R;
@@ -19,6 +20,7 @@ import java.util.List;
  */
 public class InterctionActivity extends Activity {
     ListView listView;
+    ImageView img_left;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +28,13 @@ public class InterctionActivity extends Activity {
         listView = (ListView) findViewById(R.id.interaction_lv);
         InterctionAdapter interctionAdapter= new InterctionAdapter(InterctionActivity.this,list);
         listView.setAdapter(interctionAdapter);
-
+        img_left = (ImageView) findViewById(R.id.img_left);
+        img_left.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
     List<String>list = new ArrayList<String>();
     class InterctionAdapter extends BaseAdapter{
