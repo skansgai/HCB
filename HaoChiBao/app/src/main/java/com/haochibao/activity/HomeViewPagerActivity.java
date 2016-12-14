@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.WindowManager;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -51,7 +52,6 @@ public class HomeViewPagerActivity extends FragmentActivity {
         discoverBtn= (RadioButton) findViewById(R.id.discover_btn);
         mineBtn= (RadioButton) findViewById(R.id.mine_btn);
         viewPager= (ViewPager) findViewById(R.id.home_viewpager);
-
         radioButtonList=new ArrayList<RadioButton>();
         radioButtonList.add(homeBtn);
         radioButtonList.add(discoverBtn);
@@ -60,6 +60,7 @@ public class HomeViewPagerActivity extends FragmentActivity {
         homeFragment=new HomeFragment();
         findFragment=new FindFragment();
         isLogin=getIntent().getBooleanExtra("isLogin",false);
+
         Log.i("TAG",isLogin+"");
         if (isLogin){
             mineFragment=new MineFragment();
@@ -76,6 +77,7 @@ public class HomeViewPagerActivity extends FragmentActivity {
         if (mineFragment!=null){
          fragmentList.add(mineFragment);
         }
+
         viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
            @Override
            public Fragment getItem(int position) {
