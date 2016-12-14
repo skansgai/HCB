@@ -12,6 +12,7 @@
         android:background="@color/mainRed">
 
         <ImageView
+            android:id="@+id/img_left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -227,6 +228,7 @@
                 android:background="@color/lineGray" />
 
             <LinearLayout
+                android:id="@+id/phone_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -253,6 +255,7 @@
                 android:background="@color/lineGray" />
 
             <LinearLayout
+                android:id="@+id/hcb_share"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -355,6 +358,7 @@
                 android:background="@color/lineGray" />
 
             <LinearLayout
+                android:id="@+id/hcb_comment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"

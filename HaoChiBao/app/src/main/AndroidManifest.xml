@@ -37,5 +37,6 @@
         <activity android:name=".activity.UseragreementActivity"/>
         <activity android:name=".activity.UserAdviseActvity"/>
         <activity android:name=".activity.FindActivity"/><!--发现-->
+        <activity android:name=".activity.MyRecommendActivity"/><!--我的推荐-->
     </application>
 </manifest>

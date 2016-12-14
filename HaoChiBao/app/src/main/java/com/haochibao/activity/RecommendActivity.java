@@ -1,20 +1,19 @@
 package com.haochibao.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.TextView;
 
 import com.haochibao.R;
-import com.haochibao.utill.adapter.AppRecommendAdapter;
-import com.haochibao.utill.adapter.MineRecommendAdapter;
-import com.haochibao.utill.model.AppRecommendModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,84 +22,74 @@ import java.util.List;
  * Created by Administrator on 2016/12/12.
  */
 public class RecommendActivity extends Activity {
-    private ListView listView;
-    private ImageView backBtn;
-    private RadioGroup radioGroup;
-    private RadioButton appPush,minePush;
-    private TextView searchBtn;
-    private AppRecommendAdapter appAdapter;
-    private MineRecommendAdapter mineAdapter;
-    private Intent intent;
-    private List<AppRecommendModel> mineList=new ArrayList<AppRecommendModel>();
+    ImageView img_left;
+    ListView recommend_list_view;
+    Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tuijian_lv);
-        init();
+        setContentView(R.layout.activity_recommend);
+        img_left= (ImageView) findViewById(R.id.img_left);
+        recommend_list_view = (ListView) findViewById(R.id.recommend_list_view);
+        RecommendAdapter recommendAdapter = new RecommendAdapter(this,list);
+        recommend_list_view.setAdapter(recommendAdapter);
+        img_left.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        recommend_list_view.setOnItemClickListener(onItemClickListener);
+        getdate();
     }
-    public void init(){
-        backBtn= (ImageView) findViewById(R.id.back_btn);
-        radioGroup= (RadioGroup) findViewById(R.id.push_group);
-        appPush= (RadioButton) findViewById(R.id.app_push);
-        minePush= (RadioButton) findViewById(R.id.mine_push);
-        searchBtn= (TextView) findViewById(R.id.search_btn);
-        listView= (ListView) findViewById(R.id.push_list_view);
-        backBtn.setOnClickListener(onClickListener);
-        searchBtn.setOnClickListener(onClickListener);
-        radioGroup.setOnCheckedChangeListener(onCheckedChangeListener);
-        List<AppRecommendModel> list=getMineData();
-        appAdapter=new AppRecommendAdapter(this,list);
-        mineAdapter=new MineRecommendAdapter(this);
-        listView.setAdapter(appAdapter);
-    }
-    View.OnClickListener onClickListener=new View.OnClickListener() {
+    AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
-        public void onClick(View v) {
-            switch (v.getId()){
-                case R.id.back_btn:
-                    finish();
-                    break;
-                case R.id.search_btn:
-                    intent=new Intent(RecommendActivity.this,SearchActivity.class);
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    intent = new Intent(RecommendActivity.this,HotPotDetailsActivity.class);
                     startActivity(intent);
-                    break;
+            Log.i("OnItemClickListener====","position"+position);
             }
-        }
+
     };
-    RadioGroup.OnCheckedChangeListener onCheckedChangeListener=new RadioGroup.OnCheckedChangeListener() {
+    List<String>list = new ArrayList<String>();
+    public void getdate(){
+        for(int i = 0;i<3;i++){
+            String s = new String();
+            list.add(s);
+        }
+    }
+
+    class RecommendAdapter extends BaseAdapter{
+        Context context;
+        List<String>list;
+        LayoutInflater layoutInflater;
+        public RecommendAdapter(Context context, List<String>list){
+            this.context =context;
+            this.list=list;
+        }
+
         @Override
-        public void onCheckedChanged(RadioGroup group, int checkedId) {
-            switch (checkedId){
-                case R.id.app_push:
-                    appPush.setChecked(true);
-                    listView.setAdapter(appAdapter);
-                    appPush.setTextColor(getResources().getColor(R.color.mainRed));
-                    minePush.setTextColor(getResources().getColor(R.color.white));
-                    break;
-                case R.id.mine_push:
-                    appPush.setChecked(false);
-                    listView.setAdapter(mineAdapter);
-                    appPush.setTextColor(getResources().getColor(R.color.white));
-                    minePush.setTextColor(getResources().getColor(R.color.mainRed));
-                    break;
+        public int getCount() {
+            return list.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return list.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            layoutInflater = LayoutInflater.from(context);
+            if(convertView==null){
+               convertView = layoutInflater.inflate(R.layout.item_recommend,null);
             }
+            return convertView;
         }
-    };
-    public List<AppRecommendModel> getMineData(){
-        for (int i=0;i<10;i++){
-            AppRecommendModel model=new AppRecommendModel();
-            model.setFooImageId(R.mipmap.my_beauty_photo);
-            model.setFooImageId1(R.mipmap.my_head_portrait);
-            model.setFoodName("麻辣香锅");
-            model.setFoodName1("好吃串串");
-            model.setFoodGrde(3.5);
-            model.setFoodGrde1(4.5);
-            model.setZan(true);
-            model.setZan1(false);
-            model.setZanNumber(100);
-            model.setZanNumber1(20);
-            mineList.add(model);
-        }
-        return mineList;
     }
 }
