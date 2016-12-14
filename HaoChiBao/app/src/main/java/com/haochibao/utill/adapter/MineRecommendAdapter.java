@@ -11,12 +11,17 @@ import com.haochibao.R;
 /**
  * Created by Administrator on 2016/12/13.
  */
-public class MytuijianListAdapter extends BaseAdapter {
+
+public class MineRecommendAdapter extends BaseAdapter {
     Context context;
-    public MytuijianListAdapter(Context context){this.context=context;}
+    LayoutInflater inflater;
+    public MineRecommendAdapter(Context context){
+        this.context=context;
+        inflater=LayoutInflater.from(context);
+    }
     @Override
     public int getCount() {
-        return 5;
+        return 10;
     }
 
     @Override
@@ -31,8 +36,7 @@ public class MytuijianListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater layoutInflater=LayoutInflater.from(context);
-        convertView=layoutInflater.inflate(R.layout.activity_mytuijian_listview,null);
+        convertView=inflater.inflate(R.layout.activity_tuijian_lv_item_me,null);
         return convertView;
     }
 }

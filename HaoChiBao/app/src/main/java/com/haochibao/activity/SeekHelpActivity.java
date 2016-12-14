@@ -6,12 +6,12 @@ import android.os.Bundle;
 import com.haochibao.R;
 
 /**
- * Created by Administrator on 2016/12/12.
+ * Created by Administrator on 2016/12/13.
  */
-public class GuanzhuActivity extends Activity {
+public class SeekHelpActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_guanzhu);
+        setContentView(R.layout.activity_seekhelp);
     }
 }

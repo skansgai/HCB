@@ -15,9 +15,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:paddingBottom="12dp"
-            android:paddingLeft="10dp"
-            android:paddingTop="12dp"
+            android:paddingBottom="16dp"
+            android:paddingLeft="12dp"
+            android:paddingTop="16dp"
             android:src="@mipmap/left_arrow_white" />
 
         <TextView
@@ -92,6 +92,13 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:orientation="horizontal">
+                        <RatingBar
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:numStars="5"
+                            android:stepSize="0.5"
+                            style="@style/roomRatingBar"
+                            android:rating="4.5"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -502,6 +509,7 @@
                             android:layout_height="wrap_content"
                             android:numStars="5"
                             android:stepSize="0.5"
+                            android:rating="4.5"
                             android:layout_marginLeft="5dp"/>
 
                     </LinearLayout>
@@ -608,12 +616,21 @@
                     android:text="查看全部评论" />
 
                 <ImageView
+                    android:id="@+id/img_chakan_lv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@mipmap/e_resize" />
             </LinearLayout>
+            <ListView
+                android:id="@+id/hotpot_lv"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:visibility="gone">
+            </ListView>
         </LinearLayout>
     </ScrollView>
+
 
     <View
         android:layout_width="match_parent"
