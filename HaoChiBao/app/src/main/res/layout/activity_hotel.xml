@@ -6,9 +6,7 @@
     android:background="@color/bgGrayWhite">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:focusableInTouchMode="true"
-        android:touchscreenBlocksFocus="true"
+        android:layout_height="50dp"
         android:background="@color/mainRed">
 
         <ImageView
@@ -20,26 +18,13 @@
             android:padding="10dp"
             android:src="@mipmap/left_arrow_white" />
 
-        <EditText
-            android:layout_width="190dp"
-            android:layout_height="30dp"
-            android:layout_centerInParent="true"
-            android:background="@drawable/bg_top_edit"
-            android:hint="@string/homepage_edittext"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:gravity="center"
-            android:textSize="@dimen/font_24"
-            android:textColorHint="@color/borderGray" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:text="@string/weather"
+            android:layout_centerInParent="true"
+            android:text="@string/jiudian"
             android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:textSize="@dimen/font_36" />
     </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
