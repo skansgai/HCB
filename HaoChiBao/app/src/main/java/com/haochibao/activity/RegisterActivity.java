@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.haochibao.R;
+import com.haochibao.fragment.MineFragment;
 
 /**
  * Created by Administrator on 2016/12/10.
@@ -51,6 +53,9 @@ public class RegisterActivity extends Activity {
                 break;
             case R.id.login_btn:
                 //登陆按钮
+                Intent intent=new Intent(RegisterActivity.this, HomeViewPagerActivity.class);
+                    intent.putExtra("isLogin",true);
+                    startActivity(intent);
                 break;
             case R.id.fast_login:
                 //快速登陆
@@ -81,4 +86,5 @@ public class RegisterActivity extends Activity {
             }
         });
     }
+
 }
