@@ -8,18 +8,16 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!--<activity android:name=".activity.LoginActivity">-->
-
-        <!--</activity>-->
-        <activity android:name=".activity.NoLoginMineActivity"/><!--没有登陆是我的页面-->
-        <activity android:name=".activity.RegisterActivity"/><!--注册页面-->
-        <activity android:name=".activity.CommentActivity"/>
-        <activity android:name=".activity.LoginActivity">
+        <activity android:name=".activity.SplashActivity"><!--引导页面-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity><!--娱乐-->
+        </activity>
+        <activity android:name=".activity.NoLoginMineActivity"/><!--没有登陆是我的页面-->
+        <activity android:name=".activity.RegisterActivity"/><!--注册页面-->
+        <activity android:name=".activity.CommentActivity"/>
+        <activity android:name=".activity.LoginActivity"/>
         <activity android:name=".activity.MineCollectionActivity"/><!--我的收藏-->
         <activity android:name=".activity.MineHomePageActivity"/><!--个人主页-->
         <activity android:name=".activity.HomeViewPagerActivity"/>

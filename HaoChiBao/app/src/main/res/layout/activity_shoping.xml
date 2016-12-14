@@ -29,9 +29,8 @@
             android:background="@drawable/bg_top_edit"
             android:hint="@string/homepage_edittext"
             android:gravity="center"
-            android:paddingBottom="5dp"
-            android:paddingRight="20dp"
-            android:paddingTop="5dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
             android:textSize="@dimen/font_24"
             android:textColorHint="@color/borderGray" />
 
@@ -39,9 +38,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_marginBottom="12dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="12dp"
+            android:layout_centerVertical="true"
+            android:padding="10dp"
             android:text="@string/weather"
             android:textColor="@color/white"
             android:textSize="16sp" />
