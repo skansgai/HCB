@@ -1,19 +1,16 @@
 package com.haochibao.activity;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.haochibao.R;
-import com.haochibao.utill.adapter.EntertainmentAdapter;
 import com.haochibao.utill.fragment.EntertainmentContentFragment;
 import com.haochibao.utill.fragment.EntertainmentGoodReputationFragment;
 import com.haochibao.utill.fragment.EntertainmentNearbyFragment;
@@ -37,11 +34,13 @@ public class EntertainmentActivity extends FragmentActivity {
     ViewPager viewPager;
     List<Fragment> mFragment = new ArrayList<Fragment>();
     FragmentPagerAdapter mAdapter;
+    ImageView img_left;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entertainment);
         viewPager = (ViewPager) findViewById(R.id.entertainment_view_pager);
+        img_left = (ImageView) findViewById(R.id.img_left);
         init();
         mAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
@@ -61,7 +60,12 @@ public class EntertainmentActivity extends FragmentActivity {
         rank.setOnClickListener(getStateOnClickListener());
         setChecked(0);
         viewPager.setOnPageChangeListener(getOnPageChangeListener());
-
+        img_left.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
     public void init(){
         content = (LinearLayout) findViewById(R.id.entertainment_content);
