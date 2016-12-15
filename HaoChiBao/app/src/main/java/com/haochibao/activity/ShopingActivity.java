@@ -11,10 +11,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.haochibao.R;
-import com.haochibao.utill.fragment.ShopingContentFragment;
-import com.haochibao.utill.fragment.ShopingGoodReputationFragment;
-import com.haochibao.utill.fragment.ShopingNearbyFragment;
-import com.haochibao.utill.fragment.ShopingRankFragment;
+import com.haochibao.fragment.ShopingContentFragment;
+import com.haochibao.fragment.ShopingGoodReputationFragment;
+import com.haochibao.fragment.ShopingNearbyFragment;
+import com.haochibao.fragment.ShopingRankFragment;
 
 import java.util.ArrayList;
 import java.util.List;
