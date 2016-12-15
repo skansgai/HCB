@@ -11,10 +11,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.haochibao.R;
-import com.haochibao.utill.fragment.HotelContentFragment;
-import com.haochibao.utill.fragment.HotelGoodReputationFragment;
-import com.haochibao.utill.fragment.HotelNearbyFragment;
-import com.haochibao.utill.fragment.HotelRankFragment;
+import com.haochibao.fragment.HotelContentFragment;
+import com.haochibao.fragment.HotelGoodReputationFragment;
+import com.haochibao.fragment.HotelNearbyFragment;
+import com.haochibao.fragment.HotelRankFragment;
 
 import java.util.ArrayList;
 import java.util.List;

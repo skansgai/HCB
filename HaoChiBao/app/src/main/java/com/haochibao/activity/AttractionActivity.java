@@ -11,10 +11,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.haochibao.R;
-import com.haochibao.utill.fragment.AttractionContentFragment;
-import com.haochibao.utill.fragment.AttractionGoodReputationFragment;
-import com.haochibao.utill.fragment.AttractionNearbyFragment;
-import com.haochibao.utill.fragment.AttractionRankFragment;
+import com.haochibao.fragment.AttractionContentFragment;
+import com.haochibao.fragment.AttractionGoodReputationFragment;
+import com.haochibao.fragment.AttractionNearbyFragment;
+import com.haochibao.fragment.AttractionRankFragment;
 
 import java.util.ArrayList;
 import java.util.List;

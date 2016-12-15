@@ -11,10 +11,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.haochibao.R;
-import com.haochibao.utill.fragment.ParkingContentFragment;
-import com.haochibao.utill.fragment.ParkingGoodReputationFragment;
-import com.haochibao.utill.fragment.ParkingNearbyFragment;
-import com.haochibao.utill.fragment.ParkingRankFragment;
+import com.haochibao.fragment.ParkingContentFragment;
+import com.haochibao.fragment.ParkingGoodReputationFragment;
+import com.haochibao.fragment.ParkingNearbyFragment;
+import com.haochibao.fragment.ParkingRankFragment;
 
 import java.util.ArrayList;
 import java.util.List;
