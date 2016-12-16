@@ -1,13 +1,18 @@
 package com.haochibao.activity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.KeyEvent;
+import android.view.WindowManager;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.haochibao.R;
 import com.haochibao.fragment.FindFragment;
@@ -33,6 +38,8 @@ public class HomeViewPagerActivity extends FragmentActivity {
     private Fragment homeFragment;
     private Fragment findFragment;
     private List<RadioButton> radioButtonList;
+    private Bundle bundle=new Bundle();
+    private Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,19 +52,21 @@ public class HomeViewPagerActivity extends FragmentActivity {
         discoverBtn= (RadioButton) findViewById(R.id.discover_btn);
         mineBtn= (RadioButton) findViewById(R.id.mine_btn);
         viewPager= (ViewPager) findViewById(R.id.home_viewpager);
-
         radioButtonList=new ArrayList<RadioButton>();
         radioButtonList.add(homeBtn);
         radioButtonList.add(discoverBtn);
         radioButtonList.add(mineBtn);
-
         fragmentList=new ArrayList<Fragment>();
         homeFragment=new HomeFragment();
         findFragment=new FindFragment();
+        isLogin=getIntent().getBooleanExtra("isLogin",false);
+
+        Log.i("TAG",isLogin+"");
         if (isLogin){
-             mineFragment=new MineFragment();
+            mineFragment=new MineFragment();
         }else {
-             mineFragment=new NoLoginMineFragment();
+            mineFragment=new NoLoginMineFragment();
+
         }
         if (homeFragment!=null){
             fragmentList.add(homeFragment);
@@ -69,7 +78,7 @@ public class HomeViewPagerActivity extends FragmentActivity {
          fragmentList.add(mineFragment);
         }
 
-       viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+        viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
            @Override
            public Fragment getItem(int position) {
                return fragmentList.get(position);

@@ -2,21 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bgGrayWhite"
-    android:orientation="vertical">
-
+    android:orientation="vertical"
+    android:background="@color/bgGrayWhite">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/mainRed"
-        android:paddingBottom="16dp"
-        android:paddingTop="16dp">
+        android:layout_height="50dp"
+        android:background="@color/mainRed">
 
         <ImageView
+            android:id="@+id/img_left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:paddingLeft="12dp"
+            android:layout_centerVertical="true"
+            android:padding="10dp"
             android:src="@mipmap/left_arrow_white" />
 
         <TextView
@@ -26,135 +25,120 @@
             android:text="@string/tingchechang"
             android:textColor="@color/white"
             android:textSize="@dimen/font_36" />
-
     </RelativeLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:orientation="horizontal"
+        android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:paddingTop="10dp">
-
+        android:orientation="horizontal"
+        android:background="@color/white">
         <LinearLayout
             android:id="@+id/parking_nearby"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="5dp">
-
+            android:padding="5dp"
+            android:gravity="center">
             <TextView
                 android:id="@+id/text_nearby"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="附近"
-                android:textColor="@color/textBlack"
-                android:textSize="@dimen/font_32" />
-
+                android:textSize="@dimen/font_32"
+                android:textColor="@color/textBlack"/>
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:src="@mipmap/entertainment_small_arrow" />
+                android:src="@mipmap/entertainment_small_arrow"/>
         </LinearLayout>
 
         <View
             android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
-            android:background="@color/lineGray" />
-
+            android:layout_marginBottom="5dp"
+            android:layout_height="match_parent"
+            android:background="@color/lineGray"/>
         <LinearLayout
             android:id="@+id/parking_content"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
+            android:padding="5dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="5dp">
-
+            android:gravity="center">
             <TextView
                 android:id="@+id/text_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="停车"
-                android:textColor="@color/textBlack"
-                android:textSize="@dimen/font_32" />
-
+                android:textSize="@dimen/font_32"
+                android:textColor="@color/textBlack"/>
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:src="@mipmap/entertainment_small_arrow" />
+                android:src="@mipmap/entertainment_small_arrow"/>
         </LinearLayout>
 
         <View
             android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
-            android:background="@color/lineGray" />
-
+            android:layout_marginBottom="5dp"
+            android:layout_height="match_parent"
+            android:background="@color/lineGray"/>
         <LinearLayout
             android:id="@+id/parking_rank"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
+            android:padding="5dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="5dp">
-
+            android:gravity="center">
             <TextView
                 android:id="@+id/text_rank"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="排序"
-                android:textColor="@color/textBlack"
-                android:textSize="@dimen/font_32" />
-
+                android:textSize="@dimen/font_32"
+                android:textColor="@color/textBlack"/>
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:src="@mipmap/entertainment_small_arrow" />
+                android:src="@mipmap/entertainment_small_arrow"/>
         </LinearLayout>
 
         <View
             android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
-            android:background="@color/lineGray" />
-
+            android:layout_marginBottom="5dp"
+            android:layout_height="match_parent"
+            android:background="@color/lineGray"/>
         <LinearLayout
             android:id="@+id/parking_good_reputation"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
+            android:padding="5dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="5dp">
-
+            android:gravity="center">
             <TextView
                 android:id="@+id/text_good_reputation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="好评"
-                android:textColor="@color/textBlack"
-                android:textSize="@dimen/font_32" />
-
+                android:textSize="@dimen/font_32"
+                android:textColor="@color/textBlack"/>
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:src="@mipmap/entertainment_small_arrow" />
+                android:src="@mipmap/entertainment_small_arrow"/>
         </LinearLayout>
     </LinearLayout>
-
     <android.support.v4.view.ViewPager
         android:id="@+id/parking_view_pager"
         android:layout_width="match_parent"

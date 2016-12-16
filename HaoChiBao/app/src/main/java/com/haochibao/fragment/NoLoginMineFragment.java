@@ -31,6 +31,8 @@ public class NoLoginMineFragment extends Fragment {
     private CheckBox dayNightBtn;
     private Intent intent;
     private Context context;
+    private Bundle bundle;
+    private boolean isLogin=false;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,12 +55,14 @@ public class NoLoginMineFragment extends Fragment {
         minePageBtn= (RelativeLayout) view.findViewById(R.id.mine_page_btn);
         setting= (RelativeLayout) view.findViewById(R.id.setting);
         dayNightBtn= (CheckBox) view.findViewById(R.id.day_night_btn);
+        bundle=getArguments();//获得Activity传值
 
         loginBtn.setOnClickListener(onClickListener);
         moreLogin.setOnClickListener(onClickListener);
         mineCollection.setOnClickListener(onClickListener);
         minePageBtn.setOnClickListener(onClickListener);
         setting.setOnClickListener(onClickListener);
+        mineSpoor.setOnClickListener(onClickListener);
         dayNightBtn.setOnClickListener(onClickListener);
     }
     View.OnClickListener onClickListener=new View.OnClickListener() {
@@ -67,8 +71,10 @@ public class NoLoginMineFragment extends Fragment {
         switch (v.getId()){
             case R.id.login_btn:
                 //登陆按钮
-                intent=new Intent(context, RegisterActivity.class);
-                startActivity(intent);
+                intent=new Intent(context,RegisterActivity.class);
+                boolean isLogin=getActivity().getIntent().getBooleanExtra("isLogin",false);
+                intent.putExtra("toLogin",isLogin);
+                startActivityForResult(intent,100);
                 break;
             case R.id.more_login:
                 //更多登陆
@@ -103,7 +109,7 @@ public class NoLoginMineFragment extends Fragment {
         }
     };
     public void createLoginDialog(){
-        AlertDialog.Builder builder=new AlertDialog.Builder(context);
+        final AlertDialog.Builder builder=new AlertDialog.Builder(context);
         builder.setIcon(R.mipmap.jinggao)
         .setTitle("提示")
         .setMessage("您还未登陆，是否立即登陆")
@@ -116,10 +122,20 @@ public class NoLoginMineFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 intent=new Intent(context,RegisterActivity.class);
-                startActivity(intent);
+                boolean isLogin=getActivity().getIntent().getBooleanExtra("isLogin",false);
+                intent.putExtra("toLogin",isLogin);
+                startActivityForResult(intent,100);
             }
         });
         AlertDialog alertDialog=builder.create();
         alertDialog.show();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==100&&resultCode==101){
+            isLogin=data.getBooleanExtra("toLogin",false);
+        }
     }
 }

@@ -43,26 +43,35 @@
             style="@style/roomRatingBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_margin="5dp" />
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/value_layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/font_28"
-            android:textColor="@color/textGrayBlack"
-            android:text="$"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/font_28"
-            android:textColor="@color/textGrayBlack"
-            android:text="15"
-            android:layout_marginLeft="2dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/font_28"
-            android:textColor="@color/textGrayBlack"
-            android:text="/人"/>
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/font_28"
+                android:textColor="@color/textGrayBlack"
+                android:text="$"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/font_28"
+                android:textColor="@color/textGrayBlack"
+                android:text="15"
+                android:layout_marginLeft="2dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/font_28"
+                android:textColor="@color/textGrayBlack"
+                android:text="/人"/>
+        </LinearLayout>
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
