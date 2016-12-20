@@ -114,10 +114,12 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 case R.id.imgbtn_pass:
                     intent = new Intent(LoginActivity.this, HomeViewPagerActivity.class);
                     startActivity(intent);
+                    finish();
                     break;
                 case R.id.imgbtn_enter:
                     intent = new Intent(LoginActivity.this, HomeViewPagerActivity.class);
                     startActivity(intent);
+                    finish();
                     break;
             }
         }

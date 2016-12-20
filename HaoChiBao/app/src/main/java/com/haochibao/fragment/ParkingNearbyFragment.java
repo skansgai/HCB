@@ -1,4 +1,4 @@
-package com.haochibao.utill.fragment;
+package com.haochibao.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -16,7 +16,7 @@ import com.haochibao.utill.adapter.EntertainmentAdapter;
  * Created by David on 2016/12/12.
  */
 
-public class AttractionNearbyFragment extends Fragment {
+public class ParkingNearbyFragment extends Fragment {
     Activity activity;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

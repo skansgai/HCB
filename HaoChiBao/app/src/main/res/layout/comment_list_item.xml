@@ -145,110 +145,117 @@
             android:paddingTop="7dp"
             android:src="@mipmap/review_comments" />
     </LinearLayout>
-
-    <com.haochibao.utill.view.FlowLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/bgGrayWhite"
-        android:padding="5dp">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:src="@mipmap/recommended_praise" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:text="在此风花雪月"
-            android:textColor="@color/mainRed" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:text="问你奶奶个腿"
-            android:textColor="@color/mainRed" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:text="日川冈坂"
-            android:textColor="@color/mainRed" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:text="紫电"
-            android:textColor="@color/mainRed" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:text="异域至尊"
-            android:textColor="@color/mainRed" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:text="奇味椒盐酥"
-            android:textColor="@color/mainRed" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:text="在此风花雪月"
-            android:textColor="@color/mainRed" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:text="你爹临死前"
-            android:textColor="@color/mainRed" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:text="在此风花雪月"
-            android:textColor="@color/mainRed" />
-
-
-    </com.haochibao.utill.view.FlowLayout>
-
     <LinearLayout
+        android:id="@+id/comment_square"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/bgGrayWhite"
-        android:orientation="horizontal"
-        android:paddingBottom="15dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
-
-        <TextView
-            android:layout_width="wrap_content"
+        android:orientation="vertical">
+        <com.haochibao.utill.view.FlowLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="在此风花雪月"
-            android:textColor="@color/mainRed" />
+            android:background="@color/bgGrayWhite"
+            android:padding="5dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=":"
-            android:textColor="@color/mainRed" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:src="@mipmap/recommended_praise" />
 
-        <TextView
-            android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="在此风花雪月"
+                android:textColor="@color/mainRed" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="问你奶奶个腿"
+                android:textColor="@color/mainRed" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="日川冈坂"
+                android:textColor="@color/mainRed" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="紫电"
+                android:textColor="@color/mainRed" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="异域至尊"
+                android:textColor="@color/mainRed" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="奇味椒盐酥"
+                android:textColor="@color/mainRed" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="在此风花雪月"
+                android:textColor="@color/mainRed" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="你爹临死前"
+                android:textColor="@color/mainRed" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="在此风花雪月"
+                android:textColor="@color/mainRed" />
+
+
+        </com.haochibao.utill.view.FlowLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/comment_content" />
+            android:background="@color/bgGrayWhite"
+            android:orientation="horizontal"
+            android:paddingBottom="15dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="在此风花雪月"
+                android:textColor="@color/mainRed" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":"
+                android:textColor="@color/mainRed" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/comment_content" />
+        </LinearLayout>
     </LinearLayout>
+
 
 </LinearLayout>

@@ -6,7 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,18 +22,9 @@ import com.haochibao.activity.ParkingActivity;
 import com.haochibao.activity.RecommendActivity;
 import com.haochibao.activity.SeekHelpActivity;
 import com.haochibao.activity.ShopingActivity;
-import com.haochibao.utill.http.LoadPictrue;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -47,9 +39,7 @@ public class HomeFragment extends Fragment {
     private TextView homeRecommend;
     private Context context;
     private Activity mactivity;
-    private Intent intent;
-    private String uri="http://192.168.7.23/index.php/home/index/getImage";
-    private ImageView imageview;
+    Intent intent;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +60,7 @@ public class HomeFragment extends Fragment {
         home_scenic_spots = (TextView) view.findViewById(R.id.home_scenic_spots);
         home_shopping = (TextView) view.findViewById(R.id.home_shopping);
         home_park = (TextView) view.findViewById(R.id.home_park);
-        imageview= (ImageView) view.findViewById(R.id.image_view);
+
         home_recommend.setOnClickListener(onClickListener);
         home_interaction.setOnClickListener(onClickListener);
         home_seek_help.setOnClickListener(onClickListener);
@@ -79,20 +69,13 @@ public class HomeFragment extends Fragment {
         home_scenic_spots.setOnClickListener(onClickListener);
         home_shopping.setOnClickListener(onClickListener);
         home_park.setOnClickListener(onClickListener);
-
         return view;
     }
     public void init(){
         homeRecommend= (TextView) view.findViewById(R.id.home_recommend);
         homeRecommend.setOnClickListener(onClickListener);
-        new LoadPictrue().getPicture(imageview);
-        new Thread(){
-            @Override
-            public void run() {
-               getPath(uri);
-            }
-        }.start();
     }
+
     View.OnClickListener onClickListener = new View.OnClickListener() {
 
         @Override
@@ -134,32 +117,5 @@ public class HomeFragment extends Fragment {
 
         }
     };
-    public void getPath(String uri){
-        try {
-            URL url=new URL(uri);
-            HttpURLConnection conn= (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
-            conn.setReadTimeout(5000);
-            conn.connect();
-            if (conn.getResponseCode()==HttpURLConnection.HTTP_OK){
-                StringBuilder builder=new StringBuilder();
-                BufferedReader buf=new BufferedReader(new InputStreamReader(conn.getInputStream(),"utf-8"));
-                String s;
-                while ((s=buf.readLine())!=null){
-                    builder.append(s);
-                }
-                String data=builder.toString();
-                Log.i("Result",data);
-                buf.close();
-
-            }else {
-                Log.i("RequstCode",conn.getResponseCode()+"");
-            }
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
 }
