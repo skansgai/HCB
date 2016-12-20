@@ -25,6 +25,7 @@ import com.haochibao.activity.RecommendActivity;
 import com.haochibao.activity.SeekHelpActivity;
 import com.haochibao.activity.ShopingActivity;
 import com.haochibao.utill.http.Location;
+import com.haochibao.utill.http.Weather;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +46,10 @@ public class HomeFragment extends Fragment {
     private Activity mactivity;
     Intent intent;
     ListView listView;
-    Location location;
+    private Location location;
+    private Weather weather;
+    final static String HTTPUTI = "http://api.avatardata.cn/Weather/Query?key=d14a6039b7f7420c82d7d487eaa38bbe&cityname=";
+
     private Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -177,6 +181,10 @@ public class HomeFragment extends Fragment {
     public void getLocation(){
         location=new Location(context,handler);
         location.start();
+    }
+    public  void getWeath(){
+        weather = new Weather(HTTPUTI,location.getCityname());
+        weather.start();
     }
 
 }
