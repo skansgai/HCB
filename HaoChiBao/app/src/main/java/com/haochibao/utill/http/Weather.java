@@ -18,6 +18,7 @@ import java.net.URLEncoder;
 public class Weather extends Thread {
     String http;
     String cityName;
+    
     public Weather(String uri, String cityName ){
         this.http=uri;
         this.cityName=cityName;
