@@ -6,13 +6,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.BaseAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
+
 import com.haochibao.R;
 import com.haochibao.activity.AttractionActivity;
 import com.haochibao.activity.EntertainmentActivity;
@@ -40,6 +40,7 @@ public class HomeFragment extends Fragment {
     private Context context;
     private Activity mactivity;
     Intent intent;
+    ListView listView;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +61,9 @@ public class HomeFragment extends Fragment {
         home_scenic_spots = (TextView) view.findViewById(R.id.home_scenic_spots);
         home_shopping = (TextView) view.findViewById(R.id.home_shopping);
         home_park = (TextView) view.findViewById(R.id.home_park);
-
+        listView = (ListView) view.findViewById(R.id.homepage_lv);
+        HomePageAdapter homePageAdapter = new HomePageAdapter(this.getActivity(),list);
+        listView.setAdapter(homePageAdapter);
         home_recommend.setOnClickListener(onClickListener);
         home_interaction.setOnClickListener(onClickListener);
         home_seek_help.setOnClickListener(onClickListener);
@@ -117,5 +120,38 @@ public class HomeFragment extends Fragment {
 
         }
     };
+    List<String> list = new ArrayList<String>();
+    class HomePageAdapter extends BaseAdapter{
+        Context context;
+        List<String>list;
+        LayoutInflater layoutInflater;
+    public HomePageAdapter(Context context,List<String>list){
+        this.context = context;
+        this.list=list;
+    }
+        @Override
+        public int getCount() {
+            return 10;
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return list.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            layoutInflater = LayoutInflater.from(context);
+            if(convertView==null){
+               convertView = layoutInflater.inflate(R.layout.item_homepage_lv,null);
+            }
+            return convertView;
+        }
+    }
 
 }

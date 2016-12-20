@@ -8,6 +8,11 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+        android:name ="com.amap.api.v2.apikey"
+        android:value="082c61096fed068ebc8d4f1add956086"/>
+
+
         <activity android:name=".activity.SplashActivity"><!--引导页面-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -39,4 +44,6 @@
         <activity android:name=".activity.FindActivity"/><!--发现-->
         <activity android:name=".activity.MyRecommendActivity"/><!--我的推荐-->
     </application>
+
+
 </manifest>
