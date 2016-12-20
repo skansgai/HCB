@@ -1,7 +1,6 @@
 package com.haochibao.activity;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
@@ -31,7 +30,7 @@ public class HotPotDetailsActivity extends Activity {
     ListView listView;
     ImageView img_chakan_lv,img_left;
     LinearLayout phone_edit,hcb_share,hcb_comment;
-    AlertDialog alertDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -141,4 +140,6 @@ public class HotPotDetailsActivity extends Activity {
 //        alertDialog=dialogUtill.createDialog();
 
     }
+
+
 }

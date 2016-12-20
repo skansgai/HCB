@@ -1,6 +1,5 @@
 package com.haochibao.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,11 +7,8 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.KeyEvent;
-import android.view.WindowManager;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import com.haochibao.R;
 import com.haochibao.fragment.FindFragment;
@@ -40,6 +36,8 @@ public class HomeViewPagerActivity extends FragmentActivity {
     private List<RadioButton> radioButtonList;
     private Bundle bundle=new Bundle();
     private Intent intent;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -142,4 +140,5 @@ public class HomeViewPagerActivity extends FragmentActivity {
 
         }
     };
+
 }

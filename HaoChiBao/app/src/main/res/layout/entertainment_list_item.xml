@@ -103,6 +103,7 @@
             android:textColor="@color/textGrayBlack"
             android:text="密室"/>
         <TextView
+            android:id="@+id/have_a_look_at"
             android:layout_width="52dp"
             android:layout_height="20dp"
             android:text="去逛逛"
