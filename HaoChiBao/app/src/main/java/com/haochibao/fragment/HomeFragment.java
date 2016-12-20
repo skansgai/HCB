@@ -78,7 +78,6 @@ public class HomeFragment extends Fragment {
         listView = (ListView) view.findViewById(R.id.homepage_lv);
         homepage_address = (TextView) view.findViewById(R.id.homepage_address);
         homepage_weather = (TextView) view.findViewById(R.id.homepage_weather);
-
         HomePageAdapter homePageAdapter = new HomePageAdapter(this.getActivity(), list);
         listView.setAdapter(homePageAdapter);
         home_recommend.setOnClickListener(onClickListener);

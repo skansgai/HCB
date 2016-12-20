@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.haochibao.R;
 import com.haochibao.fragment.MineFragment;
+import com.haochibao.utill.http.GetHttp;
 
 /**
  * Created by Administrator on 2016/12/10.

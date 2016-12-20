@@ -17,6 +17,11 @@ import java.net.URI;
  */
 
 public class URIBitmap {
+    /**
+     * 通过uri获取图片并进行压缩
+     *
+     * @param uri
+     */
     public static Bitmap getBitmapFormUri(Activity activity, Uri uri){
         try {
             InputStream input=activity.getContentResolver().openInputStream(uri);
@@ -60,7 +65,12 @@ public class URIBitmap {
         }
         return null;
     }
-
+    /**
+     * 质量压缩方法
+     *
+     * @param image
+     * @return
+     */
     private static Bitmap compressImage(Bitmap image) {
         ByteArrayOutputStream baos=new ByteArrayOutputStream();
         image.compress(Bitmap.CompressFormat.JPEG,100,baos);//质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中

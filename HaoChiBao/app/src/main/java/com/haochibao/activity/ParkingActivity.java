@@ -25,7 +25,7 @@ public class ParkingActivity extends FragmentActivity {
         img_left = (ImageView) findViewById(R.id.img_left);
 
         img_left.setOnClickListener(getOnClickListener());
-        parkingList.setAdapter(new EntertainmentAdapter(this));
+       // parkingList.setAdapter(new EntertainmentAdapter(this,));
     }
 
     public View.OnClickListener getOnClickListener() {
