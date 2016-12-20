@@ -12,11 +12,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.haochibao.R;
-import com.haochibao.fragment.AttractionContentFragment;
-import com.haochibao.fragment.AttractionGoodReputationFragment;
-import com.haochibao.fragment.AttractionNearbyFragment;
-import com.haochibao.fragment.AttractionRankFragment;
 import com.haochibao.utill.adapter.EntertainmentAdapter;
+import com.haochibao.utill.model.EntertainmentModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,15 +24,17 @@ import java.util.List;
 public class AttractionActivity extends FragmentActivity {
     ImageView img_left;
     ListView attractionList;
+    List<EntertainmentModel> list;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attraction);
         img_left = (ImageView) findViewById(R.id.img_left);
         attractionList = (ListView) findViewById(R.id.attraction_list);
-
+        list = new ArrayList<EntertainmentModel>();
+        getData();
         img_left.setOnClickListener(getOnClickListener());
-        attractionList.setAdapter(new EntertainmentAdapter(this));
+        attractionList.setAdapter(new EntertainmentAdapter(this,list));
     }
     public View.OnClickListener getOnClickListener(){
         View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -49,5 +48,16 @@ public class AttractionActivity extends FragmentActivity {
             }
         };
         return onClickListener;
+    }
+    public void getData(){
+        for (int i=0;i<12;i++){
+            EntertainmentModel model = new EntertainmentModel();
+            model.setName("巴将军");
+            model.setLocation("沙坪坝");
+            model.setDistance("1000");
+            model.setPrice("45");
+            model.setType("火锅");
+            list.add(model);
+        }
     }
 }

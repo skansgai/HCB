@@ -36,7 +36,21 @@
     <string name="chenyanjing">陈眼镜火锅</string>
     <string-array name="nearby">
         <item>附近</item>
-        <item>500米之内</item>
+        <item>500米</item>
+        <item>1000米</item>
+        <item>2000米</item>
+        <item>2000米之外</item>
+    </string-array>
+    <string-array name="ranking">
+        <item>排序</item>
+        <item>评价最高</item>
+        <item>人气最高</item>
+        <item>价格最高</item>
+        <item>价格最低</item>
+    </string-array>
+    <string-array name="praise">
+        <item>好评</item>
+        <item></item>
         <item>500-1000米</item>
         <item>1000-1500米</item>
         <item>1500米以上</item>
