@@ -90,7 +90,7 @@ public class Location extends Thread {
         //启动定位
         mapLocationClient.startLocation();
     }
-    public static String getCityname(){
+    public  String getCityname(){
         if (cityname!=null){
             return cityname;
         }

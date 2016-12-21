@@ -8,17 +8,6 @@ import android.widget.TextView;
  * Created by Administrator on 2016/12/20.
  */
 public class SortViewHolder {
-    TextView name,type,distance,look,price,location;
-    ImageView itemImg;
-    RatingBar roomRatingBar;
-    public TextView getLocation() {
-        return location;
-    }
-
-    public void setLocation(TextView location) {
-        this.location = location;
-    }
-
     public TextView getName() {
         return name;
     }
@@ -59,6 +48,14 @@ public class SortViewHolder {
         this.price = price;
     }
 
+    public TextView getLocation() {
+        return location;
+    }
+
+    public void setLocation(TextView location) {
+        this.location = location;
+    }
+
     public ImageView getItemImg() {
         return itemImg;
     }
@@ -74,4 +71,9 @@ public class SortViewHolder {
     public void setRoomRatingBar(RatingBar roomRatingBar) {
         this.roomRatingBar = roomRatingBar;
     }
+
+    TextView name,type,distance,look,price,location;
+    ImageView itemImg;
+    RatingBar roomRatingBar;
+
 }

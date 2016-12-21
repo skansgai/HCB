@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -22,6 +24,8 @@ import com.haochibao.activity.ParkingActivity;
 import com.haochibao.activity.RecommendActivity;
 import com.haochibao.activity.SeekHelpActivity;
 import com.haochibao.activity.ShopingActivity;
+import com.haochibao.utill.http.Location;
+import com.haochibao.utill.http.Weather;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,25 +37,39 @@ import java.util.List;
  */
 
 public class HomeFragment extends Fragment {
-    TextView home_recommend,home_interaction,home_seek_help,home_recreation,
-            home_grogshop,home_scenic_spots,home_shopping,home_park;
+    TextView home_recommend, home_interaction, home_seek_help, home_recreation,
+            home_grogshop, home_scenic_spots, home_shopping, home_park, homepage_address,
+            homepage_weather;
     private View view;
     private TextView homeRecommend;
     private Context context;
     private Activity mactivity;
     Intent intent;
     ListView listView;
+    private Location location;
+    private Weather weather;
+    final static String HTTPUTI = "http://api.avatardata.cn/Weather/Query?key=d14a6039b7f7420c82d7d487eaa38bbe&cityname=";
+
+    private Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what==0){
+             homepage_address.setText(location.getCityname());
+            }
+        }
+    };
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mactivity=getActivity();
+        mactivity = getActivity();
     }
+
     @Nullable
     @Override
     public View onCreateView(
             LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view=inflater.inflate(R.layout.activity_homepage,null);
-        context=getActivity();
+        view = inflater.inflate(R.layout.activity_homepage, null);
+        context = getActivity();
         init();
         home_recommend = (TextView) view.findViewById(R.id.home_recommend);
         home_interaction = (TextView) view.findViewById(R.id.home_interaction);
@@ -62,7 +80,9 @@ public class HomeFragment extends Fragment {
         home_shopping = (TextView) view.findViewById(R.id.home_shopping);
         home_park = (TextView) view.findViewById(R.id.home_park);
         listView = (ListView) view.findViewById(R.id.homepage_lv);
-        HomePageAdapter homePageAdapter = new HomePageAdapter(this.getActivity(),list);
+        homepage_address = (TextView) view.findViewById(R.id.homepage_address);
+        homepage_weather = (TextView) view.findViewById(R.id.homepage_weather);
+        HomePageAdapter homePageAdapter = new HomePageAdapter(this.getActivity(), list);
         listView.setAdapter(homePageAdapter);
         home_recommend.setOnClickListener(onClickListener);
         home_interaction.setOnClickListener(onClickListener);
@@ -72,10 +92,12 @@ public class HomeFragment extends Fragment {
         home_scenic_spots.setOnClickListener(onClickListener);
         home_shopping.setOnClickListener(onClickListener);
         home_park.setOnClickListener(onClickListener);
+        getLocation();
         return view;
     }
-    public void init(){
-        homeRecommend= (TextView) view.findViewById(R.id.home_recommend);
+
+    public void init() {
+        homeRecommend = (TextView) view.findViewById(R.id.home_recommend);
         homeRecommend.setOnClickListener(onClickListener);
     }
 
@@ -83,37 +105,37 @@ public class HomeFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
+            switch (v.getId()) {
                 case R.id.home_recommend:
-                    intent = new Intent(mactivity,RecommendActivity.class);
+                    intent = new Intent(mactivity, RecommendActivity.class);
                     startActivity(intent);
                     break;
                 case R.id.home_interaction:
-                    intent = new Intent(mactivity,InterctionActivity.class);
+                    intent = new Intent(mactivity, InterctionActivity.class);
                     startActivity(intent);
                     break;
                 case R.id.home_seek_help:
-                    intent = new Intent(mactivity,SeekHelpActivity.class);
+                    intent = new Intent(mactivity, SeekHelpActivity.class);
                     startActivity(intent);
                     break;
                 case R.id.home_recreation:
-                    intent = new Intent(mactivity,EntertainmentActivity.class);
+                    intent = new Intent(mactivity, EntertainmentActivity.class);
                     startActivity(intent);
                     break;
                 case R.id.home_grogshop:
-                    intent = new Intent(mactivity,HotelActivity.class);
+                    intent = new Intent(mactivity, HotelActivity.class);
                     startActivity(intent);
                     break;
                 case R.id.home_scenic_spots:
-                    intent = new Intent(mactivity,AttractionActivity.class);
+                    intent = new Intent(mactivity, AttractionActivity.class);
                     startActivity(intent);
                     break;
                 case R.id.home_shopping:
-                    intent = new Intent(mactivity,ShopingActivity.class);
+                    intent = new Intent(mactivity, ShopingActivity.class);
                     startActivity(intent);
                     break;
                 case R.id.home_park:
-                    intent = new Intent(mactivity,ParkingActivity.class);
+                    intent = new Intent(mactivity, ParkingActivity.class);
                     startActivity(intent);
                     break;
             }
@@ -121,14 +143,17 @@ public class HomeFragment extends Fragment {
         }
     };
     List<String> list = new ArrayList<String>();
-    class HomePageAdapter extends BaseAdapter{
+
+    class HomePageAdapter extends BaseAdapter {
         Context context;
-        List<String>list;
+        List<String> list;
         LayoutInflater layoutInflater;
-    public HomePageAdapter(Context context,List<String>list){
-        this.context = context;
-        this.list=list;
-    }
+
+        public HomePageAdapter(Context context, List<String> list) {
+            this.context = context;
+            this.list = list;
+        }
+
         @Override
         public int getCount() {
             return 10;
@@ -147,11 +172,19 @@ public class HomeFragment extends Fragment {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             layoutInflater = LayoutInflater.from(context);
-            if(convertView==null){
-               convertView = layoutInflater.inflate(R.layout.item_homepage_lv,null);
+            if (convertView == null) {
+                convertView = layoutInflater.inflate(R.layout.item_homepage_lv, null);
             }
             return convertView;
         }
+    }
+    public void getLocation(){
+        location=new Location(context,handler);
+        location.start();
+    }
+    public  void getWeath(){
+        weather = new Weather(HTTPUTI,location.getCityname());
+        weather.start();
     }
 
 }

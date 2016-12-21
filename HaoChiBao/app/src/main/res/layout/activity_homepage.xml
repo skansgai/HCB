@@ -15,6 +15,7 @@
         >
 
         <TextView
+            android:id="@+id/homepage_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
@@ -22,7 +23,7 @@
             android:layout_marginTop="16dp"
             android:drawablePadding="5dp"
             android:drawableRight="@mipmap/home_sw_resize"
-            android:text="@string/cq"
+            android:text=""
             android:textColor="@color/white"
             android:textSize="@dimen/font_40" />
 
@@ -40,6 +41,7 @@
             android:textColorHint="@color/borderGray" />
 
         <TextView
+            android:id="@+id/homepage_weather"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
