@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,6 +18,13 @@ import com.haochibao.R;
 import com.haochibao.utill.adapter.EntertainmentAdapter;
 import com.haochibao.utill.model.EntertainmentModel;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +44,6 @@ public class EntertainmentActivity extends Activity {
         enterList = (ListView) findViewById(R.id.entertainment_list);
         list = new ArrayList<EntertainmentModel>();
         getData();
-
         imgLeft.setOnClickListener(getOnClickListener());
         enterList.setAdapter(new EntertainmentAdapter(EntertainmentActivity.this,list));
     }
@@ -62,6 +69,32 @@ public class EntertainmentActivity extends Activity {
             model.setPrice("45");
             model.setType("火锅");
             list.add(model);
+        }
+    }
+    public void getInternetData(){
+        HttpURLConnection httpURLConnection = null;
+        String httpUrl="http://localhost/index.php/home/index/getServiceType?typename=小吃&by=price";
+        try {
+            URL url = new URL(httpUrl);
+            httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setRequestMethod("GET");
+            httpURLConnection.setConnectTimeout(5000);
+            httpURLConnection.connect();
+            if (httpURLConnection.getResponseCode()==HttpURLConnection.HTTP_OK){
+                StringBuilder stringBuilder = new StringBuilder();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream,"utf-8");
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String s;
+                while ((s=bufferedReader.readLine())!=null){
+                    stringBuilder.append(s);
+                }
+                Log.i("data====>",stringBuilder.toString());
+            }
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

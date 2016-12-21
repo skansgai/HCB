@@ -63,6 +63,5 @@ public class EntertainmentAdapter extends BaseAdapter {
         viewHolder.getLocation().setText(list.get(position).getLocation());
         viewHolder.getType().setText(list.get(position).getType());
         return convertView;
-
     }
 }
