@@ -23,7 +23,7 @@
             android:layout_marginTop="16dp"
             android:drawablePadding="5dp"
             android:drawableRight="@mipmap/home_sw_resize"
-            android:text=""
+            android:text="@string/cq"
             android:textColor="@color/white"
             android:textSize="@dimen/font_40" />
 
