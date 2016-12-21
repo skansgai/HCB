@@ -19,8 +19,7 @@ import java.util.List;
 public class ParkingActivity extends FragmentActivity {
     ListView parkingList;
     ImageView img_left;
-    List<EntertainmentModel>list;
-
+    List<EntertainmentModel> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +28,7 @@ public class ParkingActivity extends FragmentActivity {
         parkingList = (ListView) findViewById(R.id.parking_list);
         img_left = (ImageView) findViewById(R.id.img_left);
         list = new ArrayList<EntertainmentModel>();
-
+        getData();
         img_left.setOnClickListener(getOnClickListener());
         parkingList.setAdapter(new EntertainmentAdapter(this,list));
     }
@@ -48,6 +47,16 @@ public class ParkingActivity extends FragmentActivity {
         };
         return onClickListener;
     }
-
+    public void getData(){
+        for (int i=0;i<12;i++){
+            EntertainmentModel model = new EntertainmentModel();
+            model.setName("巴将军");
+            model.setLocation("沙坪坝");
+            model.setDistance("1000");
+            model.setPrice("45");
+            model.setType("火锅");
+            list.add(model);
+        }
+    }
 
 }

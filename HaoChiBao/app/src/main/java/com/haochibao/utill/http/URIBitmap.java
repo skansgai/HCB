@@ -5,6 +5,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,6 +17,11 @@ import java.net.URI;
  */
 
 public class URIBitmap {
+    /**
+     * 通过uri获取图片并进行压缩
+     *
+     * @param uri
+     */
     public static Bitmap getBitmapFormUri(Activity activity, Uri uri){
         try {
             InputStream input=activity.getContentResolver().openInputStream(uri);
@@ -45,7 +52,12 @@ public class URIBitmap {
             //比例压缩
             BitmapFactory.Options bitmapOptions=new BitmapFactory.Options();
             bitmapOptions.inSampleSize=be;
-
+            bitmapOptions.inDither = true;
+            bitmapOptions.inPreferredConfig = Bitmap.Config.ARGB_8888;
+            input = activity.getContentResolver().openInputStream(uri);
+            Bitmap bitmap=BitmapFactory.decodeStream(input,null,bitmapOptions);
+            input.close();
+            return  compressImage(bitmap);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -53,4 +65,24 @@ public class URIBitmap {
         }
         return null;
     }
+    /**
+     * 质量压缩方法
+     *
+     * @param image
+     * @return
+     */
+    private static Bitmap compressImage(Bitmap image) {
+        ByteArrayOutputStream baos=new ByteArrayOutputStream();
+        image.compress(Bitmap.CompressFormat.JPEG,100,baos);//质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
+        int options=100;
+        while (baos.toByteArray().length/1024>100){
+            baos.reset();//重置
+            image.compress(Bitmap.CompressFormat.JPEG,options,baos);
+            options-=10;//每次减少10
+        }
+        ByteArrayInputStream isBm=new ByteArrayInputStream(baos.toByteArray());
+        Bitmap bitmap=BitmapFactory.decodeStream(isBm,null,null);//把
+        return bitmap;
+    }
+
 }
