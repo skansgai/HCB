@@ -16,9 +16,6 @@ import com.haochibao.R;
 import com.haochibao.utill.adapter.CommentListAdater;
 import com.haochibao.utill.view.FlowLayout;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by Administrator on 2016/12/10.
  */
@@ -113,4 +110,5 @@ public class CommentActivity extends Activity {
         };
         return onClickListener;
     }
+
 }
