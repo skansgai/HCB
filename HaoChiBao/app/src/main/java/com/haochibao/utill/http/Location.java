@@ -10,6 +10,8 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 
+import org.json.JSONException;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -56,6 +58,7 @@ public class Location extends Thread {
                 amapLocation.getAdCode();//地区编码
                 amapLocation.getAoiName();//获取当前定位点的AOI信息
                 cityname=amapLocation.getCity();
+                resultListener.onClick(cityname);
                 Message message=new Message();
                 message.what=0;
                 handler.sendMessage(message);
@@ -95,5 +98,12 @@ public class Location extends Thread {
             return cityname;
         }
         return null;
+    }
+    public onResultListener resultListener;
+    public void setOnClicklistener(onResultListener onResultListener){
+        this.resultListener=onResultListener;
+    }
+    public interface onResultListener{
+        void onClick(String data);
     }
 }

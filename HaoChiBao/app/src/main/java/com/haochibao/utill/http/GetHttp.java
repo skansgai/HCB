@@ -4,6 +4,8 @@ import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
 
+import org.json.JSONException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -21,7 +23,6 @@ public class GetHttp extends Thread{
     private HttpURLConnection connection=null;
     private URL url=null;
     private Context context;
-
 
     String data=null;
     public GetHttp(Context context,URL url){
@@ -44,12 +45,16 @@ public class GetHttp extends Thread{
                 }
                 data=builder.toString();
                 Log.i(TAG,"Request"+data);
+                resultListener.onClick(data);
             }else {
                 Log.i(TAG,"错误码"+connection.getResponseCode());
+                resultListener.onClick(connection.getRequestMethod());
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
             e.printStackTrace();
         }
     }
@@ -61,6 +66,13 @@ public class GetHttp extends Thread{
         if (data!=null){
             return data;
         }
-        return null;
+        return "0";
+    }
+    onResultListener resultListener;
+    public void setOnClicklistener(onResultListener onResultListener){
+        this.resultListener=onResultListener;
+    }
+    public interface onResultListener{
+        void onClick(String data) throws JSONException;
     }
 }

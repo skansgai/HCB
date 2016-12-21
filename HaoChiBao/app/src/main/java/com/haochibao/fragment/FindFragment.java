@@ -1,10 +1,21 @@
 package com.haochibao.fragment;
 
+import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,21 +23,33 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.haochibao.R;
 import com.haochibao.utill.adapter.FindListViewAdapter;
+import com.haochibao.utill.http.GetHttp;
+import com.haochibao.utill.http.URIBitmap;
+import com.haochibao.utill.model.FindModel;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2016/12/13.
  */
 
 public class FindFragment extends Fragment {
+    final static String TAG="HaoChiBao";
     private View view;
     private TextView location;
     private RadioGroup radioGroup;
@@ -40,10 +63,15 @@ public class FindFragment extends Fragment {
     private SimpleAdapter simpleAdapter;
     private String[] from={"userImage","userName","LeftIcon","RightIcon"};
     private int[] to={R.id.user_image,R.id.user_name,R.id.left_icon,R.id.right_icon};
+    private Map<String,Object> map=new HashMap<String,Object>();
+    private RelativeLayout layout;
+    private List<FindModel> findList=new ArrayList<FindModel>();
+    FindModel findModel=new FindModel();
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context=getActivity();
+        getShare();
     }
     @Nullable
     @Override
@@ -55,14 +83,14 @@ public class FindFragment extends Fragment {
     }
 
     public void init(){
+        layout= (RelativeLayout) view.findViewById(R.id.home_layout);
         location= (TextView) view.findViewById(R.id.location);
         radioGroup= (RadioGroup) view.findViewById(R.id.group);
         newsBtn= (RadioButton) view.findViewById(R.id.news);
         attentionBtn= (RadioButton) view.findViewById(R.id.attention);
         shareBtn= (ImageView) view.findViewById(R.id.share);
         listView= (ListView) view.findViewById(R.id.find_list_view);
-        findAdapter=new FindListViewAdapter(context);
-        listView.setAdapter(findAdapter);
+        findAdapter=new FindListViewAdapter(context,findList,listView);
         location.setOnClickListener(onClickListener);
         radioGroup.setOnCheckedChangeListener(onCheckedChangeListener);
         getAttentionData();
@@ -103,9 +131,18 @@ public class FindFragment extends Fragment {
         }
         }
     };
+   /* public List<FindModel> getFindData(){
+    for (int i=0;i<5;i++){
+        findModel.setUser_name(map.get("user_name").toString());
+        findModel.setTitle(map.get("title").toString());
+        findModel.setDescribe(map.get("describe").toString());
+        findModel.setTime(map.get("time").toString());
+        findList.add(findModel);
+    }
+        return findList;
+    }*/
     public void getAttentionData(){
         for (int i=0;i<20;i++){
-            HashMap<String,Object> map=new HashMap<String,Object>();
             map.put("userImage",R.mipmap.my_head_portrait);
             map.put("userName","娃哈哈！！！");
             int r= (int) (Math.random()*3+1);
@@ -117,7 +154,60 @@ public class FindFragment extends Fragment {
                 map.put("LeftIcon",R.mipmap.found_interactive_arrow);
             }
             map.put("RightIcon",R.mipmap.my_location);
-            attentionList.add(map);
+            attentionList.add((HashMap<String, Object>) map);
         }
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    public void getShare(){
+        String uri="http://192.168.7.23/index.php/home/index/getShare";
+        try {
+            URL url=new URL(uri);
+            GetHttp getHttp=new GetHttp(context,url);
+            getHttp.setOnClicklistener(new GetHttp.onResultListener() {
+                @Override
+                public void onClick(String data) throws JSONException {
+                    Log.i("4444444444444444444444",data);
+                    //数据解析
+                    JSONObject object = null;
+                    try {
+                        object = new JSONObject(data);
+                        JSONArray resultArray = object.optJSONArray("result");
+                        for (int i=0;i<resultArray.length();i++){
+                            JSONObject subJson=resultArray.getJSONObject(i);
+                            findModel.setUser_icon(subJson.optString("icon_path"));
+                            findModel.setUser_name(subJson.optString("user_name"));
+                            findModel.setTitle(subJson.optString("title"));
+                            findModel.setTime(subJson.optString("time"));
+                            findModel.setHotel_name(subJson.optString("name"));
+                            findModel.setDescribe(subJson.optString("describe"));
+                            findList.add(findModel);
+                            Message message=new Message();
+                            message.what=2;
+                            handler.sendMessage(message);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            getHttp.start();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+    }
+    Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what){
+                case 2:
+                    listView.setAdapter(findAdapter);
+                    break;
+            }
+        }
+    };
 }
