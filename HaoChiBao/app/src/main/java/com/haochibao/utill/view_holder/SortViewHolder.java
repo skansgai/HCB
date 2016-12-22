@@ -72,8 +72,8 @@ public class SortViewHolder {
         this.roomRatingBar = roomRatingBar;
     }
 
-    TextView name,type,distance,look,price,location;
-    ImageView itemImg;
-    RatingBar roomRatingBar;
+    public TextView name,type,distance,look,price,location;
+    public ImageView itemImg;
+    public RatingBar roomRatingBar;
 
 }

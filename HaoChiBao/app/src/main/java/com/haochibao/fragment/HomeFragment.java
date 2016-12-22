@@ -3,11 +3,14 @@ package com.haochibao.fragment;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +29,10 @@ import com.haochibao.activity.SeekHelpActivity;
 import com.haochibao.activity.ShopingActivity;
 import com.haochibao.utill.http.Location;
 import com.haochibao.utill.http.Weather;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +53,12 @@ public class HomeFragment extends Fragment {
     private Activity mactivity;
     Intent intent;
     ListView listView;
+    String tianqi;
     private Location location;
+    String cituName="重庆";
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
+    private final static String TAG="HaoChoBao";
     private Weather weather;
     final static String HTTPUTI = "http://api.avatardata.cn/Weather/Query?key=d14a6039b7f7420c82d7d487eaa38bbe&cityname=";
 
@@ -54,7 +66,10 @@ public class HomeFragment extends Fragment {
         @Override
         public void handleMessage(Message msg) {
             if (msg.what==0){
-             homepage_address.setText(location.getCityname());
+             homepage_address.setText(cituName);
+            }
+            if (msg.what==1){
+                homepage_weather.setText(tianqi);
             }
         }
     };
@@ -93,12 +108,15 @@ public class HomeFragment extends Fragment {
         home_shopping.setOnClickListener(onClickListener);
         home_park.setOnClickListener(onClickListener);
         getLocation();
+        getWeath();
         return view;
     }
 
     public void init() {
         homeRecommend = (TextView) view.findViewById(R.id.home_recommend);
         homeRecommend.setOnClickListener(onClickListener);
+        sharedPreferences=context.getSharedPreferences("Weather",Context.MODE_APPEND);
+        editor=sharedPreferences.edit();
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -180,10 +198,30 @@ public class HomeFragment extends Fragment {
     }
     public void getLocation(){
         location=new Location(context,handler);
+        location.setOnClicklistener(new Location.onResultListener() {
+            @Override
+            public void onClick(String data) {
+                editor.putString("location",location.getCityname());
+                editor.commit();
+            }
+        });
         location.start();
+
     }
     public  void getWeath(){
-        weather = new Weather(HTTPUTI,location.getCityname());
+        if (sharedPreferences.getString("location",null)!=null){
+            cituName=sharedPreferences.getString("location",null);
+            Log.i(TAG,cituName);
+        }else{
+            cituName="重庆";
+        }
+        weather = new Weather(HTTPUTI,cituName,handler);
+        weather.setOnClicklistener(new Weather.onResultListener() {
+            @Override
+            public void onClick(String data) {
+                tianqi=data;
+            }
+        });
         weather.start();
     }
 

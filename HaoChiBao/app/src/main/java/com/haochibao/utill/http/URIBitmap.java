@@ -1,88 +1,66 @@
 package com.haochibao.utill.http;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.Message;
+import android.widget.ImageView;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URL;
 
 /**
  * Created by Administrator on 2016/12/20.
  */
 
-public class URIBitmap {
+public class URIBitmap  {
     /**
      * 通过uri获取图片并进行压缩
      *
      * @param uri
      */
-    public static Bitmap getBitmapFormUri(Activity activity, Uri uri){
-        try {
-            InputStream input=activity.getContentResolver().openInputStream(uri);
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inJustDecodeBounds = true;
-            options.inDither=true;
-            options.inPreferredConfig = Bitmap.Config.ARGB_8888;//
-            BitmapFactory.decodeStream(input,null,options);
-            input.close();
-            int originalWidth=options.outWidth;
-            int originalHeight=options.outHeight;
-            if ((originalWidth == -1) || (originalHeight == -1))
-                return null;
-                //图片分辨率以480X800为
-            float hh=800f;
-            float ww=480f;
-            //缩放比。由于是固定比例缩放，只用高或者宽其中一个数据进行计算即可
-            int be=1;
-            if (originalWidth>originalHeight && originalWidth>ww){//如果宽度大的话根据宽度固定大小缩放
-                be=(int)(originalWidth/ww);
-            }else if (originalWidth<originalHeight && originalHeight>hh){
-                be=(int)(originalHeight/hh);
-            }
-            if (be <=0){
-                be=1;
-            }
+    private String uri;
+    public URIBitmap(String uri){
+        this.uri=uri;
 
-            //比例压缩
-            BitmapFactory.Options bitmapOptions=new BitmapFactory.Options();
-            bitmapOptions.inSampleSize=be;
-            bitmapOptions.inDither = true;
-            bitmapOptions.inPreferredConfig = Bitmap.Config.ARGB_8888;
-            input = activity.getContentResolver().openInputStream(uri);
-            Bitmap bitmap=BitmapFactory.decodeStream(input,null,bitmapOptions);
-            input.close();
-            return  compressImage(bitmap);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
     }
-    /**
-     * 质量压缩方法
-     *
-     * @param image
-     * @return
-     */
-    private static Bitmap compressImage(Bitmap image) {
-        ByteArrayOutputStream baos=new ByteArrayOutputStream();
-        image.compress(Bitmap.CompressFormat.JPEG,100,baos);//质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
-        int options=100;
-        while (baos.toByteArray().length/1024>100){
-            baos.reset();//重置
-            image.compress(Bitmap.CompressFormat.JPEG,options,baos);
-            options-=10;//每次减少10
-        }
-        ByteArrayInputStream isBm=new ByteArrayInputStream(baos.toByteArray());
-        Bitmap bitmap=BitmapFactory.decodeStream(isBm,null,null);//把
-        return bitmap;
-    }
+    public void loadImage(final ImageCallBack imageCallBack){
+        final Handler handler=new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                Drawable drawable=(Drawable)msg.obj;
+                imageCallBack.getDrawable(drawable);
+            }
+        };
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Drawable drawable=Drawable.createFromStream(new URL(uri).openStream(),"");
+                    Message message=new Message();
+                    message.obj=drawable;
+                    handler.sendMessage(message);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
 
+    }
+    public interface ImageCallBack {
+        public void getDrawable(Drawable drawable);
+    }
 }

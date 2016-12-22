@@ -19,6 +19,7 @@ import java.util.List;
  * Created by Administrator on 2016/12/12.
  */
 public class EntertainmentAdapter extends BaseAdapter {
+    SortViewHolder viewHolder;
     Context context;
     LayoutInflater inflater;
     List<EntertainmentModel> list;
@@ -26,6 +27,7 @@ public class EntertainmentAdapter extends BaseAdapter {
         this.context = context;
         this.list = list;
         inflater = LayoutInflater.from(context);
+        viewHolder=new SortViewHolder();
     }
     @Override
     public int getCount() {
@@ -34,21 +36,19 @@ public class EntertainmentAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return list.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        SortViewHolder viewHolder = new SortViewHolder();
         if (convertView == null){
             convertView = inflater.inflate(R.layout.entertainment_list_item,null);
             viewHolder.setName((TextView) convertView.findViewById(R.id.name));
-            viewHolder.setDistance((TextView) convertView.findViewById(R.id.distance));
             viewHolder.setType((TextView) convertView.findViewById(R.id.type));
             viewHolder.setLocation((TextView) convertView.findViewById(R.id.location));
             viewHolder.setLook((TextView) convertView.findViewById(R.id.have_a_look_at));
@@ -59,7 +59,6 @@ public class EntertainmentAdapter extends BaseAdapter {
         }
         viewHolder.getName().setText(list.get(position).getName());
         viewHolder.getPrice().setText(list.get(position).getPrice());
-        viewHolder.getDistance().setText(list.get(position).getDistance());
         viewHolder.getLocation().setText(list.get(position).getLocation());
         viewHolder.getType().setText(list.get(position).getType());
         return convertView;

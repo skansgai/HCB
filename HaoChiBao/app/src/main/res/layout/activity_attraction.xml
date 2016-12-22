@@ -33,12 +33,15 @@
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:background="@color/white"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:weightSum="1"
+        android:gravity="center_horizontal">
         <Spinner
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="90dp"
             android:layout_height="wrap_content"
-            android:entries="@array/nearby"/>
+            android:gravity="right"
+            android:entries="@array/nearby"
+            android:layout_weight="0.06"></Spinner>
         <View
             android:layout_width="1dp"
             android:layout_marginTop="5dp"
@@ -46,32 +49,10 @@
             android:layout_height="match_parent"
             android:background="@color/lineGray"/>
         <Spinner
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
-            android:entries="@array/nearby"/>
-        <View
-            android:layout_width="1dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_height="match_parent"
-            android:background="@color/lineGray"/>
-        <Spinner
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:entries="@array/nearby"/>
-        <View
-            android:layout_width="1dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_height="match_parent"
-            android:background="@color/lineGray"/>
-        <Spinner
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:entries="@array/nearby"/>
+            android:entries="@array/ranking"
+            android:layout_weight="0.23"></Spinner>
     </LinearLayout>
     <ListView
         android:id="@+id/attraction_list"

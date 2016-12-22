@@ -7,7 +7,9 @@
         android:id="@+id/comment_search_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="6dp">
+        android:padding="6dp"
+        android:layout_marginBottom="-10dp"
+        android:background="@color/bgGrayWhite">
 
     </com.haochibao.utill.view.FlowLayout>
 </LinearLayout>

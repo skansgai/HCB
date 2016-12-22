@@ -1,6 +1,12 @@
 package com.haochibao.utill.http;
 
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,12 +22,16 @@ import java.net.URLEncoder;
  */
 
 public class Weather extends Thread {
+    private final static String TAG="HaoChoBao";
     String http;
     String cityName;
-    
-    public Weather(String uri, String cityName ){
+    String data=null;
+    Handler handler;
+    String TianQi="哈哈";
+    public Weather(String uri, String cityName, Handler handler){
         this.http=uri;
         this.cityName=cityName;
+        this.handler=handler;
     }
     @Override
     public void run() {
@@ -40,8 +50,20 @@ public class Weather extends Thread {
                 while ((s=buf.readLine())!=null){
                     builder.append(s);
                 }
-                String data=builder.toString();
-                Log.i("Result",data);
+                data=builder.toString();
+                Log.i(TAG,data);
+                JSONObject jsonObject=new JSONObject(data);
+                JSONObject result=jsonObject.optJSONObject("result");;
+                JSONArray jsonArray=result.optJSONArray("weather");
+                JSONObject monday=jsonArray.getJSONObject(0);
+                JSONObject info=monday.optJSONObject("info");
+                JSONArray night=info.optJSONArray("night");
+                TianQi=night.getString(1);
+                resultListener.onClick(TianQi);
+                Message message=new Message();
+                message.what=1;
+                handler.sendMessage(message);
+                buf.close();
             }
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -49,6 +71,18 @@ public class Weather extends Thread {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
+    }
+    public String resultWeather(){
+            return TianQi;
+    }
+    public onResultListener resultListener;
+    public void setOnClicklistener(onResultListener onResultListener){
+        this.resultListener=onResultListener;
+    }
+    public interface onResultListener{
+        void  onClick(String data);
     }
 }

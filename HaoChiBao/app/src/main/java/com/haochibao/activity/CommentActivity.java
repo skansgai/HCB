@@ -16,9 +16,6 @@ import com.haochibao.R;
 import com.haochibao.utill.adapter.CommentListAdater;
 import com.haochibao.utill.view.FlowLayout;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by Administrator on 2016/12/10.
  */
@@ -30,8 +27,8 @@ public class CommentActivity extends Activity {
     TextView btnSearch;
 
     FlowLayout searchList;
-    String[] searchNames = {"卡密尔","艾翁","艾希","艾瑞莉娅","巨魔",
-            "艾翁","艾希","艾瑞莉娅","巨魔","艾翁","艾"
+    String[] searchNames = {"全部","好评","差评","最新点评","团购点评（81）",
+            "分量较少","艾希","艾瑞莉娅","巨魔","艾翁","艾"
             ,"艾翁","艾希","艾瑞莉娅","巨魔","艾瑞莉娅"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,4 +110,5 @@ public class CommentActivity extends Activity {
         };
         return onClickListener;
     }
+
 }
