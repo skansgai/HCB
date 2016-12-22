@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.haochibao.R;
 import com.haochibao.utill.adapter.CommentListAdater;
+import com.haochibao.utill.model.CommentModel;
 import com.haochibao.utill.view.FlowLayout;
 
 /**
@@ -25,11 +26,11 @@ public class CommentActivity extends Activity {
     RadioButton rgTopRight;
     ImageView btnBack;
     TextView btnSearch;
+    List<CommentModel> list = new ArrayList<CommentModel>();
 
     FlowLayout searchList;
-    String[] searchNames = {"全部","好评","差评","最新点评","团购点评（81）",
-            "分量较少","艾希","艾瑞莉娅","巨魔","艾翁","艾"
-            ,"艾翁","艾希","艾瑞莉娅","巨魔","艾瑞莉娅"};
+    String[] searchNames = {"全部","好评","差评","最新点评","团购点评（81）", "分量较少（51）",
+            "请客（4）","锅底不错（6）","店面大","口味真不错（66）","服务热情" , "位置不错"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,17 +44,29 @@ public class CommentActivity extends Activity {
         rgTopRight = (RadioButton) findViewById(R.id.rg_top_right);
         btnBack = (ImageView) findViewById(R.id.btn_back);
         btnSearch = (TextView) findViewById(R.id.btn_top_search);
+        getData();
         addSearchList();
         //设置RadioButton的初始状态
         resetRadioButton(1);
         rgTopLeft.setChecked(true);
         
         commentList.addHeaderView(listHead,null,true);
-        commentList.setAdapter(new CommentListAdater(this));
+        commentList.setAdapter(new CommentListAdater(this,list));
 
         rgTop.setOnCheckedChangeListener(getOnCheckedChangeListener());
         btnBack.setOnClickListener(getOnClickListener());
         btnSearch.setOnClickListener(getOnClickListener());
+    }
+    public void getData(){
+        for (int i=0;i<10;i++){
+            CommentModel model = new CommentModel();
+            model.content="11.9元斩获一箱原价40元的天友核桃花生奶";
+            model.scan="134";
+            model.time="上周五";
+            model.userName = "日川冈坂";
+            model.userLevel = "99";
+            list.add(model);
+        }
     }
     public void addSearchList(){
         LayoutInflater inflater = LayoutInflater.from(this);
