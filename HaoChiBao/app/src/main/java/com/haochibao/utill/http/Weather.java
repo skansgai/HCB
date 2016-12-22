@@ -53,7 +53,7 @@ public class Weather extends Thread {
                 data=builder.toString();
                 Log.i(TAG,data);
                 JSONObject jsonObject=new JSONObject(data);
-                JSONObject result=jsonObject.optJSONObject("result");;
+                JSONObject result=jsonObject.optJSONObject("result");
                 JSONArray jsonArray=result.optJSONArray("weather");
                 JSONObject monday=jsonArray.getJSONObject(0);
                 JSONObject info=monday.optJSONObject("info");
