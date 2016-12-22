@@ -17,6 +17,9 @@ import com.haochibao.utill.adapter.CommentListAdater;
 import com.haochibao.utill.model.CommentModel;
 import com.haochibao.utill.view.FlowLayout;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Administrator on 2016/12/10.
  */
