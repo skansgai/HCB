@@ -63,7 +63,7 @@ public class HotPotDetailsActivity extends Activity {
         hcb_share = (LinearLayout) headView.findViewById(R.id.hcb_share);
         hcb_comment = (LinearLayout) headView.findViewById(R.id.hcb_comment);
         hcbao_comment = (FlowLayout) headView.findViewById(R.id.hcbao_comment);
-        getLv();
+        //getLv();
         new Thread() {
             @Override
             public void run() {
@@ -225,6 +225,7 @@ public class HotPotDetailsActivity extends Activity {
                     hotPotDetails.setComment(jobj.getString("comment"));
                     hotPotDetails.setSupport(jobj.getString("support"));
                     Log.i("comment===>", "" + jobj.getInt("comment"));
+
                     hotPotDetailsList.add(hotPotDetails);
 
                 }
