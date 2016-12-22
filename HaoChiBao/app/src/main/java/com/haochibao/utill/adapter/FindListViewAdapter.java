@@ -86,7 +86,8 @@ public class FindListViewAdapter extends BaseAdapter {
         viewHodler.time.setText(findModel.getTime());
         viewHodler.hotel_name.setText(findModel.getHotel_name());
         viewHodler.describe.setText(findModel.getDescribe());
-        String uri="http://bpic.588ku.com/element_pic/00/00/00/00569082d7dc280.jpg!/fw/208/quality/90/unsharp/true/compress/true";
+        String uri="http://bpic.588ku.com/element_pic/00/00/00/00569082d7dc280.jpg!/fw/208/quality/90" +
+                "/unsharp/true/compress/true";
         ImageView imageView= viewHodler.user_image;
         imageView.setTag(uri);
         viewHodler.user_image.setImageResource(R.mipmap.ic_launcher);

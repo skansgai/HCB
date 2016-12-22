@@ -71,6 +71,6 @@ public class GetHttp extends Thread{
         this.resultListener=onResultListener;
     }
     public interface onResultListener{
-        void onClick(String data) throws JSONException;
+        void onClick(String data) throws JSONException, IOException;
     }
 }

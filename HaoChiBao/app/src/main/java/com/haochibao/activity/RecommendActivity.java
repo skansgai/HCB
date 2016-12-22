@@ -14,7 +14,15 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.haochibao.R;
+import com.haochibao.utill.http.GetHttp;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +30,7 @@ import java.util.List;
  * Created by Administrator on 2016/12/12.
  */
 public class RecommendActivity extends Activity {
+    final static String TAG="RecommendActivity";
     ImageView img_left;
     ListView recommend_list_view;
     Intent intent;
@@ -91,5 +100,26 @@ public class RecommendActivity extends Activity {
             }
             return convertView;
         }
+    }
+    public void getServiceType(){
+        String uri="http://localhost/index.php/home/index/getFenLei";
+        try {
+            URL url=new URL(uri);
+            GetHttp getHttp=new GetHttp(this,url);
+            getHttp.setOnClicklistener(new GetHttp.onResultListener() {
+                @Override
+                public void onClick(String data) throws JSONException, IOException {
+                    Log.i(TAG,data);
+                    JSONObject object=new JSONObject(data);
+                    JSONArray array=object.optJSONArray("result");
+                    for (int i=0;i<array.length();i++){
+                        
+                    }
+                }
+            });
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
     }
 }
