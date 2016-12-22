@@ -131,16 +131,6 @@ public class FindFragment extends Fragment {
         }
         }
     };
-   /* public List<FindModel> getFindData(){
-    for (int i=0;i<5;i++){
-        findModel.setUser_name(map.get("user_name").toString());
-        findModel.setTitle(map.get("title").toString());
-        findModel.setDescribe(map.get("describe").toString());
-        findModel.setTime(map.get("time").toString());
-        findList.add(findModel);
-    }
-        return findList;
-    }*/
     public void getAttentionData(){
         for (int i=0;i<20;i++){
             map.put("userImage",R.mipmap.my_head_portrait);
