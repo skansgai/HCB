@@ -243,7 +243,7 @@ public class HomeFragment extends Fragment {
         }else{
             cituName="重庆";
         }
-        weather = new Weather(HTTPUTI,cituName,handler);
+        weather = new Weather(HTTPUTI,"重庆",handler);
         weather.setOnClicklistener(new Weather.onResultListener() {
             @Override
             public void onClick(String data) {

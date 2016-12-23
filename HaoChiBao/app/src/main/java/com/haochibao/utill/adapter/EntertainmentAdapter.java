@@ -1,6 +1,11 @@
 package com.haochibao.utill.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +18,16 @@ import com.haochibao.R;
 import com.haochibao.utill.model.EntertainmentModel;
 import com.haochibao.utill.view_holder.SortViewHolder;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 /**
  * Created by Administrator on 2016/12/12.
  */
 public class EntertainmentAdapter extends BaseAdapter {
+
     SortViewHolder viewHolder;
     Context context;
     LayoutInflater inflater;
@@ -48,6 +57,7 @@ public class EntertainmentAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null){
             convertView = inflater.inflate(R.layout.entertainment_list_item,null);
+            viewHolder.setItemImg((ImageView) convertView.findViewById(R.id.item_img));
             viewHolder.setName((TextView) convertView.findViewById(R.id.name));
             viewHolder.setType((TextView) convertView.findViewById(R.id.type));
             viewHolder.setLocation((TextView) convertView.findViewById(R.id.location));
@@ -56,6 +66,9 @@ public class EntertainmentAdapter extends BaseAdapter {
             convertView.setTag(viewHolder);
         }else {
             viewHolder= (SortViewHolder) convertView.getTag();
+        }
+        if (list.get(position).getImg()!=null){
+            viewHolder.getItemImg().setImageBitmap(list.get(position).getImg());
         }
         viewHolder.getName().setText(list.get(position).getName());
         viewHolder.getPrice().setText(list.get(position).getPrice());
