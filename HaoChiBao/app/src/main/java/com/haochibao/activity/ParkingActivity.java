@@ -1,5 +1,6 @@
 package com.haochibao.activity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.os.Message;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
@@ -56,6 +58,13 @@ public class ParkingActivity extends FragmentActivity {
         }.start();
         img_left.setOnClickListener(getOnClickListener());
         parkingList.setAdapter(new EntertainmentAdapter(this,list));
+        parkingList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(ParkingActivity.this,HotPotDetailsActivity.class);
+                startActivity(intent);
+            }
+        });
     }
     Handler handler = new Handler(){
         @Override

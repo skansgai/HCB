@@ -1,5 +1,6 @@
 package com.haochibao.activity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -60,6 +62,13 @@ public class AttractionActivity extends FragmentActivity {
         }.start();
         img_left.setOnClickListener(getOnClickListener());
         attractionList.setAdapter(new EntertainmentAdapter(this,list));
+        attractionList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(AttractionActivity.this,HotPotDetailsActivity.class);
+                startActivity(intent);
+            }
+        });
     }
     Handler handler = new Handler(){
         @Override

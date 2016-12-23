@@ -59,7 +59,7 @@ public class HomeViewPagerActivity extends FragmentActivity {
         findFragment=new FindFragment();
         isLogin=getIntent().getBooleanExtra("isLogin",false);
 
-        Log.i("TAG",isLogin+"");
+        Log.i("TAG",isLogin + "");
         if (isLogin){
             mineFragment=new MineFragment();
         }else {
