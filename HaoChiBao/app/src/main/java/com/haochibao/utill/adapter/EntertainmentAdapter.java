@@ -27,7 +27,6 @@ import java.util.List;
  * Created by Administrator on 2016/12/12.
  */
 public class EntertainmentAdapter extends BaseAdapter {
-
     SortViewHolder viewHolder;
     Context context;
     LayoutInflater inflater;
