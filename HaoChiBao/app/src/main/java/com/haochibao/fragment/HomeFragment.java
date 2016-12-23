@@ -253,6 +253,7 @@ public class HomeFragment extends Fragment {
         weather.start();
     }
     public String  getHomeBanner(){
+
             try {
                 String uri="http://192.168.7.23/index.php/home/index/getImage?state=1";
                 URL url=new URL(uri);
@@ -261,6 +262,12 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onClick(String data) throws JSONException, IOException {
                         Log.i("4444444444444444444444",data);
+                        if (sharedPreferences.getString("homeBanner",null)==null){
+                            editor.putString("homeBanner",data);
+                            editor.commit();
+                        }else {
+                            data=sharedPreferences.getString("homeBanner",null);
+                        }
                         //数据解析
                         JSONObject object=new JSONObject(data);
                         JSONArray array=object.optJSONArray("result");

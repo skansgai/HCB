@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -67,6 +68,8 @@ public class FindFragment extends Fragment {
     private RelativeLayout layout;
     private List<FindModel> findList=new ArrayList<FindModel>();
     FindModel findModel=new FindModel();
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +96,8 @@ public class FindFragment extends Fragment {
         findAdapter=new FindListViewAdapter(context,findList,listView);
         location.setOnClickListener(onClickListener);
         radioGroup.setOnCheckedChangeListener(onCheckedChangeListener);
+        sharedPreferences=context.getSharedPreferences("findData",Context.MODE_APPEND);
+        editor=sharedPreferences.edit();
         getAttentionData();
         simpleAdapter=new SimpleAdapter(
                 context,
@@ -163,6 +168,12 @@ public class FindFragment extends Fragment {
                 public void onClick(String data) throws JSONException {
                     Log.i("4444444444444444444444",data);
                     //数据解析
+                    if (sharedPreferences.getString("findData",null)==null){
+                        editor.putString("findData",null);
+                        editor.commit();
+                    }else {
+                        data=sharedPreferences.getString("findData",null);
+                    }
                     JSONObject object = null;
                     try {
                         object = new JSONObject(data);
