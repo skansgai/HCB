@@ -13,6 +13,7 @@
     android:layout_marginTop="30dp"
     >
     <EditText
+        android:gravity="center_vertical"
         android:alpha="0.5"
         android:background="@color/textBlack"
         android:paddingLeft="10dp"
@@ -39,6 +40,7 @@
         android:paddingBottom="5dp"
         android:paddingTop="5dp">
         <EditText
+            android:gravity="center_vertical"
             android:background="@null"
             android:paddingLeft="10dp"
             android:id="@+id/register_yanzheng"
@@ -51,13 +53,14 @@
             android:textColorHint="@color/textGray"
             android:inputType="number"
             android:textSize="@dimen/font_28"
-            android:maxLength="11"
+            android:maxLength="6"
             />
 
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="获取验证码"
+            android:gravity="center"
             android:layout_marginRight="20dp"
             android:button="@null"
             android:background="@drawable/get_yanzheng"
@@ -84,10 +87,11 @@
         android:layout_height="40dp"
         android:drawableLeft="@mipmap/password"
         android:hint="登录密码"
+        android:gravity="center_vertical"
         android:textColor="@color/white"
         android:drawablePadding="10dp"
         android:textColorHint="@color/textGray"
-        android:inputType="number"
+        android:inputType="text"
         android:textSize="@dimen/font_28"
         android:maxLength="11"
         />
@@ -103,10 +107,11 @@
         android:layout_height="40dp"
         android:drawableLeft="@mipmap/password"
         android:hint="确认密码"
+        android:gravity="center_vertical"
         android:textColor="@color/white"
         android:drawablePadding="10dp"
         android:textColorHint="@color/textGray"
-        android:inputType="number"
+        android:inputType="text"
         android:textSize="@dimen/font_28"
         android:maxLength="11"
         />
@@ -118,6 +123,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginLeft="20dp">
         <CheckBox
+            android:id="@+id/checkBox"
             android:checked="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

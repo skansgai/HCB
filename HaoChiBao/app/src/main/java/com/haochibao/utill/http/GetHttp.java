@@ -44,6 +44,9 @@ public class GetHttp extends Thread{
                 data=builder.toString();
                 Log.i(TAG,"Request"+data);
                 resultListener.onClick(data);
+                if (buffer!=null){
+                    buffer.close();
+                }
             }else {
                 Log.i(TAG,"错误码"+connection.getResponseCode());
                 resultListener.onClick(connection.getRequestMethod());

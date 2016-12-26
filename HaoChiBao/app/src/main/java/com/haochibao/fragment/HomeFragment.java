@@ -247,7 +247,7 @@ public class HomeFragment extends Fragment {
     public String  getHomeBanner(){
 
             try {
-                String uri="http://192.168.7.16/index.php/home/index/getImage?state=1";
+                String uri="http://192.168.7.23/index.php/home/index/getImage?state=1";
                 URL url=new URL(uri);
                 GetHttp http=new GetHttp(context,url);
                 http.setOnClicklistener(new GetHttp.onResultListener() {
