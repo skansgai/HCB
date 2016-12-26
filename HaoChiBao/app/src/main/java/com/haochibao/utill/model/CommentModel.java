@@ -6,4 +6,5 @@ package com.haochibao.utill.model;
 public class CommentModel {
     public String userName,userLevel,content,time,scan,portraitPath,imgPath;
     public double rating;
+    public Boolean state=false;
 }
