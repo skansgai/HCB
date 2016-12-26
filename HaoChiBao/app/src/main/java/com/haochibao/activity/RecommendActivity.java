@@ -17,20 +17,21 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
 import com.haochibao.R;
-import com.haochibao.utill.http.GetHttp;
 import com.haochibao.utill.model.Recommend;
 import com.haochibao.utill.view_holder.RecommendViewHolder;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import java.io.IOException;
+
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +44,17 @@ public class RecommendActivity extends Activity {
     ImageView img_left;
     ListView recommend_list_view;
     Intent intent;
+    Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what==1){
+                Bitmap bitmap= (Bitmap) msg.obj;
+                if (viewHolder.img!=null){
+                    viewHolder.img.setImageBitmap(bitmap);
+                }
+            }
+        }
+    };
     List<Recommend>list = new ArrayList<Recommend>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +71,7 @@ public class RecommendActivity extends Activity {
             }
         });
         recommend_list_view.setOnItemClickListener(onItemClickListener);
+//        getdate();
         new Thread() {
             @Override
             public void run() {
@@ -84,17 +97,6 @@ public class RecommendActivity extends Activity {
 //    }
 
     class RecommendAdapter extends BaseAdapter{
-        Handler handler=new Handler(){
-            @Override
-            public void handleMessage(Message msg) {
-                if (msg.what==1){
-                    Bitmap bitmap= (Bitmap) msg.obj;
-                    if (viewHolder.img!=null){
-                        viewHolder.img.setImageBitmap(bitmap);
-                    }
-                }
-            }
-        };
         Context context;
         List<Recommend>list;
         LayoutInflater layoutInflater;
@@ -134,6 +136,7 @@ public class RecommendActivity extends Activity {
             } else {
                 viewHolder = (RecommendViewHolder) convertView.getTag();
             }
+
             viewHolder.name.setText(list.get(position).getName());
             viewHolder.grade.setRating((float) list.get(position).getGrade());
             viewHolder.price.setText(""+list.get(position).getPrice());
@@ -154,34 +157,15 @@ public class RecommendActivity extends Activity {
                     }
                 }
             }.start();
-            return convertView;
-        }
-    }
-    public void getServiceType() {
-        String uri = "http://localhost/index.php/home/index/getFenLei";
-        try {
-            URL url = new URL(uri);
-            GetHttp getHttp = new GetHttp(this, url);
-            getHttp.setOnClicklistener(new GetHttp.onResultListener() {
-                @Override
-                public void onClick(String data) throws JSONException, IOException {
-                    Log.i(TAG, data);
-                    JSONObject object = new JSONObject(data);
-                    JSONArray array = object.optJSONArray("result");
-                    for (int i = 0; i < array.length(); i++) {
 
-                    }
-                }
-            });
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
+            return convertView;
         }
     }
 
     public void getDate() {
         StringBuilder stringBuilder = new StringBuilder();
         try {
-            String httpUrl = "http://192.168.7.23/index.php/home/index/getServiceType?typename="+URLEncoder.encode("火锅","utf-8")+"&by=price" ;
+            String httpUrl = "http://10.0.2.2/index.php/home/index/getServiceType?typename="+ URLEncoder.encode("火锅");
             URL url = new URL(httpUrl);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setRequestMethod("GET");
@@ -193,7 +177,7 @@ public class RecommendActivity extends Activity {
                 while ((str = bufferedReader.readLine()) != null) {
                     stringBuilder.append(str);
                 }
-                Log.i("stringBuilder", "状态码" + stringBuilder.toString());
+                Log.i("stringBuilder", "状态码" + stringBuilder);
                 JSONObject jsonObject = new JSONObject(stringBuilder.toString());
                 JSONArray jsonArray = jsonObject.getJSONArray("result");
                 for (int i = 0; i < jsonArray.length(); i++) {
@@ -206,8 +190,6 @@ public class RecommendActivity extends Activity {
                     recommend.setDescribe(jobj.getString("describe"));
                     list.add(recommend);
                 }
-            }else {
-                Log.i(TAG,httpURLConnection.getResponseCode()+"");
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();

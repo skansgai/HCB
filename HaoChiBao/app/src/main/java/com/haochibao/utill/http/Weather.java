@@ -38,6 +38,7 @@ public class Weather extends Thread {
         try {
             String city= URLEncoder.encode(cityName,"utf-8");
             String uri=http+city;
+            Log.i("uri====>",""+uri);
             URL url=new URL(uri);
             HttpURLConnection conn= (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");

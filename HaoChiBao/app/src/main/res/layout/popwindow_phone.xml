@@ -23,15 +23,15 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="2dp"
         android:layout_marginLeft="12dp"
         android:layout_marginRight="12dp"
         android:background="@color/lineGray" />
 
     <TextView
+        android:id="@+id/phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:gravity="center_horizontal"
         android:paddingBottom="15dp"
         android:paddingTop="15dp"
