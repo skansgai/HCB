@@ -34,7 +34,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         initEvents();
 
     }
-
     private void initEvents() {
         mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
