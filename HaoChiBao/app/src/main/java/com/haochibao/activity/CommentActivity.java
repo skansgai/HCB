@@ -1,10 +1,14 @@
 package com.haochibao.activity;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -24,13 +28,14 @@ import java.util.List;
  * Created by Administrator on 2016/12/10.
  */
 public class CommentActivity extends Activity {
+    LinearLayout commentSquare;
     RadioGroup rgTop;
     RadioButton rgTopLeft;
     RadioButton rgTopRight;
     ImageView btnBack;
     TextView btnSearch;
     List<CommentModel> list = new ArrayList<CommentModel>();
-
+    ListView commentList;
     FlowLayout searchList;
     String[] searchNames = {"全部","好评","差评","最新点评","团购点评（81）", "分量较少（51）",
             "请客（4）","锅底不错（6）","店面大","口味真不错（66）","服务热情" , "位置不错"};
@@ -40,7 +45,14 @@ public class CommentActivity extends Activity {
         setContentView(R.layout.activity_comment);
         LayoutInflater inflater = LayoutInflater.from(this);
         LinearLayout listHead = (LinearLayout) inflater.inflate(R.layout.comment_list_head,null);
-        ListView commentList = (ListView) findViewById(R.id.comment_list);
+        commentList = (ListView) findViewById(R.id.comment_list);
+        commentList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                commentList.deferNotifyDataSetChanged();
+            }
+        });
         searchList = (FlowLayout) listHead.findViewById(R.id.comment_search_list);
         rgTop = (RadioGroup) findViewById(R.id.rg_top);
         rgTopLeft = (RadioButton) findViewById(R.id.rg_top_left);
@@ -55,7 +67,6 @@ public class CommentActivity extends Activity {
         
         commentList.addHeaderView(listHead,null,true);
         commentList.setAdapter(new CommentListAdater(this,list));
-
         rgTop.setOnCheckedChangeListener(getOnCheckedChangeListener());
         btnBack.setOnClickListener(getOnClickListener());
         btnSearch.setOnClickListener(getOnClickListener());

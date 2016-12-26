@@ -36,9 +36,10 @@
         </RelativeLayout>
 
         <ImageView
+            android:id="@+id/interact_image"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@mipmap/interaction_banner" />
+            android:layout_height="120dp"
+            android:background="@mipmap/ic_launcher" />
         <View
             android:layout_width="match_parent"
             android:layout_height="10dp"

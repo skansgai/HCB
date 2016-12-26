@@ -49,16 +49,26 @@
         android:layout_margin="10dp"
         android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="0dp"
+        <EditText
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="大坪正街" />
+            android:hint="请输入您的评论"
+            android:textSize="@dimen/font_28"
+            android:background="@drawable/bg_top_edit"/>
 
-        <ImageView
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/review_refresh" />
+            android:text="发表"
+            android:textSize="@dimen/font_32"
+            android:textColor="@color/white"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:background="@drawable/login_btn_style"
+            android:id="@+id/textView2" />
     </LinearLayout>
 
 </LinearLayout>
