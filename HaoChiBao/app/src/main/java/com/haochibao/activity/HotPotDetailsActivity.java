@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.haochibao.R;
@@ -48,6 +49,8 @@ public class HotPotDetailsActivity extends Activity {
     List<HotPotDetails> hotPotDetailsList = new ArrayList<HotPotDetails>();
     String[] comment = {"店家不错", "服务不错", "上菜快菜量多"};
     LayoutInflater layoutInflater;
+    TextView poptextview;
+    String phone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,11 +66,17 @@ public class HotPotDetailsActivity extends Activity {
         hcb_share = (LinearLayout) headView.findViewById(R.id.hcb_share);
         hcb_comment = (LinearLayout) headView.findViewById(R.id.hcb_comment);
         hcbao_comment = (FlowLayout) headView.findViewById(R.id.hcbao_comment);
-        //getLv();
+
         new Thread() {
             @Override
             public void run() {
-                getDate();
+                getService();
+            }
+        }.start();
+        new Thread() {
+            @Override
+            public void run() {
+                getUserComment();
             }
         }.start();
 
@@ -111,13 +120,6 @@ public class HotPotDetailsActivity extends Activity {
         }
     };
 
-    public void getLv() {
-        for (int i = 0; i < 3; i++) {
-            HotPotDetails hotPotDetails = new HotPotDetails();
-            hotPotDetailsList.add(hotPotDetails);
-        }
-    }
-
     class HotPotDetailsAdapter extends BaseAdapter {
         Context context;
         List<HotPotDetails> hotPotDetailsList;
@@ -147,20 +149,23 @@ public class HotPotDetailsActivity extends Activity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            HotPotDetailsViewHolder viewHolder = new HotPotDetailsViewHolder();
+            HotPotDetailsViewHolder viewHolder;
+
             layoutInflater = LayoutInflater.from(context);
             if (convertView == null) {
+                 viewHolder = new HotPotDetailsViewHolder();
                 convertView = layoutInflater.inflate(R.layout.item_hotpotlistview, null);
-                viewHolder.setComment((TextView) convertView.findViewById(R.id.comment));
-                viewHolder.setSupport((TextView) convertView.findViewById(R.id.support));
+                viewHolder.user_name = (TextView) convertView.findViewById(R.id.user_name);
+                viewHolder.time = (TextView) convertView.findViewById(R.id.time);
+                viewHolder.grade = (RatingBar) convertView.findViewById(R.id.grade);
+                viewHolder.comment = (TextView) convertView.findViewById(R.id.comment);
                 convertView.setTag(viewHolder);
-            } else {
-                viewHolder = (HotPotDetailsViewHolder) convertView.getTag();
             }
-
-            viewHolder.getComment().setText(hotPotDetailsList.get(position).getComment());
-            viewHolder.getSupport().setText(hotPotDetailsList.get(position).getSupport());
-
+            viewHolder = (HotPotDetailsViewHolder) convertView.getTag();
+            viewHolder.user_name.setText(hotPotDetailsList.get(position).getUser_name());
+            viewHolder.time.setText(hotPotDetailsList.get(position).getTime());
+            viewHolder.grade.setRating(hotPotDetailsList.get(position).getGrade().floatValue());
+            viewHolder.comment.setText(hotPotDetailsList.get(position).getComment());
             return convertView;
         }
     }
@@ -168,6 +173,8 @@ public class HotPotDetailsActivity extends Activity {
     public void createPopupWindow() {
         LayoutInflater layoutInflater = LayoutInflater.from(this);
         View popview = layoutInflater.inflate(R.layout.popwindow_phone, null);
+        poptextview = (TextView) popview.findViewById(R.id.phone);
+        poptextview.setText(phone);
         PopupWindow popupWindow = new PopupWindow(popview, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         popupWindow.setOutsideTouchable(true);
         WindowManager.LayoutParams lp = getWindow().getAttributes();
@@ -201,10 +208,11 @@ public class HotPotDetailsActivity extends Activity {
         }
     }
 
-    public void getDate() {
-        StringBuilder stringBuilder = new StringBuilder();
+    public void getService() {
+
         try {
-            String httpUrl = "http://10.0.2.2/index.php/home/Comment/getcomment?service_id=1";
+            StringBuilder stringBuilder = new StringBuilder();
+            String httpUrl = "http://10.0.2.2/index.php/home/index/getServiceInfo?id=1";
             URL url = new URL(httpUrl);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setRequestMethod("GET");
@@ -219,17 +227,79 @@ public class HotPotDetailsActivity extends Activity {
                 Log.i("stringBuilder", "状态码" + stringBuilder);
                 JSONObject jsonObject = new JSONObject(stringBuilder.toString());
                 JSONArray jsonArray = jsonObject.getJSONArray("result");
+                HotPotDetailsViewHolder viewHolder = new HotPotDetailsViewHolder();
                 for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject jobj = jsonArray.getJSONObject(i);
-                    HotPotDetails hotPotDetails = new HotPotDetails();
-                    hotPotDetails.setComment(jobj.getString("comment"));
-                    hotPotDetails.setSupport(jobj.getString("support"));
-                    Log.i("comment===>", "" + jobj.getInt("comment"));
+                    JSONObject obj = jsonArray.getJSONObject(i);
+                    String name = obj.optString("name");
+                    String img = obj.optString("img");
+                    String grade = obj.optString("grade");
+                    String price = obj.optString("price");
+                    String location = obj.optString("location");
+                    String describe = obj.optString("describe");
+                    phone = obj.optString("phone");
+                    String zan = obj.optString("zan");
+                    String visited = obj.optString("visited");
 
-                    hotPotDetailsList.add(hotPotDetails);
+                    viewHolder.name = (TextView) findViewById(R.id.name);
+                    viewHolder.img = (ImageView) findViewById(R.id.img);
+                    viewHolder.grade = (RatingBar) findViewById(R.id.grade);
+                    viewHolder.price = (TextView) findViewById(R.id.price);
+                    viewHolder.location = (TextView) findViewById(R.id.location);
+                    viewHolder.describe = (TextView) findViewById(R.id.describe);
+                    viewHolder.phone = (TextView) findViewById(R.id.phone);
+                    // viewHolder.zan = (TextView) findViewById(R.id.zan);
+
+                    viewHolder.name.setText(name);
+                    Log.i("能接收到数据吗=========>", "" + name);
+                    //viewHolder.img.setImageBitmap();
+                    viewHolder.grade.setRating(Float.parseFloat(grade));
+                    viewHolder.price.setText(price);
+                    viewHolder.location.setText(location);
+                    viewHolder.describe.setText(describe);
+                    viewHolder.phone.setText(phone);
+                    // viewHolder.zan.setText(zan);
+                    // viewHolder.visited.setText(visited);
+
 
                 }
+            }
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 
+    public void getUserComment() {
+        try {
+            StringBuilder stringBuilder = new StringBuilder();
+            String httpUrl = "http://10.0.2.2/index.php/home/index/getServiceComment?id=1";
+            URL url = new URL(httpUrl);
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setRequestMethod("GET");
+            httpURLConnection.setConnectTimeout(5000);
+            httpURLConnection.connect();
+            if (httpURLConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(
+                        httpURLConnection.getInputStream()));
+                String str;
+                while ((str = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(str);
+                }
+                Log.i("stringBuilder", "" + stringBuilder);
+                JSONObject object = new JSONObject(stringBuilder.toString());
+                JSONArray jsonArray = object.getJSONArray("result");
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject object1 = jsonArray.getJSONObject(i);
+                    HotPotDetails hotPotDetails = new HotPotDetails();
+                    hotPotDetails.setUser_name(object1.getString("user_name"));
+                    hotPotDetails.setComment(object1.getString("content"));
+                    hotPotDetails.setTime(object1.getString("time"));
+                    hotPotDetails.setGrade(object1.getDouble("grade"));
+                    hotPotDetailsList.add(hotPotDetails);
+                }
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();
