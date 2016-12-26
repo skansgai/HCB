@@ -10,47 +10,67 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="12dp"
+            android:id="@+id/user_image"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:scaleType="centerCrop"
             android:src="@mipmap/chushi" />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_weight="2"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
             <LinearLayout
+                android:layout_weight="1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingBottom="12dp"
+                android:paddingTop="10dp">
                 <TextView
+                    android:layout_weight="1"
+                    android:id="@+id/user_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
                     android:text="妖刀姬"
                     android:textSize="@dimen/font_32" />
 
-                <ImageView
+                <CheckBox
+                    android:button="@null"
+                    android:id="@+id/collection"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="24dp"
-                    android:layout_marginTop="16dp"
-                    android:src="@mipmap/star" />
-
+                    android:checked="false"
+                    android:background="@drawable/collection_selector"/>
                 <ImageView
+                    android:id="@+id/share"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="12dp"
-                    android:layout_marginTop="16dp"
                     android:src="@mipmap/share" />
             </LinearLayout>
             <TextView
+                android:layout_weight="3"
+                android:id="@+id/describe"
                 android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:maxLength="120"
+                android:text="\t\tI'm twenty three 我二十三岁난 수수께끼 Question我是个谜题 问题뭐게요 맞혀봐요会是怎样的 猜猜看吧I'm twenty three我二十三岁。"/>
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="I'm twenty three 我二十三岁난 수수께끼 Question我是个谜题 问题뭐게요 맞혀봐요会是怎样的 猜猜看吧I'm twenty three我二十三岁。"/>
+                android:text="2016-12-19 17:21:01"
+                android:layout_gravity="right"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"/>
         </LinearLayout>
     </LinearLayout>
 

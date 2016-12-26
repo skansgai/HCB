@@ -41,6 +41,8 @@ import com.haochibao.utill.http.GetImage;
 import com.haochibao.utill.http.Location;
 import com.haochibao.utill.http.URIBitmap;
 import com.haochibao.utill.http.Weather;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -80,7 +82,7 @@ public class HomeFragment extends Fragment {
     private String bannerPath;
     private ImageView image_view;
     final static String HTTPUTI = "http://api.avatardata.cn/Weather/Query?key=d14a6039b7f7420c82d7d487eaa38bbe&cityname=";
-
+    ImageLoader imageLoader;
     private Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -145,6 +147,7 @@ public class HomeFragment extends Fragment {
         editor=sharedPreferences.edit();
         image_view= (ImageView) view.findViewById(R.id.image_view);
         image_view.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        imageLoader=ImageLoader.getInstance();
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -271,13 +274,13 @@ public class HomeFragment extends Fragment {
                         //数据解析
                         JSONObject object=new JSONObject(data);
                         JSONArray array=object.optJSONArray("result");
-                        for (int i=0;i<array.length();i++){
-                            JSONObject sunObject=array.getJSONObject(i);
-                            bannerPath=sunObject.optString("path",null);
-                            Bitmap bitmap=BitmapFactory.decodeStream(new URL(bannerPath).openStream());
-                            Message message=new Message();
-                            message.what=3;
-                            message.obj=bitmap;
+                        for (int i=0;i<array.length();i++) {
+                            JSONObject sunObject = array.getJSONObject(i);
+                            bannerPath = sunObject.optString("path", null);
+                            Bitmap bitmap = BitmapFactory.decodeStream(new URL(bannerPath).openStream());
+                            Message message = new Message();
+                            message.what = 3;
+                            message.obj = bitmap;
                             handler.sendMessage(message);
                         }
                     }
