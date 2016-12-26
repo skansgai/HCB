@@ -1,5 +1,8 @@
 package com.haochibao.activity;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -9,6 +12,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -29,6 +33,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,6 +62,13 @@ public class HotelActivity extends FragmentActivity {
         }.start();
         img_left.setOnClickListener(getOnClickListener());
         hotelList.setAdapter(new EntertainmentAdapter(this,list));
+        hotelList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(HotelActivity.this,HotPotDetailsActivity.class);
+                startActivity(intent);
+            }
+        });
     }
     Handler handler = new Handler(){
         @Override
@@ -83,7 +95,7 @@ public class HotelActivity extends FragmentActivity {
    }
     public void getInternetData(){
         HttpURLConnection httpURLConnection = null;
-        String httpUrl="http://10.0.2.2/index.php/home/index/getServiceType?typename=火锅";
+        String httpUrl="http://10.0.2.2/index.php/home/index/getServiceType?typename="+ URLEncoder.encode("酒店");
         try {
             URL url = new URL(httpUrl);
             httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -106,17 +118,21 @@ public class HotelActivity extends FragmentActivity {
                     JSONObject object = jsonArray.getJSONObject(i);
                     String name = object.optString("name");
                     Log.i("name===>",name);
+                    String img = object.optString("img");
+                    Log.i("img===>",img);
                     String price = object.optString("price");
                     String location = object.optString("location");
                     String type = object.optString("type_name");
                     EntertainmentModel model = new EntertainmentModel();
-
+                    Bitmap imgBitmap = getBitmap(img);
+                    model.setImg(imgBitmap);
                     model.setName(name);
                     model.setLocation(location);
                     model.setPrice(price);
                     model.setType(type);
                     list.add(model);
                 }
+                inputStream.close();
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -125,5 +141,15 @@ public class HotelActivity extends FragmentActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+    public Bitmap getBitmap(String imgUrl) {
+        Bitmap bitmap = null;
+        try {
+            URL url = new URL(imgUrl);
+            bitmap = BitmapFactory.decodeStream(url.openStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return bitmap;
     }
 }

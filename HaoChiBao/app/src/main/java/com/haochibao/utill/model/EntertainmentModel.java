@@ -13,7 +13,7 @@ public class EntertainmentModel {
     private String look;
     private String price;
     private String distance;
-    private Bitmap img;
+    private Bitmap img=null;
     private double rating;
 
     public String getName() {

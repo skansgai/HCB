@@ -17,6 +17,7 @@ import com.haochibao.R;
 import com.haochibao.utill.model.CommentModel;
 import com.haochibao.utill.view_holder.CommentViewHolder;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -26,10 +27,14 @@ public class CommentListAdater extends BaseAdapter {
     Context context;
     LayoutInflater inflater;
     List<CommentModel> list;
+    HashMap<String,Boolean> state = new HashMap<String, Boolean>();
     CommentViewHolder viewHolder;
     public CommentListAdater(Context context,List<CommentModel> list){
         this.context = context;
         this.list = list;
+        for (int i=0;i<list.size();i++){
+            state.put(""+i,false);
+        }
         inflater = LayoutInflater.from(context);
         viewHolder = new CommentViewHolder();
     }
@@ -49,7 +54,7 @@ public class CommentListAdater extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         if (convertView == null){
             convertView = inflater.inflate(R.layout.comment_list_item,null);
             viewHolder.comment = (ImageView) convertView.findViewById(R.id.comment);
@@ -72,6 +77,11 @@ public class CommentListAdater extends BaseAdapter {
         viewHolder.content.setText(list.get(position).content);
         viewHolder.time.setText(list.get(position).time);
         viewHolder.scan.setText(list.get(position).scan);
+        if (state.get(""+position)){
+            viewHolder.commentSquare.setVisibility(View.VISIBLE);
+        }else {
+            viewHolder.commentSquare.setVisibility(View.GONE);
+        }
         viewHolder.praise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,7 +91,7 @@ public class CommentListAdater extends BaseAdapter {
         viewHolder.comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                viewHolder.commentSquare.setVisibility(View.VISIBLE);
+                state.put(""+position,true);
                 Toast.makeText(context,"评论",Toast.LENGTH_SHORT).show();
             }
         });
