@@ -4,17 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Message;
-import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -35,11 +29,8 @@ import com.haochibao.activity.ParkingActivity;
 import com.haochibao.activity.RecommendActivity;
 import com.haochibao.activity.SeekHelpActivity;
 import com.haochibao.activity.ShopingActivity;
-import com.haochibao.utill.http.AsyncImageLoader;
 import com.haochibao.utill.http.GetHttp;
-import com.haochibao.utill.http.GetImage;
 import com.haochibao.utill.http.Location;
-import com.haochibao.utill.http.URIBitmap;
 import com.haochibao.utill.http.Weather;
 
 import org.json.JSONArray;
@@ -47,8 +38,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -243,7 +232,7 @@ public class HomeFragment extends Fragment {
         }else{
             cituName="重庆";
         }
-        weather = new Weather(HTTPUTI,cituName,handler);
+        weather = new Weather(HTTPUTI,"重庆",handler);
         weather.setOnClicklistener(new Weather.onResultListener() {
             @Override
             public void onClick(String data) {
@@ -254,7 +243,7 @@ public class HomeFragment extends Fragment {
     }
     public String  getHomeBanner(){
             try {
-                String uri="http://192.168.7.23/index.php/home/index/getImage?state=1";
+                String uri="http://192.168.7.16/index.php/home/index/getImage?state=1";
                 URL url=new URL(uri);
                 GetHttp http=new GetHttp(context,url);
                 http.setOnClicklistener(new GetHttp.onResultListener() {

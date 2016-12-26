@@ -6,21 +6,14 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.haochibao.R;
 import com.haochibao.utill.adapter.EntertainmentAdapter;
-import com.haochibao.utill.http.GetHttp;
 import com.haochibao.utill.model.EntertainmentModel;
 
 import org.json.JSONArray;
@@ -98,7 +91,7 @@ public class EntertainmentActivity extends Activity {
     }
     public void getInternetData(){
         HttpURLConnection httpURLConnection = null;
-        String httpUrl="http://10.0.2.2/index.php/home/index/getServiceType?typename=火锅";
+        String httpUrl="http://10.0.2.2/index.php/home/index/getServiceType?typename=娱乐";
         try {
             URL url = new URL(httpUrl);
             httpURLConnection = (HttpURLConnection) url.openConnection();

@@ -9,14 +9,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginBottom="5dp">
 
         <ImageView
             android:id="@+id/img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:src="@mipmap/my_beauty_photo" />
+            android:padding="10dp"
+            android:src="@mipmap/hotpot" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,7 +27,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -50,7 +50,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="5dp"
                 android:orientation="horizontal">
                 <RatingBar
                     android:id="@+id/grade"
@@ -82,7 +82,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="5dp"
                 android:orientation="horizontal">
 
                 <TextView

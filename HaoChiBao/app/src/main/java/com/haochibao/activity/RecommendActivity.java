@@ -17,19 +17,22 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
 import com.haochibao.R;
-import com.haochibao.utill.http.GetHttp;
 import com.haochibao.utill.model.Recommend;
 import com.haochibao.utill.view_holder.RecommendViewHolder;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import java.io.IOException;
+
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 /**
@@ -123,7 +126,7 @@ public class RecommendActivity extends Activity {
             layoutInflater = LayoutInflater.from(context);
             viewHolder = new RecommendViewHolder();
             if(convertView==null){
-               convertView = layoutInflater.inflate(R.layout.item_recommend,null);
+                convertView = layoutInflater.inflate(R.layout.item_recommend,null);
                 viewHolder.name=((TextView)convertView.findViewById(R.id.name));
                 viewHolder.img = ((ImageView)convertView.findViewById(R.id.img));
                 viewHolder.grade = ((RatingBar) convertView.findViewById(R.id.grade));
@@ -158,31 +161,11 @@ public class RecommendActivity extends Activity {
             return convertView;
         }
     }
-    public void getServiceType() {
-        String uri = "http://localhost/index.php/home/index/getFenLei";
-        try {
-            URL url = new URL(uri);
-            GetHttp getHttp = new GetHttp(this, url);
-            getHttp.setOnClicklistener(new GetHttp.onResultListener() {
-                @Override
-                public void onClick(String data) throws JSONException, IOException {
-                    Log.i(TAG, data);
-                    JSONObject object = new JSONObject(data);
-                    JSONArray array = object.optJSONArray("result");
-                    for (int i = 0; i < array.length(); i++) {
-
-                    }
-                }
-            });
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-    }
 
     public void getDate() {
         StringBuilder stringBuilder = new StringBuilder();
         try {
-            String httpUrl = "http://10.0.2.2/index.php/home/index/getServiceType?typename=火锅";
+            String httpUrl = "http://10.0.2.2/index.php/home/index/getServiceType?typename="+ URLEncoder.encode("火锅");
             URL url = new URL(httpUrl);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setRequestMethod("GET");
