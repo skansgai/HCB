@@ -59,6 +59,7 @@
         <activity android:name=".activity.UserAdviseActvity"/>
         <activity android:name=".activity.FindActivity"/><!--发现-->
         <activity android:name=".activity.MyRecommendActivity"/><!--我的推荐-->
+        <activity android:name=".activity.UserRegisterActivity"/><!--用户注册页面-->
         <service android:name="com.amap.api.location.APSService"></service><!--定位服务-->
     </application>
 </manifest>

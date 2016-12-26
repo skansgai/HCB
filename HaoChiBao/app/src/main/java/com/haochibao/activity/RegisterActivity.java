@@ -23,7 +23,7 @@ import com.haochibao.utill.http.GetHttp;
 
 public class RegisterActivity extends Activity {
     private EditText phoneEdit,passwordEdit;
-    private TextView forgetPassword,fastLogin,loginBtn;
+    private TextView forgetPassword,fastLogin,loginBtn,register;
     private Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +38,12 @@ public class RegisterActivity extends Activity {
         forgetPassword= (TextView) findViewById(R.id.forget_password);
         loginBtn= (TextView) findViewById(R.id.login_btn);
         fastLogin= (TextView) findViewById(R.id.fast_login);
+        register= (TextView) findViewById(R.id.user_register);
 
         forgetPassword.setOnClickListener(onClickListener);
         loginBtn.setOnClickListener(onClickListener);
         fastLogin.setOnClickListener(onClickListener);
+        register.setOnClickListener(onClickListener);
         context=this;
     }
 
@@ -62,6 +64,10 @@ public class RegisterActivity extends Activity {
                 //快速登陆
                 createLoginMoreDialog();
                 break;
+            case R.id.user_register:
+                //用户注册
+                Intent intent1=new Intent(RegisterActivity.this,UserRegisterActivity.class);
+                startActivity(intent1);
 
         }
         }
