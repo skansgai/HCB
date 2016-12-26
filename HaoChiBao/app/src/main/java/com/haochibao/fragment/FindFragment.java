@@ -181,11 +181,13 @@ public class FindFragment extends Fragment {
                         for (int i=0;i<resultArray.length();i++){
                             JSONObject subJson=resultArray.getJSONObject(i);
                             findModel.setUser_icon(subJson.optString("icon_path"));
+                            Log.i("============2016",subJson.optString("icon_path"));
                             findModel.setUser_name(subJson.optString("user_name"));
                             findModel.setTitle(subJson.optString("title"));
                             findModel.setTime(subJson.optString("time"));
                             findModel.setHotel_name(subJson.optString("name"));
                             findModel.setDescribe(subJson.optString("describe"));
+                            findModel.setImg(subJson.optString("img"));
                             findList.add(findModel);
                             Message message=new Message();
                             message.what=2;

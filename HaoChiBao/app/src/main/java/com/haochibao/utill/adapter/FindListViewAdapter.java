@@ -86,11 +86,10 @@ public class FindListViewAdapter extends BaseAdapter {
         viewHodler.time.setText(findModel.getTime());
         viewHodler.hotel_name.setText(findModel.getHotel_name());
         viewHodler.describe.setText(findModel.getDescribe());
-        String uri="http://bpic.588ku.com/element_pic/00/00/00/00569082d7dc280.jpg!/fw/208/quality/90" +
-                "/unsharp/true/compress/true";
+        String uri=findModel.getUser_icon();
+        //获得用户头像
         ImageView imageView= viewHodler.user_image;
         imageView.setTag(uri);
-        viewHodler.user_image.setImageResource(R.mipmap.ic_launcher);
         Drawable cacheImage=asyncImageLoader.loadDrawable(uri, new AsyncImageLoader.ImageCallback() {
             @Override
             public void imageLoaded(Drawable imageDrawable, String imageUrl) {
@@ -104,8 +103,26 @@ public class FindListViewAdapter extends BaseAdapter {
             imageView.setImageResource(R.mipmap.ic_launcher);
         }else {
             imageView.setImageDrawable(cacheImage);
-            viewHodler.hotel_image.setImageDrawable(cacheImage);
         }
+        //获得商铺图片
+        ImageView imageView1=viewHodler.hotel_image;
+        String uri1=findModel.getImg();
+        imageView.setTag(uri1);
+        Drawable cacheImage1=asyncImageLoader.loadDrawable(uri1, new AsyncImageLoader.ImageCallback() {
+            @Override
+            public void imageLoaded(Drawable imageDrawable, String imageUrl) {
+                ImageView imageViewByTog=(ImageView)listView.findViewWithTag(imageUrl);
+                if (imageViewByTog != null){
+                    imageViewByTog.setImageDrawable(imageDrawable);
+                }
+            }
+        });
+        if (cacheImage1 == null){
+            imageView1.setImageResource(R.mipmap.ic_launcher);
+        }else {
+            imageView1.setImageDrawable(cacheImage1);
+        }
+
         return convertView;
     }
     class ViewHodler{
