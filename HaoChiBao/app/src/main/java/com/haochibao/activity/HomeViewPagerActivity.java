@@ -30,7 +30,7 @@ public class HomeViewPagerActivity extends FragmentActivity {
     private ViewPager viewPager;
     private List<Fragment> fragmentList;
     private boolean isLogin=false; 
-    private Fragment mineFragment;
+    private Fragment mineFragment; 
     private Fragment homeFragment;
     private Fragment findFragment;
     private List<RadioButton> radioButtonList;

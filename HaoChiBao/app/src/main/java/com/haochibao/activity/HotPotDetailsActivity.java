@@ -40,7 +40,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2016/12/12.
  */
-public class HotPotDetailsActivity extends Activity {
+public class     HotPotDetailsActivity extends Activity {
     ListView listView;
     ImageView img_chakan_lv, img_left;
     LinearLayout phone_edit, hcb_share, hcb_comment;
