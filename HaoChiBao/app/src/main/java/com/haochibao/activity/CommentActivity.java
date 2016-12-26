@@ -72,7 +72,7 @@ public class CommentActivity extends Activity {
         btnSearch.setOnClickListener(getOnClickListener());
     }
     public void getData(){
-        for (int i=0;i<10;i++){
+        for (int i=0;i<9;i++){
             CommentModel model = new CommentModel();
             model.content="11.9元斩获一箱原价40元的天友核桃花生奶";
             model.scan="134";
