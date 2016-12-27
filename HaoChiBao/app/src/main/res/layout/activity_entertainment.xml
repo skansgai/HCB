@@ -37,6 +37,7 @@
         android:weightSum="1"
         android:gravity="center_horizontal">
         <Spinner
+            android:id="@+id/spinner_one"
             android:layout_width="90dp"
             android:layout_height="wrap_content"
             android:gravity="right"
@@ -49,6 +50,7 @@
             android:layout_height="match_parent"
             android:background="@color/lineGray"/>
         <Spinner
+            android:id="@+id/spinner_two"
             android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:entries="@array/ranking"

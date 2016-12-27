@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.haochibao.R;
 import com.haochibao.utill.model.CommentModel;
+import com.haochibao.utill.view.FlowLayout;
 import com.haochibao.utill.view_holder.CommentViewHolder;
 
 import java.util.HashMap;
@@ -58,11 +59,11 @@ public class CommentListAdater extends BaseAdapter {
             viewHolder.userPortrait = (ImageView) convertView.findViewById(R.id.user_portrait);
             viewHolder.userLevel = (TextView) convertView.findViewById(R.id.user_level);
             viewHolder.userName = (TextView) convertView.findViewById(R.id.user_name);
-            viewHolder.commentImg = (ImageView) convertView.findViewById(R.id.img_one);
             viewHolder.rating = (RatingBar) convertView.findViewById(R.id.rating);
             viewHolder.content = (TextView) convertView.findViewById(R.id.content);
             viewHolder.time = (TextView) convertView.findViewById(R.id.time);
             viewHolder.scan = (TextView) convertView.findViewById(R.id.scan);
+            viewHolder.imgList = (FlowLayout) convertView.findViewById(R.id.img_list);
             viewHolder.commentSquare = (LinearLayout) convertView.findViewById(R.id.comment_square);
             convertView.setTag(viewHolder);
         }
@@ -72,12 +73,19 @@ public class CommentListAdater extends BaseAdapter {
         viewHolder.content.setText(list.get(position).content);
         viewHolder.time.setText(list.get(position).time);
         viewHolder.scan.setText(list.get(position).scan);
+        if (viewHolder.imgList.getChildCount()==0){
+            for (int i = 0 ; i<list.get(position).imgIds.size();i++){
+                ImageView imageView = new ImageView(context);
+                ViewGroup.MarginLayoutParams layoutParams = new ViewGroup.MarginLayoutParams(180,180);
+                imageView.setLayoutParams(layoutParams);
+                imageView.setImageResource(list.get(position).imgIds.get(i));
+                viewHolder.imgList.addView(imageView);
+            }
+        }
         if (list.get(position).state){
             viewHolder.commentSquare.setVisibility(View.VISIBLE);
-            Toast.makeText(context,"显示",Toast.LENGTH_SHORT).show();
         }else {
             viewHolder.commentSquare.setVisibility(View.GONE);
-            Toast.makeText(context,"隐藏",Toast.LENGTH_SHORT).show();
         }
         viewHolder.praise.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,15 +104,8 @@ public class CommentListAdater extends BaseAdapter {
                     list.get(p).state=true;
                 }
                 notifyDataSetChanged();
-                Toast.makeText(context,"评论",Toast.LENGTH_SHORT).show();
             }
         });
         return convertView;
-    }
-
-    @Override
-    public void notifyDataSetChanged() {
-        super.notifyDataSetChanged();
-        Log.i("notifyDataSetChanged","notifyDataSetChanged");
     }
 }
