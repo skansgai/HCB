@@ -74,8 +74,6 @@ public class FlowLayout extends ViewGroup {
                 height += lineHeight;
             }
         }
-        Log.i("sizeWidth","sizeWidth="+sizeWidth);
-        Log.i("sizeHeight","sizeHeight="+sizeHeight);
         //判断xml设置的是wrap_content还是match_parent,设置相应的宽高
         setMeasuredDimension(modeWidth == MeasureSpec.EXACTLY?sizeWidth:width + getPaddingLeft() +getPaddingRight(),
                 modeHeight == MeasureSpec.EXACTLY?sizeHeight:height + getPaddingTop() +getPaddingBottom());

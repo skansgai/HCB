@@ -27,7 +27,6 @@ import java.util.List;
  * Created by Administrator on 2016/12/12.
  */
 public class EntertainmentAdapter extends BaseAdapter {
-    SortViewHolder viewHolder;
     Context context;
     LayoutInflater inflater;
     List<EntertainmentModel> list;
@@ -35,7 +34,7 @@ public class EntertainmentAdapter extends BaseAdapter {
         this.context = context;
         this.list = list;
         inflater = LayoutInflater.from(context);
-        viewHolder=new SortViewHolder();
+
     }
     @Override
     public int getCount() {
@@ -54,7 +53,9 @@ public class EntertainmentAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        SortViewHolder viewHolder;
         if (convertView == null){
+            viewHolder=new SortViewHolder();
             convertView = inflater.inflate(R.layout.entertainment_list_item,null);
             viewHolder.setItemImg((ImageView) convertView.findViewById(R.id.item_img));
             viewHolder.setName((TextView) convertView.findViewById(R.id.name));

@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.haochibao.R;
 import com.haochibao.utill.adapter.EntertainmentAdapter;
@@ -27,6 +29,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,13 +40,18 @@ public class EntertainmentActivity extends Activity {
     ListView enterList;
     ImageView imgLeft;
     List<EntertainmentModel> list;
-
+    Spinner spinnerOne;
+    Spinner spinnerTwo;
+    String sort;
+    String distance;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entertainment);
         imgLeft = (ImageView) findViewById(R.id.img_left);
         enterList = (ListView) findViewById(R.id.entertainment_list);
+        spinnerOne = (Spinner) findViewById(R.id.spinner_one);
+        spinnerTwo = (Spinner) findViewById(R.id.spinner_two);
         list = new ArrayList<EntertainmentModel>();
         new Thread(){
             @Override
@@ -54,9 +62,33 @@ public class EntertainmentActivity extends Activity {
                 handler.sendMessage(message);
             }
         }.start();
+        spinnerOne.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                distance = EntertainmentActivity.this.getResources().getStringArray(R.array.nearby)[position];
+                Toast.makeText(EntertainmentActivity.this,distance,Toast.LENGTH_SHORT).show();
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                distance = EntertainmentActivity.this.getResources().getStringArray(R.array.nearby)[0];
+                Toast.makeText(EntertainmentActivity.this,distance,Toast.LENGTH_SHORT).show();
+            }
+        });
+        spinnerTwo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                sort = EntertainmentActivity.this.getResources().getStringArray(R.array.ranking)[position];
+                Toast.makeText(EntertainmentActivity.this,sort,Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                sort = EntertainmentActivity.this.getResources().getStringArray(R.array.ranking)[0];
+                Toast.makeText(EntertainmentActivity.this,sort,Toast.LENGTH_SHORT).show();
+            }
+        });
         imgLeft.setOnClickListener(getOnClickListener());
-        enterList.setAdapter(new EntertainmentAdapter(EntertainmentActivity.this,list));
         enterList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -64,7 +96,9 @@ public class EntertainmentActivity extends Activity {
                 startActivity(intent);
             }
         });
+
     }
+
     Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -76,6 +110,7 @@ public class EntertainmentActivity extends Activity {
 
         }
     };
+
     public View.OnClickListener getOnClickListener(){
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
@@ -89,6 +124,7 @@ public class EntertainmentActivity extends Activity {
         };
         return onClickListener;
     }
+
     public void getInternetData(){
         HttpURLConnection httpURLConnection = null;
         String httpUrl="http://10.0.2.2/index.php/home/index/getServiceType?typename=娱乐";
@@ -117,6 +153,7 @@ public class EntertainmentActivity extends Activity {
                     String price = object.optString("price");
                     String location = object.optString("location");
                     String type = object.optString("type_name");
+                    String imgPath = object.optString("img");
                     EntertainmentModel model = new EntertainmentModel();
 
                     model.setName(name);
