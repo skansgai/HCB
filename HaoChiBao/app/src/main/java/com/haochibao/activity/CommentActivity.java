@@ -79,6 +79,17 @@ public class CommentActivity extends Activity {
             model.time="上周五";
             model.userName = "日川冈坂";
             model.userLevel = "99";
+            if (i%3==1){
+                model.imgIds.add(R.mipmap.my_beauty_photo);
+                model.imgIds.add(R.mipmap.entertainment_item_img);
+            }else {
+                model.imgIds.add(R.mipmap.my_beauty_photo);
+                model.imgIds.add(R.mipmap.entertainment_item_img);
+                model.imgIds.add(R.mipmap.my_head_portrait);
+                model.imgIds.add(R.mipmap.my_beauty_photo);
+                model.imgIds.add(R.mipmap.entertainment_item_img);
+                model.imgIds.add(R.mipmap.my_head_portrait);
+            }
             list.add(model);
         }
     }
@@ -137,5 +148,4 @@ public class CommentActivity extends Activity {
         };
         return onClickListener;
     }
-
 }
