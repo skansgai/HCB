@@ -52,11 +52,13 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent">
                 <com.haochibao.utill.view.CircleImageView
+                    android:id="@+id/user_icon"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:src="@mipmap/my_head_portrait"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="20dp"/>
+                    android:layout_marginRight="30dp"
+                    />
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -106,11 +108,13 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerInParent="true"/>
             <TextView
+                android:id="@+id/user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="我的令爱icon"
                 android:textSize="@dimen/font_32"
                 android:layout_toLeftOf="@+id/nickname"
+                android:layout_marginRight="20dp"
                 android:layout_centerVertical="true"/>
         </RelativeLayout>
     </LinearLayout>
@@ -143,6 +147,54 @@
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"/>
+            <TextView
+                android:id="@+id/user_sex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="男"
+                android:layout_toLeftOf="@+id/sex"
+                android:layout_marginRight="20dp"
+                android:textSize="@dimen/font_36"
+                />
+        </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/bgGrayWhite"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingLeft="10dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:paddingRight="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="生日"
+                android:textSize="@dimen/font_32"
+                android:textColor="@color/textBlack"
+                android:layout_alignParentLeft="true"/>
+            <ImageView
+                android:id="@+id/birthday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/e_resize"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"/>
+            <TextView
+                android:id="@+id/user_birthday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2012-12-12"
+                android:layout_toLeftOf="@+id/birthday"
+                android:layout_marginRight="20dp"
+                android:textSize="@dimen/font_36"
+                />
         </RelativeLayout>
         <View
             android:layout_width="match_parent"
@@ -166,13 +218,22 @@
                 android:textColor="@color/textBlack"
                 android:layout_alignParentLeft="true"/>
             <ImageView
-                android:id="@+id/location"
+                android:id="@+id/location_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/e_resize"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"/>
+            <TextView
+                android:id="@+id/location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="男"
+                android:layout_toLeftOf="@+id/location_image"
+                android:layout_marginRight="20dp"
+                android:textSize="@dimen/font_36"
+                />
         </RelativeLayout>
         <View
             android:layout_width="match_parent"
@@ -196,13 +257,22 @@
                 android:textColor="@color/textBlack"
                 android:layout_alignParentLeft="true"/>
             <ImageView
-                android:id="@+id/signature"
+                android:id="@+id/signature_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/e_resize"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"/>
+            <TextView
+                android:id="@+id/signature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="无敌是多磨的寂寞！"
+                android:layout_toLeftOf="@+id/signature_image"
+                android:layout_marginRight="20dp"
+                android:textSize="@dimen/font_36"
+                />
         </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

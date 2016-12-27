@@ -9,7 +9,9 @@ import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,22 +76,6 @@ public class RegisterActivity extends Activity {
             case R.id.login_btn:
                 //登陆按钮
                 userLogin();
-                boolean isPhone=checkPhoneNumber(phone);
-                if (isPhone){
-                    if (password!=null){
-                        Intent intent=new Intent(RegisterActivity.this, HomeViewPagerActivity.class);
-                        intent.putExtra("isLogin",true);
-                        startActivity(intent);
-                    }else{
-                        Toast.makeText(RegisterActivity.this,"请输入正确的手机号码！",Toast.LENGTH_SHORT).show();
-                        phoneEdit.setText(null);
-                    }
-                }else {
-                    Toast.makeText(RegisterActivity.this,"请输入正确的手机号码！",Toast.LENGTH_SHORT).show();
-                    phoneEdit.setText(null);
-                    passwordEdit.setText(null);
-                }
-
                 break;
             case R.id.fast_login:
                 //快速登陆
@@ -147,27 +133,49 @@ public class RegisterActivity extends Activity {
     public void userLogin(){
         phone=phoneEdit.getText().toString();
         password=passwordEdit.getText().toString();
+        boolean isPhone=checkPhoneNumber(phone);
         String uri="http://192.168.7.23/index.php/home/user/login?phone_num="+phone+"&password="+password;
-        try {
-            URL url=new URL(uri);
-            GetHttp getHttp=new GetHttp(context,url);
-            getHttp.setOnClicklistener(new GetHttp.onResultListener() {
-                @Override
-                public void onClick(String data) throws JSONException, IOException {
-                if (data!=null){
-                    Log.i("LoginResult",data);
-                    JSONObject object=new JSONObject(data);
-                    requestCode=object.optString("requestCode",null);
-                    message=object.optString("message",null);
-                    JSONObject subObject=object.optJSONObject("result");
-                    MyApplication.setUserId(Integer.valueOf(subObject.optString("id")));
-                    MyApplication.setUserToken(subObject.optString("password"));
+        if (phone!=null){
+            if (isPhone){
+                if (password!=null){
+                    try {
+                        URL url=new URL(uri);
+                        GetHttp getHttp=new GetHttp(context,url);
+                        getHttp.setOnClicklistener(new GetHttp.onResultListener() {
+                            @Override
+                            public void onClick(String data) throws JSONException, IOException {
+                                if (data!=null){
+                                    Log.i("LoginResult",data);
+                                    JSONObject object=new JSONObject(data);
+                                    requestCode=object.optString("requestCode",null);
+                                    message=object.optString("message",null);
+                                    Message message1=new Message();
+                                    message1.what=0;
+                                    message1.obj=message;
+                                    handler.sendMessage(message1);
+                                    if (Integer.valueOf(requestCode)==200){
+                                        JSONObject subObject=object.optJSONObject("result");
+                                        MyApplication.setUserId(Integer.valueOf(subObject.optString("id")));
+                                        MyApplication.setUserToken(subObject.optString("password"));
+                                        Intent intent=new Intent(RegisterActivity.this, HomeViewPagerActivity.class);
+                                        intent.putExtra("isLogin",true);
+                                        startActivity(intent);
+                                    }
+                                }
+                            }
+                        });
+                        getHttp.start();
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    }
+                }else {
+                    Toast.makeText(RegisterActivity.this,"密码不能为空！！",Toast.LENGTH_SHORT).show();
                 }
-                }
-            });
-            getHttp.start();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
+            }else {
+                Toast.makeText(RegisterActivity.this,"请输入正确的手机号码！",Toast.LENGTH_SHORT).show();
+            }
+        }else {
+            Toast.makeText(RegisterActivity.this,"手机号码不能为空！",Toast.LENGTH_SHORT).show();
         }
     }
     /**
@@ -180,4 +188,13 @@ public class RegisterActivity extends Activity {
         Matcher matcher=pattern.matcher(phoneNumber);
         return matcher.matches();
     }
+    Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what==0){
+                String mesage= (String) msg.obj;
+                Toast.makeText(RegisterActivity.this,mesage,Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
 }

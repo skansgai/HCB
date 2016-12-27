@@ -104,17 +104,20 @@ public class MineFragment extends Fragment {
                     if (data!=null){
                         Log.i("getUserInfo",data);
                         JSONObject object=new JSONObject(data);
-                        JSONArray array=object.optJSONArray("result");
-                        for (int i=0;i<array.length();i++){
-                            JSONObject sub=array.optJSONObject(i);
-                            userInfo.setName(sub.optString("user_name","null"));
-                            String path=sub.optString("icon_path");
-                            Bitmap bitmap=BitmapFactory.decodeStream(new URL(path).openStream());
-                            userInfo.setBitmap(bitmap);
-                            Message message=new Message();
-                            message.what=0;
-                            message.obj=userInfo;
-                            handler.sendMessage(message);
+                        String requestCode=object.optString("requestCode");
+                        if (Integer.valueOf(requestCode)==200){
+                            JSONArray array=object.optJSONArray("result");
+                            for (int i=0;i<array.length();i++){
+                                JSONObject sub=array.optJSONObject(i);
+                                userInfo.setName(sub.optString("user_name","null"));
+                                String path=sub.optString("icon_path");
+                                Bitmap bitmap=BitmapFactory.decodeStream(new URL(path).openStream());
+                                userInfo.setBitmap(bitmap);
+                                Message message=new Message();
+                                message.what=0;
+                                message.obj=userInfo;
+                                handler.sendMessage(message);
+                            }
                         }
                     }
                 }
