@@ -2,6 +2,8 @@ package com.haochibao.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -43,6 +45,7 @@ public class EntertainmentActivity extends Activity {
     Spinner spinnerOne;
     Spinner spinnerTwo;
     String sort;
+    String rank;
     String distance;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,6 +56,46 @@ public class EntertainmentActivity extends Activity {
         spinnerOne = (Spinner) findViewById(R.id.spinner_one);
         spinnerTwo = (Spinner) findViewById(R.id.spinner_two);
         list = new ArrayList<EntertainmentModel>();
+        rank = "price";
+        spinnerOne.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                distance = EntertainmentActivity.this.getResources().getStringArray(R.array.nearby)[position];
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                distance = EntertainmentActivity.this.getResources().getStringArray(R.array.nearby)[0];
+            }
+        });
+        spinnerTwo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                sort = EntertainmentActivity.this.getResources().getStringArray(R.array.ranking)[position];
+                switch (sort){
+                    case "排序":
+                    case "价格最高":
+                    case "价格最低":
+                        rank = "price";
+                        break;
+                    case "人气最高":
+                    case "评价最高":
+                        rank = "grade";
+                        break;
+                }
+                startThread();
+                Log.i("sort:",sort+"has been selected");
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                sort = EntertainmentActivity.this.getResources().getStringArray(R.array.ranking)[0];
+            }
+        });
+        imgLeft.setOnClickListener(getOnClickListener());
+
+    }
+    public void startThread(){
         new Thread(){
             @Override
             public void run() {
@@ -62,52 +105,22 @@ public class EntertainmentActivity extends Activity {
                 handler.sendMessage(message);
             }
         }.start();
-        spinnerOne.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                distance = EntertainmentActivity.this.getResources().getStringArray(R.array.nearby)[position];
-                Toast.makeText(EntertainmentActivity.this,distance,Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                distance = EntertainmentActivity.this.getResources().getStringArray(R.array.nearby)[0];
-                Toast.makeText(EntertainmentActivity.this,distance,Toast.LENGTH_SHORT).show();
-            }
-        });
-        spinnerTwo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                sort = EntertainmentActivity.this.getResources().getStringArray(R.array.ranking)[position];
-                Toast.makeText(EntertainmentActivity.this,sort,Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                sort = EntertainmentActivity.this.getResources().getStringArray(R.array.ranking)[0];
-                Toast.makeText(EntertainmentActivity.this,sort,Toast.LENGTH_SHORT).show();
-            }
-        });
-        imgLeft.setOnClickListener(getOnClickListener());
-        enterList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(EntertainmentActivity.this,HotPotDetailsActivity.class);
-                startActivity(intent);
-            }
-        });
-
     }
-
     Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what){
                 case 1111:
                     enterList.setAdapter(new EntertainmentAdapter(EntertainmentActivity.this,list));
+                    enterList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Intent intent = new Intent(EntertainmentActivity.this,HotPotDetailsActivity.class);
+                            startActivity(intent);
+                        }
+                    });
                     break;
             }
-
         }
     };
 
@@ -127,7 +140,7 @@ public class EntertainmentActivity extends Activity {
 
     public void getInternetData(){
         HttpURLConnection httpURLConnection = null;
-        String httpUrl="http://10.0.2.2/index.php/home/index/getServiceType?typename=娱乐";
+        String httpUrl="http://192.168.7.22/index.php/home/index/getServiceType?typename=娱乐&by="+rank;
         try {
             URL url = new URL(httpUrl);
             httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -146,20 +159,22 @@ public class EntertainmentActivity extends Activity {
                 Log.i("data====>",stringBuilder.toString());
                 JSONObject jsonObject = new JSONObject(stringBuilder.toString());
                 JSONArray jsonArray = jsonObject.getJSONArray("result");
+                list.clear();
                 for (int i=0;i<jsonArray.length();i++){
                     JSONObject object = jsonArray.getJSONObject(i);
                     String name = object.optString("name");
-                    Log.i("name===>",name);
                     String price = object.optString("price");
                     String location = object.optString("location");
                     String type = object.optString("type_name");
                     String imgPath = object.optString("img");
+                    Log.i("imagePath===",imgPath);
+                    Bitmap bitmap = getBitmap(imgPath);
                     EntertainmentModel model = new EntertainmentModel();
-
                     model.setName(name);
                     model.setLocation(location);
                     model.setPrice(price);
                     model.setType(type);
+                    model.setImg(bitmap);
                     list.add(model);
                 }
             }
@@ -170,5 +185,15 @@ public class EntertainmentActivity extends Activity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+    public Bitmap getBitmap(String imgUrl) {
+        Bitmap bitmap = null;
+        try {
+            URL url = new URL(imgUrl);
+            bitmap = BitmapFactory.decodeStream(url.openStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return bitmap;
     }
 }
