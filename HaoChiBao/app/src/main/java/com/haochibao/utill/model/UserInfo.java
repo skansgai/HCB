@@ -2,11 +2,14 @@ package com.haochibao.utill.model;
 
 import android.graphics.Bitmap;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2016/12/26.
  */
 
-public class UserInfo {
+public class UserInfo implements Serializable {
+    private static final long serialVersionUID = -7060210544600464481L;
     private  String name;
     private  Bitmap bitmap;
     private  String sex;

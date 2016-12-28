@@ -64,11 +64,6 @@ public class UserRegisterActivity extends Activity {
                         if (yanzhengEdit.getText()!=null){
                                 if (Integer.valueOf(requestCode)==200){
                                     Toast.makeText(context,message,Toast.LENGTH_SHORT).show();
-                                    Intent intent=getIntent();
-                                    Bundle bundle=intent.getExtras();
-                                    bundle.putString("phone",phone);
-                                    bundle.putString("password",password);
-                                    setResult(RESULT_CODE, intent);
                                     finish();
                                 }else{
                                     Toast.makeText(context,message,Toast.LENGTH_SHORT).show();

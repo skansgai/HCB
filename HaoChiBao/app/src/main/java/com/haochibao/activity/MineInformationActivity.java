@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -49,7 +50,7 @@ public class MineInformationActivity extends Activity {
         setContentView(R.layout.activity_mine_information);
         context=getApplicationContext();
         init();
-        getUserInfor();
+        setUserInfo();
     }
     public void init(){
         userIcon= (CircleImageView) findViewById(R.id.user_icon);
@@ -58,7 +59,6 @@ public class MineInformationActivity extends Activity {
         location= (TextView) findViewById(R.id.location);
         signature= (TextView) findViewById(R.id.signature);
         birthday= (TextView) findViewById(R.id.user_birthday);
-
 
         backBtn= (ImageView) findViewById(R.id.back_btn);
         backBtn.setOnClickListener(onClickListener);
@@ -78,71 +78,28 @@ public class MineInformationActivity extends Activity {
         }
         }
     };
-    public void getUserInfor(){
-        String uri="http://192.168.7.23/index.php/home/user/getUserAllInfor?user_id="+ MyApplication.getUserId();
-        try {
-            URL url=new URL(uri);
-            GetHttp getHttp=new GetHttp(this,url);
-            getHttp.setOnClicklistener(new GetHttp.onResultListener() {
-                @Override
-                public void onClick(String data) throws JSONException, IOException {
-                    if (data!=null){
-                        Log.i("getUserAllInfor",data);
-                        JSONObject object=new JSONObject(data);
-                        JSONArray array=object.optJSONArray("result");
-                        for(int i=0;i<array.length();i++){
-                            userInfo=new UserInfo();
-                            JSONObject subObject=array.optJSONObject(i);
-                            String userName=subObject.optString("user_name");
-                            String birthday=subObject.optString("birthday");
-                            String district=subObject.optString("district");
-                            String ic_paht=subObject.optString("icon_path");
-                            String signature=subObject.optString("signature");
-                            String sex=subObject.optString("sex");
-                            String type=subObject.optString("type");
-                            String location=subObject.optString("location");
-                            userInfo.setName(userName);
-                            userInfo.setBirthday(birthday);
-                            userInfo.setSignature(signature);
-                            userInfo.setSex(sex);
-                            userInfo.setLocation(location);
-                            Bitmap bitmap= BitmapFactory.decodeStream(new URL(ic_paht).openStream());
-                            userInfo.setBitmap(bitmap);
-                            Message message=new Message();
-                            message.what=0;
-                            message.obj=userInfo;
-                            handler.sendMessage(message);
-                        }
-                    }
-                }
-            });
-            getHttp.start();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-    }
-    Handler handler=new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            if (msg.what==0){
-                userInfo= (UserInfo) msg.obj;
-                if (userInfo!=null){
-                    userIcon.setImageBitmap(userInfo.getBitmap());
-                    userName.setText(userInfo.getName());
-                    sex.setText(userInfo.getSex());
-                    signature.setText(userInfo.getSignature());
-                    location.setText(userInfo.getLocation());
-                    birthday.setText(userInfo.getBirthday());
-                }
-            }
-        }
-    };
+  public void setUserInfo(){
+      Intent intent=getIntent();
+      if (intent!=null){
+          Bundle bundle=intent.getExtras();
+          if (bundle!=null){
+              userInfo= (UserInfo)bundle.getSerializable("userInfo");
+              if (userInfo!=null){
+                  userIcon.setImageBitmap(userInfo.getBitmap());
+                  userName.setText(userInfo.getName());
+                  sex.setText(userInfo.getSex());
+                  signature.setText(userInfo.getSignature());
+                  location.setText(userInfo.getLocation());
+                  birthday.setText(userInfo.getBirthday());
+              }
+          }
+      }
+  }
 
     public void updateNameDialog(){
         LayoutInflater inflater=LayoutInflater.from(context);
         View view=inflater.inflate(R.layout.dialog_edit_text,null);
         editDialog= (EditText) view.findViewById(R.id.edit_dialog);
-
         AlertDialog.Builder  builder=new AlertDialog.Builder(context);
         builder.setTitle("昵称修改")//
         .setPositiveButton("保存", new DialogInterface.OnClickListener() {

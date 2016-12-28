@@ -7,6 +7,24 @@ import android.os.Bundle;
 public class MyApplication extends Application {
     private static int userId;
     private static String userToken;
+    private static boolean isLogin=false;
+    private static String LoginStyle="Normal";
+
+    public static String getLoginStyle() {
+        return LoginStyle;
+    }
+
+    public static void setLoginStyle(String loginStyle) {
+        LoginStyle = loginStyle;
+    }
+
+    public static boolean isLogin() {
+        return isLogin;
+    }
+
+    public static void setIsLogin(boolean isLogin) {
+        MyApplication.isLogin = isLogin;
+    }
 
     public static String getUserToken() {
         return userToken;
