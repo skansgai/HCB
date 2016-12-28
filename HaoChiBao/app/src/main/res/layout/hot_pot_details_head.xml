@@ -298,79 +298,12 @@
         </LinearLayout>
 
         <com.haochibao.utill.view.FlowLayout
+            android:id="@+id/hcb_share_describe"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="牛肉去哪了"
-                android:textSize="@dimen/font_28" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:text="叼嘴抄手"
-                android:textSize="@dimen/font_28" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:text="牛肉去哪了"
-                android:textSize="@dimen/font_28" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:text="叼嘴抄手"
-                android:textSize="@dimen/font_28" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="牛肉去哪了"
-                android:textSize="@dimen/font_28" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:text="叼嘴抄手"
-                android:textSize="@dimen/font_28" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:text="牛肉去哪了"
-                android:textSize="@dimen/font_28" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:text="叼嘴抄手"
-                android:textSize="@dimen/font_28" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="牛肉去哪了"
-                android:textSize="@dimen/font_28" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:text="叼嘴抄手"
-                android:textSize="@dimen/font_28" />
-
         </com.haochibao.utill.view.FlowLayout>
 
         <View
