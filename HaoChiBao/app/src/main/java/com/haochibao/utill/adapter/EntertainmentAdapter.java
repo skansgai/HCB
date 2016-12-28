@@ -74,6 +74,9 @@ public class EntertainmentAdapter extends BaseAdapter {
         viewHolder.getPrice().setText(list.get(position).getPrice());
         viewHolder.getLocation().setText(list.get(position).getLocation());
         viewHolder.getType().setText(list.get(position).getType());
+        if (list.get(position).getImg()!=null){
+            viewHolder.getItemImg().setImageBitmap(list.get(position).getImg());
+        }
         return convertView;
     }
 }

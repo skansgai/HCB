@@ -45,9 +45,10 @@ public class HotPotDetailsActivity extends Activity {
     ListView listView;
     ImageView img_chakan_lv, img_left;
     LinearLayout phone_edit, hcb_share, hcb_comment;
-    FlowLayout hcbao_comment;
+    FlowLayout hcbao_comment,hcb_share_desrcibe;
     List<HotPotDetails> hotPotDetailsList = new ArrayList<HotPotDetails>();
     String[] comment = {"店家不错", "服务不错", "上菜快菜量多"};
+    String[] desribe = {"店家不错", "服务不错", "上菜快菜量多"};
     LayoutInflater layoutInflater;
     TextView poptextview;
     String phone;
@@ -66,7 +67,7 @@ public class HotPotDetailsActivity extends Activity {
         hcb_share = (LinearLayout) headView.findViewById(R.id.hcb_share);
         hcb_comment = (LinearLayout) headView.findViewById(R.id.hcb_comment);
         hcbao_comment = (FlowLayout) headView.findViewById(R.id.hcbao_comment);
-
+        hcb_share_desrcibe = (FlowLayout) headView.findViewById(R.id.hcb_share_describe);
         new Thread() {
             @Override
             public void run() {
@@ -205,6 +206,11 @@ public class HotPotDetailsActivity extends Activity {
             TextView subview = (TextView) inflater.inflate(R.layout.hot_search_child, hcbao_comment, false);
             subview.setText(comment[i]);
             hcbao_comment.addView(subview);
+        }
+        for (int i= 0;i<desribe.length;i++){
+            TextView textView = (TextView) inflater.inflate(R.layout.hot_search_child,hcb_share_desrcibe,false);
+            textView.setText(desribe[i]);
+            hcb_share_desrcibe.addView(textView);
         }
     }
 
