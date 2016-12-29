@@ -41,17 +41,18 @@ import java.util.List;
 /**
  * Created by Administrator on 2016/12/12.
  */
-public class HotPotDetailsActivity extends Activity {
+public class ShopDetailsActivity extends Activity {
     ListView listView;
-    ImageView  img_left;
+    ImageView img_left;
     LinearLayout phone_edit, hcb_share, hcb_comment;
-    FlowLayout hcbao_comment,hcb_share_desrcibe;
+    FlowLayout hcbao_comment, hcb_share_desrcibe;
     List<HotPotDetails> hotPotDetailsList = new ArrayList<HotPotDetails>();
     String[] comment = {"店家不错", "服务不错", "上菜快菜量多"};
     String[] desribe = {"店家不错", "服务不错", "上菜快菜量多"};
     LayoutInflater layoutInflater;
     TextView poptextview;
     String phone;
+    int id ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +68,9 @@ public class HotPotDetailsActivity extends Activity {
         hcb_comment = (LinearLayout) headView.findViewById(R.id.hcb_comment);
         hcbao_comment = (FlowLayout) headView.findViewById(R.id.hcbao_comment);
         hcb_share_desrcibe = (FlowLayout) headView.findViewById(R.id.hcb_share_describe);
+        Intent intent = getIntent();
+        id=intent.getIntExtra("XXXid",0);
+        Log.i("id=====",id+"");
         new Thread() {
             @Override
             public void run() {
@@ -81,10 +85,10 @@ public class HotPotDetailsActivity extends Activity {
             }
         }.start();
 
-        new Thread(){
+        new Thread() {
             @Override
             public void run() {
-                getServiceAVGrade();
+              //  getServiceAVGrade();
             }
         }.start();
         HotPotDetailsAdapter hotPotDetailsAdapter = new HotPotDetailsAdapter(this, hotPotDetailsList);
@@ -111,11 +115,11 @@ public class HotPotDetailsActivity extends Activity {
                     createPopupWindow();
                     break;
                 case R.id.hcb_share:
-                    intent = new Intent(HotPotDetailsActivity.this, MyRecommendActivity.class);
+                    intent = new Intent(ShopDetailsActivity.this, MyRecommendActivity.class);
                     startActivity(intent);
                     break;
                 case R.id.hcb_comment:
-                    intent = new Intent(HotPotDetailsActivity.this, CommentActivity.class);
+                    intent = new Intent(ShopDetailsActivity.this, CommentActivity.class);
                     startActivity(intent);
                     break;
             }
@@ -156,7 +160,7 @@ public class HotPotDetailsActivity extends Activity {
 
             layoutInflater = LayoutInflater.from(context);
             if (convertView == null) {
-                 viewHolder = new HotPotDetailsViewHolder();
+                viewHolder = new HotPotDetailsViewHolder();
                 convertView = layoutInflater.inflate(R.layout.item_hotpotlistview, null);
                 viewHolder.user_name = (TextView) convertView.findViewById(R.id.user_name);
                 viewHolder.time = (TextView) convertView.findViewById(R.id.time);
@@ -209,8 +213,8 @@ public class HotPotDetailsActivity extends Activity {
             subview.setText(comment[i]);
             hcbao_comment.addView(subview);
         }
-        for (int i= 0;i<desribe.length;i++){
-            TextView textView = (TextView) inflater.inflate(R.layout.hot_search_child,hcb_share_desrcibe,false);
+        for (int i = 0; i < desribe.length; i++) {
+            TextView textView = (TextView) inflater.inflate(R.layout.hot_search_child, hcb_share_desrcibe, false);
             textView.setText(desribe[i]);
             hcb_share_desrcibe.addView(textView);
         }
@@ -220,7 +224,7 @@ public class HotPotDetailsActivity extends Activity {
 
         try {
             StringBuilder stringBuilder = new StringBuilder();
-            String httpUrl = "http://10.0.2.2/index.php/home/index/getServiceInfo?id=1";
+            String httpUrl = "http://10.0.2.2/index.php/home/index/getServiceInfo?id="+id;
             URL url = new URL(httpUrl);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setRequestMethod("GET");
@@ -340,13 +344,13 @@ public class HotPotDetailsActivity extends Activity {
 //                JSONArray jsonArray = object.getJSONArray("result");
 //                for (int i = 0; i < jsonArray.length(); i++) {
 //                    JSONObject object2 = jsonArray.getJSONObject(i);
-                    HotPotDetails hotPotDetails = new HotPotDetails();
-                    hotPotDetails.setEnvironment(object.getDouble("avg(environment)"));
-                    hotPotDetails.setTaste(object.getDouble("avg(taste)"));
-                    hotPotDetails.setService(object.getDouble("avg(service)"));
-                Log.i("avg(environment)====>","avg(environment)");
-                    hotPotDetailsList.add(hotPotDetails);
-            //    }
+                HotPotDetails hotPotDetails = new HotPotDetails();
+                hotPotDetails.setEnvironment(object.getDouble("avg(environment)"));
+                hotPotDetails.setTaste(object.getDouble("avg(taste)"));
+                hotPotDetails.setService(object.getDouble("avg(service)"));
+                Log.i("avg(environment)====>", "avg(environment)");
+                hotPotDetailsList.add(hotPotDetails);
+                //    }
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();

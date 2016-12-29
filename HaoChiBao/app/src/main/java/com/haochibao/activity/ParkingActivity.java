@@ -79,7 +79,7 @@ public class ParkingActivity extends FragmentActivity {
                     parkingList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            Intent intent = new Intent(ParkingActivity.this,HotPotDetailsActivity.class);
+                            Intent intent = new Intent(ParkingActivity.this,ShopDetailsActivity.class);
                             startActivity(intent);
                         }
                     });

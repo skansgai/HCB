@@ -1,4 +1,5 @@
 package com.haochibao.activity;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -36,44 +37,49 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.haochibao.R.id.name;
+
 /**
  * Created by Administrator on 2016/12/12.
  */
 public class RecommendActivity extends Activity {
-    final static String TAG="RecommendActivity";
+    final static String TAG = "RecommendActivity";
     RecommendViewHolder viewHolder;
     ImageView img_left;
     ListView recommend_list_view;
     Intent intent;
     RadioGroup radioGroup;
     RecommendAdapter recommendAdapter;
-    RadioButton recommend_chafing_dish,recommend_self_help,
-            recommend_sichuan_cuisine,recommend_snack;
+    RadioButton recommend_chafing_dish, recommend_self_help,
+            recommend_sichuan_cuisine, recommend_snack;
     String type = "火锅";
-
-    Handler handler=new Handler(){
+    Recommend recommend = new Recommend();
+    Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            if (msg.what==1){
-                Bitmap bitmap= (Bitmap) msg.obj;
-                if (viewHolder.img!=null){
+            if (msg.what == 1) {
+                Bitmap bitmap = (Bitmap) msg.obj;
+                if (viewHolder.img != null) {
                     viewHolder.img.setImageBitmap(bitmap);
                 }
-            if (msg.what==2){
-                recommendAdapter= new RecommendAdapter(RecommendActivity.this,list);
+            }
+            if (msg.what == 2) {
+                recommendAdapter = new RecommendAdapter(RecommendActivity.this, list);
+                Log.i("222222222",""+list.size());
                 recommend_list_view.setAdapter(recommendAdapter);
                 recommend_list_view.setOnItemClickListener(onItemClickListener);
-                recommendAdapter.notifyDataSetChanged();
-            }
+                //     recommendAdapter.notifyDataSetChanged(); 有上面的new就不需要再用此方法。
             }
         }
     };
     List<Recommend> list = new ArrayList<Recommend>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recommend);
-        img_left= (ImageView) findViewById(R.id.img_left);
+        img_left = (ImageView) findViewById(R.id.img_left);
         radioGroup = (RadioGroup) findViewById(R.id.recommend_radiongroup);
 
         recommend_chafing_dish = (RadioButton) findViewById(R.id.recommend_chafing_dish);
@@ -81,8 +87,14 @@ public class RecommendActivity extends Activity {
         recommend_sichuan_cuisine = (RadioButton) findViewById(R.id.recommend_sichuan_cuisine);
         recommend_snack = (RadioButton) findViewById(R.id.recommend_snack);
         recommend_list_view = (ListView) findViewById(R.id.recommend_list_view);
-
-
+        new Thread() {
+            @Override
+            public void run() {
+                getDate();
+            }
+        }.start();
+        recommendAdapter = new RecommendAdapter(RecommendActivity.this, list);
+        recommend_list_view.setAdapter(recommendAdapter);
         img_left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,50 +104,24 @@ public class RecommendActivity extends Activity {
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId){
+                switch (checkedId) {
                     case R.id.recommend_chafing_dish:
                         type = recommend_chafing_dish.getText().toString();
-                        Log.i("====================",type);
-                        new Thread() {
-                            @Override
-                            public void run() {
-                                getDate();
-                            }
-                        }.start();
+                        get();
                         break;
                     case R.id.recommend_self_help:
                         type = recommend_self_help.getText().toString();
-                        Log.i("====================",type);
+                        get();
 
-                        new Thread() {
-                            @Override
-                            public void run() {
-                                getDate();
-                            }
-                        }.start();
                         break;
                     case R.id.recommend_sichuan_cuisine:
                         type = recommend_sichuan_cuisine.getText().toString();
-                        Log.i("====================",type);
-                        new Thread() {
-                            @Override
-                            public void run() {
-                                getDate();
-                            }
-                        }.start();
+                        get();
+
                         break;
                     case R.id.recommend_snack:
                         type = recommend_snack.getText().toString();
-                        Log.i("====================",type);
-                        new Thread() {
-                            @Override
-                            public void run() {
-                                getDate();
-                                Message msg = new Message();
-                                msg.what = 2;
-                                handler.sendMessage(msg);
-                            }
-                        }.start();
+                        get();
                         break;
 
                 }
@@ -143,25 +129,36 @@ public class RecommendActivity extends Activity {
         });
 
     }
+
+    public void get() {
+        new Thread() {
+            @Override
+            public void run() {
+                getDate();
+
+            }
+        }.start();
+    }
+
     AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    intent = new Intent(RecommendActivity.this,HotPotDetailsActivity.class);
-                    startActivity(intent);
-            Log.i("OnItemClickListener====","position"+position);
-            }
-
+            intent = new Intent(RecommendActivity.this, ShopDetailsActivity.class);
+            intent.putExtra("XXXid",recommend.getId());
+            startActivity(intent);
+        }
     };
 
 
-    class RecommendAdapter extends BaseAdapter{
+    class RecommendAdapter extends BaseAdapter {
         Context context;
-        List<Recommend>list;
+        List<Recommend> list;
         LayoutInflater layoutInflater;
 
-        public RecommendAdapter(Context context, List<Recommend>list){
-            this.context =context;
-            this.list=list;
+        public RecommendAdapter(Context context, List<Recommend> list) {
+            this.context = context;
+            this.list = list;
+            layoutInflater = LayoutInflater.from(context);
         }
 
         @Override
@@ -181,34 +178,33 @@ public class RecommendActivity extends Activity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            layoutInflater = LayoutInflater.from(context);
-            viewHolder = new RecommendViewHolder();
-            if(convertView==null){
-                convertView = layoutInflater.inflate(R.layout.item_recommend,null);
-                viewHolder.name=((TextView)convertView.findViewById(R.id.name));
-                viewHolder.img = ((ImageView)convertView.findViewById(R.id.img));
-                viewHolder.grade = ((RatingBar) convertView.findViewById(R.id.grade));
-                viewHolder.price = (TextView)convertView.findViewById(R.id.price);
-                viewHolder.describe = (TextView)convertView.findViewById(R.id.describe);
-                convertView.setTag(viewHolder);
-            } else {
-                viewHolder = (RecommendViewHolder) convertView.getTag();
-            }
 
+
+            if (convertView == null) {
+                viewHolder = new RecommendViewHolder();
+                convertView = layoutInflater.inflate(R.layout.item_recommend, null);
+                viewHolder.name = ((TextView) convertView.findViewById(name));
+                viewHolder.img = ((ImageView) convertView.findViewById(R.id.img));
+                viewHolder.grade = ((RatingBar) convertView.findViewById(R.id.grade));
+                viewHolder.price = (TextView) convertView.findViewById(R.id.price);
+                viewHolder.describe = (TextView) convertView.findViewById(R.id.describe);
+                convertView.setTag(viewHolder);
+            }
+            viewHolder = (RecommendViewHolder) convertView.getTag();
             viewHolder.name.setText(list.get(position).getName());
             viewHolder.grade.setRating((float) list.get(position).getGrade());
-            viewHolder.price.setText(""+list.get(position).getPrice());
+            viewHolder.price.setText("" + list.get(position).getPrice());
             viewHolder.describe.setText(list.get(position).getDescribe());
-            final String path=list.get(position).getImg();
-            new Thread(){
+            final String path = list.get(position).getImg();
+            new Thread() {
                 @Override
                 public void run() {
                     try {
-                        final URL url=new URL(path);
-                        Bitmap bitmap= BitmapFactory.decodeStream(url.openStream());
-                        Message message=new Message();
-                        message.what=1;
-                        message.obj=bitmap;
+                        final URL url = new URL(path);
+                        Bitmap bitmap = BitmapFactory.decodeStream(url.openStream());
+                        Message message = new Message();
+                        message.what = 1;
+                        message.obj = bitmap;
                         handler.sendMessage(message);
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -220,8 +216,10 @@ public class RecommendActivity extends Activity {
     }
 
     public void getDate() {
-        StringBuilder stringBuilder = new StringBuilder();
+        list.clear();
+
         try {
+            StringBuilder stringBuilder = new StringBuilder();
             String httpUrl = "http://10.0.2.2/index.php/home/index/getServiceType?typename="+type;
             URL url = new URL(httpUrl);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -234,21 +232,23 @@ public class RecommendActivity extends Activity {
                 while ((str = bufferedReader.readLine()) != null) {
                     stringBuilder.append(str);
                 }
-                Log.i("stringBuilder", "状态码" + stringBuilder);
+                Log.i("stringBuilder", "状态码" + stringBuilder.toString());
                 JSONObject jsonObject = new JSONObject(stringBuilder.toString());
                 JSONArray jsonArray = jsonObject.getJSONArray("result");
+                list = new ArrayList<Recommend>();
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jobj = jsonArray.getJSONObject(i);
-                    Recommend recommend = new Recommend();
                     recommend.setName(jobj.getString("name"));
                     recommend.setImg(jobj.getString("img"));
                     recommend.setGrade((float) jobj.getDouble("grade"));
                     recommend.setPrice(jobj.getDouble("price"));
                     recommend.setDescribe(jobj.getString("describe"));
+                    recommend.setId(jobj.getInt("id"));
                     list.add(recommend);
-
                 }
-
+                Message msg = new Message();
+                msg.what = 2;
+                handler.sendMessage(msg);
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();
