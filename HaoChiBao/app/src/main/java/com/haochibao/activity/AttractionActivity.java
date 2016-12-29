@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.haochibao.R;
@@ -44,13 +45,24 @@ public class AttractionActivity extends FragmentActivity {
     ImageView img_left;
     ListView attractionList;
     List<EntertainmentModel> list;
+    Spinner spinnerOne;
+    Spinner spinnerTwo;
+    String sort;
+    String rank;
+    String distance;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attraction);
         img_left = (ImageView) findViewById(R.id.img_left);
         attractionList = (ListView) findViewById(R.id.attraction_list);
+        spinnerOne = (Spinner) findViewById(R.id.spinner_one);
+        spinnerTwo = (Spinner) findViewById(R.id.spinner_two);
         list = new ArrayList<EntertainmentModel>();
+        img_left.setOnClickListener(getOnClickListener());
+        setSelectedListener();
+    }
+    public void startThread(){
         new Thread(){
             @Override
             public void run() {
@@ -60,15 +72,6 @@ public class AttractionActivity extends FragmentActivity {
                 handler.sendMessage(message);
             }
         }.start();
-        img_left.setOnClickListener(getOnClickListener());
-        attractionList.setAdapter(new EntertainmentAdapter(this,list));
-        attractionList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(AttractionActivity.this,HotPotDetailsActivity.class);
-                startActivity(intent);
-            }
-        });
     }
     Handler handler = new Handler(){
         @Override
@@ -76,10 +79,52 @@ public class AttractionActivity extends FragmentActivity {
             switch (msg.what){
                 case 1101:
                     attractionList.setAdapter(new EntertainmentAdapter(AttractionActivity.this,list));
+                    attractionList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Intent intent = new Intent(AttractionActivity.this,HotPotDetailsActivity.class);
+                            startActivity(intent);
+                        }
+                    });
                     break;
             }
         }
     };
+    public void setSelectedListener(){
+        spinnerOne.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+        spinnerTwo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                sort = AttractionActivity.this.getResources().getStringArray(R.array.ranking)[position];
+                switch (sort){
+                    case "排序":
+                    case "价格最高":
+                    case "价格最低":
+                        rank = "price";
+                        break;
+                    case "人气最高":
+                    case "评价最高":
+                        rank = "grade";
+                        break;
+                }
+                Log.i("sort:",sort+"has been selected");
+                startThread();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
     public View.OnClickListener getOnClickListener(){
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
@@ -95,7 +140,7 @@ public class AttractionActivity extends FragmentActivity {
     }
     public void getInternetData(){
         HttpURLConnection httpURLConnection = null;
-        String httpUrl="http://192.168.7.22/index.php/home/index/getServiceType?typename="+ URLEncoder.encode("景点");
+        String httpUrl="http://192.168.7.22/index.php/home/index/getServiceType?typename="+ URLEncoder.encode("景点")+"&by="+rank;
         try {
             URL url = new URL(httpUrl);
             httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -108,12 +153,13 @@ public class AttractionActivity extends FragmentActivity {
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream,"utf-8");
                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
                 String s;
-                while ((s=bufferedReader.readLine())!=null){
+                while ((s=bufferedReader.readLine()) != null){
                     stringBuilder.append(s);
                 }
                 Log.i("data====>",stringBuilder.toString());
                 JSONObject jsonObject = new JSONObject(stringBuilder.toString());
                 JSONArray jsonArray = jsonObject.getJSONArray("result");
+                list.clear();
                 for (int i=0;i<jsonArray.length();i++){
                     JSONObject object = jsonArray.getJSONObject(i);
                     String name = object.optString("name");
@@ -121,8 +167,8 @@ public class AttractionActivity extends FragmentActivity {
                     String price = object.optString("price");
                     String location = object.optString("location");
                     String type = object.optString("type_name");
-                    EntertainmentModel model = new EntertainmentModel();
                     Bitmap imgBitmap = getBitmap(img);
+                    EntertainmentModel model = new EntertainmentModel();
                     model.setImg(imgBitmap);
                     model.setName(name);
                     model.setLocation(location);

@@ -10,11 +10,15 @@ import android.util.Log;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.haochibao.MyApplication;
 import com.haochibao.R;
 import com.haochibao.fragment.FindFragment;
 import com.haochibao.fragment.HomeFragment;
 import com.haochibao.fragment.MineFragment;
 import com.haochibao.fragment.NoLoginMineFragment;
+import com.tencent.connect.common.Constants;
+import com.tencent.tauth.IUiListener;
+import com.tencent.tauth.Tencent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,14 +38,15 @@ public class HomeViewPagerActivity extends FragmentActivity {
     private Fragment homeFragment;
     private Fragment findFragment;
     private List<RadioButton> radioButtonList;
-    private Bundle bundle=new Bundle();
     private Intent intent;
-
+    private IUiListener iUiListener;
+    private Tencent mTencent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_viewpager);
+        intent=getIntent();
         init();
     }
     private void init(){
@@ -57,11 +62,16 @@ public class HomeViewPagerActivity extends FragmentActivity {
         fragmentList=new ArrayList<Fragment>();
         homeFragment=new HomeFragment();
         findFragment=new FindFragment();
-        isLogin=getIntent().getBooleanExtra("isLogin",false);
 
-        Log.i("TAG",isLogin + "");
-        if (isLogin){
-            mineFragment=new MineFragment();
+        Log.i("TAG========",MyApplication.isLogin() + "");
+        if (MyApplication.isLogin()){
+            mineFragment=new MineFragment(intent, new MineFragment.ResuQQltListener() {
+                @Override
+                public void Onclick(IUiListener listener,Tencent tencent) {
+                    iUiListener=listener;
+                }
+            });
+            viewPager.setCurrentItem(2);
         }else {
             mineFragment=new NoLoginMineFragment();
 
@@ -141,4 +151,14 @@ public class HomeViewPagerActivity extends FragmentActivity {
         }
     };
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == com.tencent.connect.common.Constants.REQUEST_API){
+            if (resultCode == com.tencent.connect.common.Constants.REQUEST_LOGIN){
+                mTencent.handleLoginData(data,iUiListener);
+            }
+        }
+        Tencent.onActivityResultData(requestCode,resultCode,data,iUiListener);
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 }
