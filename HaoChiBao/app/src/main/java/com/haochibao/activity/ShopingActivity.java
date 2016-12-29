@@ -6,18 +6,13 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.haochibao.R;
 import com.haochibao.utill.adapter.EntertainmentAdapter;
@@ -83,7 +78,7 @@ public class ShopingActivity extends FragmentActivity {
                     shoppingList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            Intent intent = new Intent(ShopingActivity.this,HotPotDetailsActivity.class);
+                            Intent intent = new Intent(ShopingActivity.this,ShopDetailsActivity.class);
                             startActivity(intent);
                         }
                     });

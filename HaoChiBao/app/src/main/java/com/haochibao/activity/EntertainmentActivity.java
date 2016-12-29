@@ -14,7 +14,6 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.haochibao.R;
 import com.haochibao.utill.adapter.EntertainmentAdapter;
@@ -31,7 +30,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -115,7 +113,7 @@ public class EntertainmentActivity extends Activity {
                     enterList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            Intent intent = new Intent(EntertainmentActivity.this,HotPotDetailsActivity.class);
+                            Intent intent = new Intent(EntertainmentActivity.this,ShopDetailsActivity.class);
                             startActivity(intent);
                         }
                     });

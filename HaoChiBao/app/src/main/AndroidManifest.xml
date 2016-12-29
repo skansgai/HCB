@@ -54,7 +54,7 @@
         <activity android:name=".activity.AttractionActivity"/><!--景点-->
         <activity android:name=".activity.InterctionActivity"/><!--互动-->
         <activity android:name=".activity.RecommendActivity"/><!--热门推荐-->
-        <activity android:name=".activity.HotPotDetailsActivity"/><!--推荐详情-->
+        <activity android:name=".activity.ShopDetailsActivity"/><!--推荐详情-->
         <activity android:name=".activity.SeekHelpActivity"/><!--帮助-->
         <activity android:name=".activity.MineInformationActivity"/><!--我的资料-->
         <activity android:name=".activity.SearchActivity"/><!--搜索-->

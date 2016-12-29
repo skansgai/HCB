@@ -14,10 +14,11 @@
 
         <ImageView
             android:id="@+id/img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:src="@mipmap/hotpot" />
+            android:layout_width="98dp"
+            android:layout_height="98dp"
+            android:layout_margin="10dp"
+            android:background="@mipmap/hotpot"
+            android:scaleType="fitXY"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -82,7 +83,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -102,7 +102,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
-
                     android:background="@drawable/home_page_qudianpu"
                     android:paddingBottom="2dp"
                     android:paddingLeft="4dp"

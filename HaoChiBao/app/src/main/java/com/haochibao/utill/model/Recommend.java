@@ -11,6 +11,15 @@ public class Recommend {
     private String img;
     private String describe;
     private double price;
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

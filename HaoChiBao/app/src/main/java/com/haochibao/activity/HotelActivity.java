@@ -78,7 +78,7 @@ public class HotelActivity extends FragmentActivity {
                     hotelList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            Intent intent = new Intent(HotelActivity.this,HotPotDetailsActivity.class);
+                            Intent intent = new Intent(HotelActivity.this,ShopDetailsActivity.class);
                             startActivity(intent);
                         }
                     });

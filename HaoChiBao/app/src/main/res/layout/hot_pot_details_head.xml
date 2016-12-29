@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="@string/chenyanjing"
+            android:text="店家详情"
             android:textColor="@color/white"
             android:textSize="@dimen/font_36" />
 
@@ -90,26 +91,27 @@
 
                     <RatingBar
                         android:id="@+id/grade"
+                        style="@style/roomRatingBar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:numStars="5"
-                        android:stepSize="0.5"
-                        style="@style/roomRatingBar"
-                        android:rating="3.5"
                         android:isIndicator="true"
-                        />
+                        android:numStars="5"
+                        android:rating="3.5"
+                        android:stepSize="0.5" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
                         android:text="￥" />
+
                     <TextView
                         android:id="@+id/price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="2dp"
                         android:text="50" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -124,26 +126,37 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="地址："/>
 
                     <TextView
                         android:id="@+id/location"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/daping" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
                         android:text="简介：" />
+
                     <TextView
                         android:id="@+id/describe"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:text="够味" />
-                </LinearLayout>
+                        android:text="够味"
+                        android:layout_marginBottom="12dp"/>
 
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 
@@ -151,14 +164,15 @@
             android:layout_width="match_parent"
             android:layout_height="10dp"
             android:background="@color/lineGray" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal"
             android:paddingBottom="12dp"
             android:paddingLeft="10dp"
-            android:paddingTop="12dp"
-            android:layout_gravity="center_vertical"
-            android:orientation="horizontal">
+            android:paddingTop="12dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -176,7 +190,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:src="@drawable/zan_selector"/>
+                android:src="@drawable/zan_selector" />
 
             <TextView
                 android:id="@+id/zan"
@@ -199,6 +213,7 @@
                 android:text="9527" />
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -219,11 +234,11 @@
                 android:text="7.9" />
 
             <TextView
+                android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:text="环境:"
-                android:id="@+id/textView3" />
+                android:text="环境:" />
 
             <TextView
                 android:id="@+id/environment"
@@ -317,6 +332,7 @@
             android:layout_width="match_parent"
             android:layout_height="10dp"
             android:background="@color/lineGray" />
+
         <LinearLayout
             android:id="@+id/hcb_share"
             android:layout_width="match_parent"
@@ -345,8 +361,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp">
-        </com.haochibao.utill.view.FlowLayout>
+            android:layout_marginRight="10dp"></com.haochibao.utill.view.FlowLayout>
 
         <View
             android:layout_width="match_parent"
@@ -380,14 +395,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp">
-        </com.haochibao.utill.view.FlowLayout>
+            android:layout_marginRight="10dp"></com.haochibao.utill.view.FlowLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_marginTop="10dp"
             android:background="@color/lineGray" />
-        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>
