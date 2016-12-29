@@ -73,12 +73,16 @@ public class CommentListAdater extends BaseAdapter {
         viewHolder.content.setText(list.get(position).content);
         viewHolder.time.setText(list.get(position).time);
         viewHolder.scan.setText(list.get(position).scan);
+        if (list.get(position).portrait!=null){
+            viewHolder.userPortrait.setImageBitmap(list.get(position).portrait);
+        }
+
         if (viewHolder.imgList.getChildCount()==0){
-            for (int i = 0 ; i<list.get(position).imgIds.size();i++){
+            for (int i = 0 ; i<list.get(position).bitmaps.size()&&list.get(position).bitmaps.get(i)!=null;i++){
                 ImageView imageView = new ImageView(context);
                 ViewGroup.MarginLayoutParams layoutParams = new ViewGroup.MarginLayoutParams(180,180);
                 imageView.setLayoutParams(layoutParams);
-                imageView.setImageResource(list.get(position).imgIds.get(i));
+                imageView.setImageBitmap(list.get(position).bitmaps.get(i));
                 viewHolder.imgList.addView(imageView);
             }
         }
