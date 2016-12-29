@@ -43,7 +43,7 @@ import java.util.List;
  */
 public class HotPotDetailsActivity extends Activity {
     ListView listView;
-    ImageView img_chakan_lv, img_left;
+    ImageView  img_left;
     LinearLayout phone_edit, hcb_share, hcb_comment;
     FlowLayout hcbao_comment,hcb_share_desrcibe;
     List<HotPotDetails> hotPotDetailsList = new ArrayList<HotPotDetails>();
@@ -61,7 +61,6 @@ public class HotPotDetailsActivity extends Activity {
         View headView = layoutInflater.inflate(R.layout.hot_pot_details_head, null);
 
         listView = (ListView) findViewById(R.id.hotpot_lv);
-        img_chakan_lv = (ImageView) findViewById(R.id.img_chakan_lv);
         img_left = (ImageView) headView.findViewById(R.id.img_left);
         phone_edit = (LinearLayout) headView.findViewById(R.id.phone_edit);
         hcb_share = (LinearLayout) headView.findViewById(R.id.hcb_share);
@@ -74,6 +73,7 @@ public class HotPotDetailsActivity extends Activity {
                 getService();
             }
         }.start();
+
         new Thread() {
             @Override
             public void run() {
@@ -81,11 +81,16 @@ public class HotPotDetailsActivity extends Activity {
             }
         }.start();
 
+        new Thread(){
+            @Override
+            public void run() {
+                getServiceAVGrade();
+            }
+        }.start();
         HotPotDetailsAdapter hotPotDetailsAdapter = new HotPotDetailsAdapter(this, hotPotDetailsList);
         listView.addHeaderView(headView);
         listView.setAdapter(hotPotDetailsAdapter);
 
-        img_chakan_lv.setOnClickListener(onClickListener);
         img_left.setOnClickListener(onClickListener);
         phone_edit.setOnClickListener(onClickListener);
         hcb_share.setOnClickListener(onClickListener);
@@ -99,9 +104,6 @@ public class HotPotDetailsActivity extends Activity {
         public void onClick(View v) {
             Intent intent;
             switch (v.getId()) {
-                case R.id.img_chakan_lv:
-                    img_chakan_lv.setVisibility(View.VISIBLE);
-                    break;
                 case R.id.img_left:
                     finish();
                     break;
@@ -253,7 +255,8 @@ public class HotPotDetailsActivity extends Activity {
                     viewHolder.location = (TextView) findViewById(R.id.location);
                     viewHolder.describe = (TextView) findViewById(R.id.describe);
                     viewHolder.phone = (TextView) findViewById(R.id.phone);
-                    // viewHolder.zan = (TextView) findViewById(R.id.zan);
+                    viewHolder.zan = (TextView) findViewById(R.id.zan);
+                    viewHolder.visited = (TextView) findViewById(R.id.visited);
 
                     viewHolder.name.setText(name);
                     Log.i("能接收到数据吗=========>", "" + name);
@@ -263,9 +266,8 @@ public class HotPotDetailsActivity extends Activity {
                     viewHolder.location.setText(location);
                     viewHolder.describe.setText(describe);
                     viewHolder.phone.setText(phone);
-                    // viewHolder.zan.setText(zan);
-                    // viewHolder.visited.setText(visited);
-
+                    viewHolder.zan.setText(zan);
+                    viewHolder.visited.setText(visited);
 
                 }
             }
@@ -315,4 +317,45 @@ public class HotPotDetailsActivity extends Activity {
             e.printStackTrace();
         }
     }
+
+
+    public void getServiceAVGrade() {
+        try {
+            StringBuilder stringBuilder = new StringBuilder();
+            String httpUrl = "http://10.0.2.2/index.php/home/index/getServiceAVGrade?serviceid=1";
+            URL url = new URL(httpUrl);
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setRequestMethod("GET");
+            httpURLConnection.setConnectTimeout(5000);
+            httpURLConnection.connect();
+            if (httpURLConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(
+                        httpURLConnection.getInputStream()));
+                String str;
+                while ((str = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(str);
+                }
+                Log.i("stringBuilder", "" + stringBuilder);
+                JSONObject object = new JSONObject(stringBuilder.toString());
+//                JSONArray jsonArray = object.getJSONArray("result");
+//                for (int i = 0; i < jsonArray.length(); i++) {
+//                    JSONObject object2 = jsonArray.getJSONObject(i);
+                    HotPotDetails hotPotDetails = new HotPotDetails();
+                    hotPotDetails.setEnvironment(object.getDouble("avg(environment)"));
+                    hotPotDetails.setTaste(object.getDouble("avg(taste)"));
+                    hotPotDetails.setService(object.getDouble("avg(service)"));
+                Log.i("avg(environment)====>","avg(environment)");
+                    hotPotDetailsList.add(hotPotDetails);
+            //    }
+            }
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }

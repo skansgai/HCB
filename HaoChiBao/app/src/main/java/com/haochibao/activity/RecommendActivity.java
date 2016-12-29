@@ -15,6 +15,8 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -32,7 +34,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 /**
@@ -44,6 +45,12 @@ public class RecommendActivity extends Activity {
     ImageView img_left;
     ListView recommend_list_view;
     Intent intent;
+    RadioGroup radioGroup;
+    RecommendAdapter recommendAdapter;
+    RadioButton recommend_chafing_dish,recommend_self_help,
+            recommend_sichuan_cuisine,recommend_snack;
+    String type = "火锅";
+
     Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -52,32 +59,89 @@ public class RecommendActivity extends Activity {
                 if (viewHolder.img!=null){
                     viewHolder.img.setImageBitmap(bitmap);
                 }
+            if (msg.what==2){
+                recommendAdapter= new RecommendAdapter(RecommendActivity.this,list);
+                recommend_list_view.setAdapter(recommendAdapter);
+                recommend_list_view.setOnItemClickListener(onItemClickListener);
+                recommendAdapter.notifyDataSetChanged();
+            }
             }
         }
     };
-    List<Recommend>list = new ArrayList<Recommend>();
+    List<Recommend> list = new ArrayList<Recommend>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recommend);
         img_left= (ImageView) findViewById(R.id.img_left);
+        radioGroup = (RadioGroup) findViewById(R.id.recommend_radiongroup);
+
+        recommend_chafing_dish = (RadioButton) findViewById(R.id.recommend_chafing_dish);
+        recommend_self_help = (RadioButton) findViewById(R.id.recommend_self_help);
+        recommend_sichuan_cuisine = (RadioButton) findViewById(R.id.recommend_sichuan_cuisine);
+        recommend_snack = (RadioButton) findViewById(R.id.recommend_snack);
         recommend_list_view = (ListView) findViewById(R.id.recommend_list_view);
-        RecommendAdapter recommendAdapter = new RecommendAdapter(this,list);
-        recommend_list_view.setAdapter(recommendAdapter);
+
+
         img_left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-        recommend_list_view.setOnItemClickListener(onItemClickListener);
-//        getdate();
-        new Thread() {
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void run() {
-                getDate();
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId){
+                    case R.id.recommend_chafing_dish:
+                        type = recommend_chafing_dish.getText().toString();
+                        Log.i("====================",type);
+                        new Thread() {
+                            @Override
+                            public void run() {
+                                getDate();
+                            }
+                        }.start();
+                        break;
+                    case R.id.recommend_self_help:
+                        type = recommend_self_help.getText().toString();
+                        Log.i("====================",type);
+
+                        new Thread() {
+                            @Override
+                            public void run() {
+                                getDate();
+                            }
+                        }.start();
+                        break;
+                    case R.id.recommend_sichuan_cuisine:
+                        type = recommend_sichuan_cuisine.getText().toString();
+                        Log.i("====================",type);
+                        new Thread() {
+                            @Override
+                            public void run() {
+                                getDate();
+                            }
+                        }.start();
+                        break;
+                    case R.id.recommend_snack:
+                        type = recommend_snack.getText().toString();
+                        Log.i("====================",type);
+                        new Thread() {
+                            @Override
+                            public void run() {
+                                getDate();
+                                Message msg = new Message();
+                                msg.what = 2;
+                                handler.sendMessage(msg);
+                            }
+                        }.start();
+                        break;
+
+                }
             }
-        }.start();
+        });
+
     }
     AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
@@ -89,12 +153,6 @@ public class RecommendActivity extends Activity {
 
     };
 
-//    public void getdate(){
-//        for(int i = 0;i<3;i++){
-//            String s = new String();
-//            list.add(s);
-//        }
-//    }
 
     class RecommendAdapter extends BaseAdapter{
         Context context;
@@ -157,7 +215,6 @@ public class RecommendActivity extends Activity {
                     }
                 }
             }.start();
-
             return convertView;
         }
     }
@@ -165,7 +222,7 @@ public class RecommendActivity extends Activity {
     public void getDate() {
         StringBuilder stringBuilder = new StringBuilder();
         try {
-            String httpUrl = "http://10.0.2.2/index.php/home/index/getServiceType?typename="+ URLEncoder.encode("火锅");
+            String httpUrl = "http://10.0.2.2/index.php/home/index/getServiceType?typename="+type;
             URL url = new URL(httpUrl);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setRequestMethod("GET");
@@ -189,7 +246,9 @@ public class RecommendActivity extends Activity {
                     recommend.setPrice(jobj.getDouble("price"));
                     recommend.setDescribe(jobj.getString("describe"));
                     list.add(recommend);
+
                 }
+
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();

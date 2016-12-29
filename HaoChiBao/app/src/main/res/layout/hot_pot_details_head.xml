@@ -85,7 +85,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="5dp"
                     android:orientation="horizontal">
 
                     <RatingBar
@@ -122,7 +122,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="5dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -151,7 +151,54 @@
             android:layout_width="match_parent"
             android:layout_height="10dp"
             android:background="@color/lineGray" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="12dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="12dp"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="浏览量" />
+
+            <TextView
+                android:id="@+id/visited"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="1314" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/zan_selector"/>
+
+            <TextView
+                android:id="@+id/zan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="520" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:src="@mipmap/review_comments" />
+
+            <TextView
+                android:id="@+id/comment_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="9527" />
+
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -175,7 +222,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:text="环境:" />
+                android:text="环境:"
+                android:id="@+id/textView3" />
 
             <TextView
                 android:id="@+id/environment"
@@ -242,11 +290,6 @@
 
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:background="@color/lineGray" />
-
         <LinearLayout
             android:id="@+id/phone_edit"
             android:layout_width="match_parent"
@@ -274,7 +317,6 @@
             android:layout_width="match_parent"
             android:layout_height="10dp"
             android:background="@color/lineGray" />
-
         <LinearLayout
             android:id="@+id/hcb_share"
             android:layout_width="match_parent"
