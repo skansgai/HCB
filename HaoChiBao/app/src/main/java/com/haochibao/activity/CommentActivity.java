@@ -3,8 +3,12 @@ package com.haochibao.activity;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +25,17 @@ import com.haochibao.utill.adapter.CommentListAdater;
 import com.haochibao.utill.model.CommentModel;
 import com.haochibao.utill.view.FlowLayout;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,40 +74,92 @@ public class CommentActivity extends Activity {
         rgTopRight = (RadioButton) findViewById(R.id.rg_top_right);
         btnBack = (ImageView) findViewById(R.id.btn_back);
         btnSearch = (TextView) findViewById(R.id.btn_top_search);
-        getData();
+        startThread();
         addSearchList();
         //设置RadioButton的初始状态
         resetRadioButton(1);
         rgTopLeft.setChecked(true);
-        
+
         commentList.addHeaderView(listHead,null,true);
-        commentList.setAdapter(new CommentListAdater(this,list));
         rgTop.setOnCheckedChangeListener(getOnCheckedChangeListener());
         btnBack.setOnClickListener(getOnClickListener());
         btnSearch.setOnClickListener(getOnClickListener());
     }
-    public void getData(){
-        for (int i=0;i<9;i++){
-            CommentModel model = new CommentModel();
-            model.content="11.9元斩获一箱原价40元的天友核桃花生奶";
-            model.scan="134";
-            model.time="上周五";
-            model.userName = "日川冈坂";
-            model.userLevel = "99";
-            if (i%3==1){
-                model.imgIds.add(R.mipmap.my_beauty_photo);
-                model.imgIds.add(R.mipmap.entertainment_item_img);
-            }else {
-                model.imgIds.add(R.mipmap.my_beauty_photo);
-                model.imgIds.add(R.mipmap.entertainment_item_img);
-                model.imgIds.add(R.mipmap.my_head_portrait);
-                model.imgIds.add(R.mipmap.my_beauty_photo);
-                model.imgIds.add(R.mipmap.entertainment_item_img);
-                model.imgIds.add(R.mipmap.my_head_portrait);
+    public void startThread(){
+        new Thread(){
+            @Override
+            public void run() {
+                getListData();
+                Message message = new Message();
+                message.what = 2000;
+                handler.sendMessage(message);
             }
-            list.add(model);
+        }.start();
+    }
+    Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what){
+                case 2000:
+                    commentList.setAdapter(new CommentListAdater(CommentActivity.this,list));
+                    break;
+            }
+        }
+    };
+    public void getListData(){
+        String httpUrl = "http://192.168.7.22/index.php/home/comment/getUserComment?service_id=1";
+        try {
+            URL url = new URL(httpUrl);
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setRequestMethod("GET");
+            httpURLConnection.setConnectTimeout(5000);
+            httpURLConnection.connect();
+            if (httpURLConnection.getResponseCode()==HttpURLConnection.HTTP_OK){
+                StringBuilder stringBuilder = new StringBuilder();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream,"utf-8");
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String s;
+                while ((s=bufferedReader.readLine())!=null){
+                    stringBuilder.append(s);
+                }
+                Log.i("data====>",stringBuilder.toString());
+                JSONObject jsonObject = new JSONObject(stringBuilder.toString());
+                JSONArray jsonArray = jsonObject.getJSONArray("result");
+                list.clear();
+                for (int i=0;i<jsonArray.length();i++){
+                    JSONObject object = jsonArray.getJSONObject(i);
+                    String comment = object.optString("comment");
+                    String time = object.optString("time");
+                    String portraitPath = object.optString("icon_path");
+                    String imgPath = object.optString("img");
+                    String userName = object.optString("user_name");
+                    String support = object.optString("support");
+                    Bitmap bitmap = getBitmap(portraitPath);
+                    Bitmap bitmap1 = getBitmap(imgPath);
+                    CommentModel model = new CommentModel();
+                    model.portrait = bitmap;
+                    model.bitmaps.add(bitmap1);
+                    model.scan="134";
+                    model.userName = userName;
+                    model.userLevel = "99";
+                    model.content = comment;
+                    model.time = time;
+                    list.add(model);
+                }
+            }
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
+
+    /**
+     * 为顶部的热门评论页面添加视图  的方法
+     */
     public void addSearchList(){
         LayoutInflater inflater = LayoutInflater.from(this);
         for (int i=0;i<searchNames.length;i++){
@@ -148,5 +214,17 @@ public class CommentActivity extends Activity {
             }
         };
         return onClickListener;
+    }
+    public Bitmap getBitmap(String url){
+        Bitmap bitmap = null;
+        try {
+            URL mUrl = new URL(url);
+            bitmap = BitmapFactory.decodeStream(mUrl.openStream());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return bitmap;
     }
 }
