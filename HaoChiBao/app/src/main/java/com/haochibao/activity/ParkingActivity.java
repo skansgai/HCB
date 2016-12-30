@@ -45,7 +45,7 @@ public class ParkingActivity extends FragmentActivity {
     String sort;
     String rank;
     String distance;
-
+    String typename;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +54,9 @@ public class ParkingActivity extends FragmentActivity {
         img_left = (ImageView) findViewById(R.id.img_left);
         spinnerOne = (Spinner) findViewById(R.id.spinner_one);
         spinnerTwo = (Spinner) findViewById(R.id.spinner_two);
+        Intent intent = getIntent();
+        typename = intent.getStringExtra("typename");
+        Log.i("typename====",typename);
         list = new ArrayList<EntertainmentModel>();
         rank = "price";
         img_left.setOnClickListener(getOnClickListener());
@@ -140,7 +143,7 @@ public class ParkingActivity extends FragmentActivity {
     }
     public void getInternetData(){
         HttpURLConnection httpURLConnection = null;
-        String httpUrl="http://192.168.7.22/index.php/home/index/getServiceType?typename="+ URLEncoder.encode("停车场")+"&by="+URLEncoder.encode(rank);
+        String httpUrl="http://192.168.7.22/index.php/home/index/getServiceType?typename="+ URLEncoder.encode(typename)+"&by="+URLEncoder.encode(rank);
         try {
             URL url = new URL(httpUrl);
             httpURLConnection = (HttpURLConnection) url.openConnection();

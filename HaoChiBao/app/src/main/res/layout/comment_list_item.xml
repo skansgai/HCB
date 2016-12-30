@@ -246,6 +246,4 @@
                 android:text="@string/comment_content" />
         </LinearLayout>
     </LinearLayout>
-
-
 </LinearLayout>

@@ -158,22 +158,27 @@ public class HomeFragment extends Fragment {
                     break;
                 case R.id.home_recreation:
                     intent = new Intent(mactivity, EntertainmentActivity.class);
+                    intent.putExtra("typename","娱乐");
                     startActivity(intent);
                     break;
                 case R.id.home_grogshop:
                     intent = new Intent(mactivity, HotelActivity.class);
+                    intent.putExtra("typename","酒店");
                     startActivity(intent);
                     break;
                 case R.id.home_scenic_spots:
                     intent = new Intent(mactivity, AttractionActivity.class);
+                    intent.putExtra("typename","景点");
                     startActivity(intent);
                     break;
                 case R.id.home_shopping:
                     intent = new Intent(mactivity, ShopingActivity.class);
+                    intent.putExtra("typename","购物");
                     startActivity(intent);
                     break;
                 case R.id.home_park:
                     intent = new Intent(mactivity, ParkingActivity.class);
+                    intent.putExtra("typename","停车场");
                     startActivity(intent);
                     break;
             }

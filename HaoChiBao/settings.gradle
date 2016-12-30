@@ -1,1 +1,1 @@
-include ':app', ':myapplication', ':textstyle'
+include ':app'

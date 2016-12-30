@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:gravity="right"
             android:entries="@array/nearby"
-            android:layout_weight="0.06"></Spinner>
+            android:layout_weight="0.06"/>
         <View
             android:layout_width="1dp"
             android:layout_marginTop="5dp"
@@ -54,7 +54,7 @@
             android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:entries="@array/ranking"
-            android:layout_weight="0.23"></Spinner>
+            android:layout_weight="0.23"/>
        <!-- <View
             android:layout_width="1dp"
             android:layout_marginTop="5dp"
@@ -202,5 +202,5 @@
     <ListView
         android:id="@+id/entertainment_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
+        android:layout_height="wrap_content"/>
 </LinearLayout>

@@ -1,9 +1,6 @@
 package com.haochibao.utill.adapter;
 
 import android.content.Context;
-import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +16,6 @@ import com.haochibao.utill.model.CommentModel;
 import com.haochibao.utill.view.FlowLayout;
 import com.haochibao.utill.view_holder.CommentViewHolder;
 
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -76,7 +72,6 @@ public class CommentListAdater extends BaseAdapter {
         if (list.get(position).portrait!=null){
             viewHolder.userPortrait.setImageBitmap(list.get(position).portrait);
         }
-
         if (viewHolder.imgList.getChildCount()==0){
             for (int i = 0 ; i<list.get(position).bitmaps.size()&&list.get(position).bitmaps.get(i)!=null;i++){
                 ImageView imageView = new ImageView(context);

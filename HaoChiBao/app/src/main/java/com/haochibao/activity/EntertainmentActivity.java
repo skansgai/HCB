@@ -47,6 +47,7 @@ public class EntertainmentActivity extends Activity {
     String sort;
     String rank;
     String distance;
+    String typename;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +56,9 @@ public class EntertainmentActivity extends Activity {
         enterList = (ListView) findViewById(R.id.entertainment_list);
         spinnerOne = (Spinner) findViewById(R.id.spinner_one);
         spinnerTwo = (Spinner) findViewById(R.id.spinner_two);
+        Intent intent = getIntent();
+        typename = intent.getStringExtra("typename");
+        Log.i("typename====",typename);
         list = new ArrayList<EntertainmentModel>();
         rank = "price";
         spinnerOne.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -93,7 +97,6 @@ public class EntertainmentActivity extends Activity {
             }
         });
         imgLeft.setOnClickListener(getOnClickListener());
-
     }
     public void startThread(){
         new Thread(){
@@ -140,7 +143,7 @@ public class EntertainmentActivity extends Activity {
 
     public void getInternetData(){
         HttpURLConnection httpURLConnection = null;
-        String httpUrl="http://192.168.7.22/index.php/home/index/getServiceType?typename=娱乐&by="+rank;
+        String httpUrl="http://192.168.7.22/index.php/home/index/getServiceType?typename="+URLEncoder.encode(typename)+"&by="+URLEncoder.encode(rank);
         try {
             URL url = new URL(httpUrl);
             httpURLConnection = (HttpURLConnection) url.openConnection();

@@ -50,6 +50,7 @@ public class AttractionActivity extends FragmentActivity {
     String sort;
     String rank;
     String distance;
+    String typename;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +59,9 @@ public class AttractionActivity extends FragmentActivity {
         attractionList = (ListView) findViewById(R.id.attraction_list);
         spinnerOne = (Spinner) findViewById(R.id.spinner_one);
         spinnerTwo = (Spinner) findViewById(R.id.spinner_two);
+        Intent intent = getIntent();
+        typename = intent.getStringExtra("typename");
+        Log.i("typename====",typename);
         list = new ArrayList<EntertainmentModel>();
         img_left.setOnClickListener(getOnClickListener());
         setSelectedListener();
@@ -140,7 +144,7 @@ public class AttractionActivity extends FragmentActivity {
     }
     public void getInternetData(){
         HttpURLConnection httpURLConnection = null;
-        String httpUrl="http://192.168.7.22/index.php/home/index/getServiceType?typename="+ URLEncoder.encode("景点")+"&by="+rank;
+        String httpUrl="http://192.168.7.22/index.php/home/index/getServiceType?typename="+ URLEncoder.encode(typename)+"&by="+URLEncoder.encode(rank);
         try {
             URL url = new URL(httpUrl);
             httpURLConnection = (HttpURLConnection) url.openConnection();
