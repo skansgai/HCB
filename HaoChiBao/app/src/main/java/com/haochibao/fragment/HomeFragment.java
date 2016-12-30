@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import com.haochibao.R;
 import com.haochibao.activity.AttractionActivity;
+import com.haochibao.activity.BaiduMapActivity;
 import com.haochibao.activity.EntertainmentActivity;
 import com.haochibao.activity.HotelActivity;
 import com.haochibao.activity.InterctionActivity;
@@ -70,6 +71,8 @@ public class HomeFragment extends Fragment {
     private Weather weather;
     private String bannerPath;
     private ImageView image_view;
+    double longitude=116.357428;
+    double latitude=39.93923;
     final static String HTTPUTI = "http://api.avatardata.cn/Weather/Query?key=d14a6039b7f7420c82d7d487eaa38bbe&cityname=";
     ImageLoader imageLoader;
     private Handler handler=new Handler(){
@@ -111,7 +114,7 @@ public class HomeFragment extends Fragment {
         home_shopping = (TextView) view.findViewById(R.id.home_shopping);
         home_park = (TextView) view.findViewById(R.id.home_park);
         listView = (ListView) view.findViewById(R.id.homepage_lv);
-        homepage_address = (TextView) view.findViewById(R.id.homepage_address);
+
         homepage_weather = (TextView) view.findViewById(R.id.homepage_weather);
         HomePageAdapter homePageAdapter = new HomePageAdapter(this.getActivity(), list);
         listView.setAdapter(homePageAdapter);
@@ -123,6 +126,7 @@ public class HomeFragment extends Fragment {
         home_scenic_spots.setOnClickListener(onClickListener);
         home_shopping.setOnClickListener(onClickListener);
         home_park.setOnClickListener(onClickListener);
+
         getLocation();
         getWeath();
         getHomeBanner();
@@ -137,6 +141,8 @@ public class HomeFragment extends Fragment {
         image_view= (ImageView) view.findViewById(R.id.image_view);
         image_view.setScaleType(ImageView.ScaleType.CENTER_CROP);
         imageLoader=ImageLoader.getInstance();
+        homepage_address = (TextView) view.findViewById(R.id.homepage_address);
+        homepage_address.setOnClickListener(onClickListener);
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -174,6 +180,14 @@ public class HomeFragment extends Fragment {
                     break;
                 case R.id.home_park:
                     intent = new Intent(mactivity, ParkingActivity.class);
+                    startActivity(intent);
+                    break;
+                case R.id.homepage_address:
+                    intent = new Intent(mactivity, BaiduMapActivity.class);
+                    Bundle bundle=new Bundle();
+                    bundle.putDouble("longitude",latitude);
+                    bundle.putDouble("latitude",longitude);
+                    intent.putExtras(bundle);
                     startActivity(intent);
                     break;
             }
@@ -223,6 +237,13 @@ public class HomeFragment extends Fragment {
             public void onClick(String data) {
                 editor.putString("location",location.getCityname());
                 editor.commit();
+            }
+        });
+        location.setLocationOnClicklistener(new Location.onLocationListener() {
+            @Override
+            public void onClick(double data1, double data2) {
+                latitude=data1;
+                longitude=data2;
             }
         });
         location.start();

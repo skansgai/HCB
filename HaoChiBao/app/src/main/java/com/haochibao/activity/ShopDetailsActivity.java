@@ -50,7 +50,7 @@ public class ShopDetailsActivity extends Activity {
     String[] comment = {"店家不错", "服务不错", "上菜快菜量多"};
     String[] desribe = {"店家不错", "服务不错", "上菜快菜量多"};
     LayoutInflater layoutInflater;
-    TextView poptextview;
+    TextView poptextview,GO;
     String phone;
     int id ;
 
@@ -60,7 +60,8 @@ public class ShopDetailsActivity extends Activity {
         setContentView(R.layout.activity_hot_pot_details);
         layoutInflater = LayoutInflater.from(this);
         View headView = layoutInflater.inflate(R.layout.hot_pot_details_head, null);
-
+        GO = (TextView) headView.findViewById(R.id.GO);
+        GO.setOnClickListener(onClickListener);
         listView = (ListView) findViewById(R.id.hotpot_lv);
         img_left = (ImageView) headView.findViewById(R.id.img_left);
         phone_edit = (LinearLayout) headView.findViewById(R.id.phone_edit);
@@ -120,6 +121,10 @@ public class ShopDetailsActivity extends Activity {
                     break;
                 case R.id.hcb_comment:
                     intent = new Intent(ShopDetailsActivity.this, CommentActivity.class);
+                    startActivity(intent);
+                    break;
+                case R.id.GO:
+                    intent = new Intent(ShopDetailsActivity.this, BaiduMapActivity.class);
                     startActivity(intent);
                     break;
             }

@@ -220,7 +220,7 @@ public class RecommendActivity extends Activity {
 
         try {
             StringBuilder stringBuilder = new StringBuilder();
-            String httpUrl = "http://10.0.2.2/index.php/home/index/getServiceType?typename="+type;
+            String httpUrl = "http://192.168.7.23/index.php/home/index/getServiceType?typename="+type;
             URL url = new URL(httpUrl);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setRequestMethod("GET");

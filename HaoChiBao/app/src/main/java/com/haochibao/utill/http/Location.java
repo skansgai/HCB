@@ -9,6 +9,7 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
+import com.haochibao.utill.model.LocationInfo;
 
 import org.json.JSONException;
 
@@ -24,7 +25,10 @@ public class Location extends Thread {
     public AMapLocationClient mapLocationClient=null;
     public AMapLocationClientOption mLocationOption = null;
     static String cityname;
+    LocationInfo locationInfo;
     Handler handler;
+    double longitude=116.357428;
+    double latitude=39.93923;
     public Location(Context context, Handler handler){
         this.context=context;
         this.handler=handler;
@@ -44,6 +48,7 @@ public class Location extends Thread {
                                 + amapLocation.getErrorInfo());
                     }
                 }
+                locationInfo =new LocationInfo();
                 amapLocation.getLocationType();//获取当前定位结果来源，如网络定位结果，详见定位类型表
                 amapLocation.getLatitude();//获取纬度
                 amapLocation.getLongitude();//获取经度
@@ -59,6 +64,9 @@ public class Location extends Thread {
                 amapLocation.getAoiName();//获取当前定位点的AOI信息
                 cityname=amapLocation.getCity();
                 resultListener.onClick(cityname);
+                latitude=amapLocation.getLatitude();
+                longitude=amapLocation.getLongitude();
+                locationListener.onClick(latitude,longitude);
                 Message message=new Message();
                 message.what=0;
                 handler.sendMessage(message);
@@ -80,7 +88,6 @@ public class Location extends Thread {
         //获取一次定位结果：
         //该方法默认为false。
         mLocationOption.setOnceLocation(true);
-
         //获取最近3s内精度最高的一次定位结果：
         //设置setOnceLocationLatest(boolean b)接口为true，启动定位时SDK会返回最近3s内精度最高的一次定位结果。如果设置其为true，setOnceLocation(boolean b)接口也会被设置为true，反之不会，默认为false。
         mLocationOption.setOnceLocationLatest(true);
@@ -105,5 +112,13 @@ public class Location extends Thread {
     }
     public interface onResultListener{
         void onClick(String data);
+    }
+
+    public onLocationListener locationListener;
+    public void setLocationOnClicklistener(onLocationListener locationListener){
+        this.locationListener=locationListener;
+    }
+    public interface onLocationListener{
+        void onClick(double latitude,double longitude);
     }
 }
