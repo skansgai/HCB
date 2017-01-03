@@ -15,10 +15,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.haochibao.R;
+import com.haochibao.utill.model.CommentDetail;
 import com.haochibao.utill.model.CommentModel;
 import com.haochibao.utill.view.FlowLayout;
+import com.haochibao.utill.view.InnerListView;
 import com.haochibao.utill.view_holder.CommentViewHolder;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -29,10 +32,19 @@ public class CommentListAdater extends BaseAdapter {
     Context context;
     LayoutInflater inflater;
     List<CommentModel> list;
+    List<CommentDetail> innerList;
     public CommentListAdater(Context context,List<CommentModel> list){
         this.context = context;
         this.list = list;
         inflater = LayoutInflater.from(context);
+        innerList = new ArrayList<CommentDetail>();
+        for (int i=0;i<4;i++){
+            CommentDetail commentDetail = new CommentDetail();
+            commentDetail.setHost("紫电");
+            commentDetail.setName("李狗蛋");
+            commentDetail.setContent("挖掘机技术哪家强");
+            innerList.add(commentDetail);
+        }
     }
     @Override
     public int getCount() {
@@ -65,6 +77,7 @@ public class CommentListAdater extends BaseAdapter {
             viewHolder.scan = (TextView) convertView.findViewById(R.id.scan);
             viewHolder.imgList = (FlowLayout) convertView.findViewById(R.id.img_list);
             viewHolder.commentSquare = (LinearLayout) convertView.findViewById(R.id.comment_square);
+            viewHolder.innerListView = (InnerListView) convertView.findViewById(R.id.inner_list_view);
             convertView.setTag(viewHolder);
         }
         viewHolder = (CommentViewHolder) convertView.getTag();
@@ -73,6 +86,7 @@ public class CommentListAdater extends BaseAdapter {
         viewHolder.content.setText(list.get(position).content);
         viewHolder.time.setText(list.get(position).time);
         viewHolder.scan.setText(list.get(position).scan);
+        viewHolder.innerListView.setAdapter(new InnerAdapter(context,innerList));
         if (list.get(position).portrait!=null){
             viewHolder.userPortrait.setImageBitmap(list.get(position).portrait);
         }

@@ -245,7 +245,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/comment_content" />
         </LinearLayout>
+        <com.haochibao.utill.view.InnerListView
+            android:id="@+id/inner_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
-
-
 </LinearLayout>

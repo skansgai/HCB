@@ -6,6 +6,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.haochibao.utill.view.FlowLayout;
+import com.haochibao.utill.view.InnerListView;
 
 /**
  * Created by Administrator on 2016/12/22.
@@ -16,4 +17,5 @@ public class CommentViewHolder {
     public RatingBar rating;
     public FlowLayout imgList;
     public ImageView userPortrait,commentImg,praise,comment;
+    public InnerListView innerListView;
 }
