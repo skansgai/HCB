@@ -3,6 +3,8 @@ package com.haochibao.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.hardware.Sensor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -33,6 +35,7 @@ import com.haochibao.R;
 import com.haochibao.utill.http.BaiduLocation;
 import com.haochibao.utill.http.Location;
 import com.haochibao.utill.model.LocationInfo;
+import com.haochibao.utill.model.MyOrientationListener;
 
 /**
  * Created by Administrator on 2016/12/30.
@@ -50,7 +53,9 @@ public class BaiduMapActivity extends Activity{
     private boolean istraffic=false;
     private boolean isFirstIn=true;
     private LocationClient locationClient = null;
-
+    private MyOrientationListener myOrientationListener;
+    private BitmapDescriptor iconBitmap;
+    float mCurrentX;
 
     Handler handler = new Handler(){
         @Override
@@ -91,6 +96,16 @@ public class BaiduMapActivity extends Activity{
         mapView = (MapView) findViewById(R.id.bmapView);
         //对地图的设置
         baiduMap = mapView.getMap();
+
+        iconBitmap =BitmapDescriptorFactory.fromResource(R.mipmap.arrow);
+
+        myOrientationListener = new MyOrientationListener(this);
+        myOrientationListener.setmOnOrientationListener(new MyOrientationListener.OnOrientationListener() {
+            @Override
+            public void onOrirentationChanged(float x) {
+                mCurrentX = x;
+            }
+        });
     }
 
     //控件监听
@@ -143,7 +158,17 @@ public class BaiduMapActivity extends Activity{
         locationClient.registerLocationListener(new BDLocationListener() {
             @Override
             public void onReceiveLocation(BDLocation bdLocation) {
-
+                MyLocationData data = new MyLocationData.Builder()//
+                .direction(mCurrentX)
+                .accuracy(bdLocation.getRadius())//
+                .latitude(bdLocation.getLatitude())//
+                .longitude(bdLocation.getLongitude())//
+                .build();
+                baiduMap.setMyLocationData(data);
+                //自定义
+                MyLocationConfiguration config = new MyLocationConfiguration(
+                        MyLocationConfiguration.LocationMode.NORMAL,true,iconBitmap);
+                baiduMap.setMyLocationConfigeration(config);
                 if (isFirstIn){
                     moveAnnotation(bdLocation.getLatitude(),bdLocation.getLongitude());
                     setMapCenter(bdLocation.getLatitude(),bdLocation.getLongitude());
@@ -193,7 +218,6 @@ public class BaiduMapActivity extends Activity{
                 Log.i("onMarkerDragEnd","拖拽结束"); //拖拽结束
 
             }
-
             @Override
             public void onMarkerDragStart(Marker marker) {
                 Log.i("onMarkerDragStart","开始拖拽"); //开始拖拽
@@ -218,9 +242,12 @@ public class BaiduMapActivity extends Activity{
     @Override
     protected void onStart() {
         super.onStart();
+        baiduMap.setMyLocationEnabled(true);
         if (!locationClient.isStarted()){
             locationClient.start();
         }
+        //开启方向传感器
+        myOrientationListener.start();
 
     }
 
@@ -240,5 +267,14 @@ public class BaiduMapActivity extends Activity{
     protected void onPause() {
         super.onPause();
         mapView.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        baiduMap.setMyLocationEnabled(false);
+        locationClient.stop();
+        //停止方向传感器
+        myOrientationListener.stop();
     }
 }
