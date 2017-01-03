@@ -1,6 +1,7 @@
 package com.haochibao.activity;
 import android.app.Activity;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -50,7 +51,6 @@ public class BaiduMapActivity extends Activity{
     private BitmapDescriptor iconBitmap;
     //定义坐标点
     private LatLng point;
-
     float mCurrentX;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +90,16 @@ public class BaiduMapActivity extends Activity{
             }
         });
     }
+
+    //初始化导航
+    public void initNavi(){
+        if (Build.VERSION.SDK_INT>=23){
+            
+        }
+    }
+
+
+
     //控件监听
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
