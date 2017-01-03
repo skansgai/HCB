@@ -49,4 +49,32 @@
             android:layout_margin="5dp"
             />
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <!-- 起点输入框 -->
+        <EditText
+            android:id="@+id/editText1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="50"
+            android:layout_weight="1"
+            android:hint="请输入起点">
+        </EditText>
+        <!-- 终点输入框 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background=""/>
+        <EditText
+            android:id="@+id/editText2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="50"
+            android:layout_weight="1"
+            android:hint="请输入终点">
+        </EditText>
+    </LinearLayout>
+
 </RelativeLayout>
