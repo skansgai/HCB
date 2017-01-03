@@ -1,18 +1,12 @@
 package com.haochibao.activity;
-
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.hardware.Sensor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -32,9 +26,7 @@ import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.haochibao.R;
-import com.haochibao.utill.http.BaiduLocation;
 import com.haochibao.utill.http.Location;
-import com.haochibao.utill.model.LocationInfo;
 import com.haochibao.utill.model.MyOrientationListener;
 
 /**
@@ -48,26 +40,18 @@ public class BaiduMapActivity extends Activity{
     private Marker mMark;
     private Location location;
     private Context context;
-    double latitude=116.357428;
-    double longitude=39.93923;
+    private double latitude=116.357428;
+    private double longitude=39.93923;
     private boolean istraffic=false;
     private boolean isHot=false;
     private boolean isFirstIn=true;
     private LocationClient locationClient = null;
     private MyOrientationListener myOrientationListener;
     private BitmapDescriptor iconBitmap;
+    //定义坐标点
+    private LatLng point;
+
     float mCurrentX;
-
-    Handler handler = new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-        if (msg.what==0){
-            moveAnnotation(longitude,latitude);
-            setMapCenter(longitude,latitude);
-            }
-        }
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,9 +81,7 @@ public class BaiduMapActivity extends Activity{
         mapView = (MapView) findViewById(R.id.bmapView);
         //对地图的设置
         baiduMap = mapView.getMap();
-
         iconBitmap =BitmapDescriptorFactory.fromResource(R.mipmap.arrow);
-
         myOrientationListener = new MyOrientationListener(this);
         myOrientationListener.setmOnOrientationListener(new MyOrientationListener.OnOrientationListener() {
             @Override
@@ -146,7 +128,7 @@ public class BaiduMapActivity extends Activity{
         locationClient = new LocationClient(this);
         LocationClientOption option = new LocationClientOption();
         option.setCoorType("bd0911");
-        option.setScanSpan(0);
+        option.setScanSpan(5000);
         option.setIsNeedAddress(true);
         option.setOpenGps(true);
         option.setLocationNotify(true);
@@ -171,9 +153,10 @@ public class BaiduMapActivity extends Activity{
                         MyLocationConfiguration.LocationMode.NORMAL,true,iconBitmap);
                 baiduMap.setMyLocationConfigeration(config);
                 if (isFirstIn){
-                    annotation(bdLocation.getLatitude(),bdLocation.getLongitude());
-                    setMapCenter(bdLocation.getLatitude(),bdLocation.getLongitude());
-                    isFirstIn=false;
+                    point = new LatLng(bdLocation.getLatitude(),bdLocation.getLongitude());
+                        setMapCenter(point);
+                        annotation(point);
+                    Log.i("================hahah","latitude"+bdLocation.getLatitude()+"longitude"+bdLocation.getLongitude()+"\n城市名"+bdLocation.getCity());
                 }
                 Log.i("================","latitude"+bdLocation.getLatitude()+"longitude"+bdLocation.getLongitude()+"\n城市名"+bdLocation.getCity());
             }
@@ -181,9 +164,7 @@ public class BaiduMapActivity extends Activity{
 
     }
     //地图标注、覆盖物
-    public void annotation(double latitude,double longitude){
-        //定义坐标点
-        LatLng point = new LatLng(latitude, longitude);
+    public void annotation(LatLng point){
         //构建图标样式
         BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.mipmap.location_icon);
         //构建MakerOption用于在地图上添加maker
@@ -194,9 +175,7 @@ public class BaiduMapActivity extends Activity{
     }
 
     //拖拉覆盖物
-    public void moveAnnotation(double latitude,double longitude){
-        //定义坐标点
-        LatLng point = new LatLng(latitude,longitude);
+    public void moveAnnotation(LatLng point){
         //构建图标样式
         BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.mipmap.location_icon);
         //构建MakerOption用于在地图上添加maker
@@ -206,7 +185,6 @@ public class BaiduMapActivity extends Activity{
                 .zIndex(9)//设置marker所在层级
                 .draggable(true); //设置手势拖拽
         mMark = (Marker) (baiduMap.addOverlay(options));
-
         //调用BaiduMap对象的setOnMarkerDragListener方法设置marker拖拽的监听
         baiduMap.setOnMarkerDragListener(new BaiduMap.OnMarkerDragListener() {
             @Override
@@ -227,9 +205,7 @@ public class BaiduMapActivity extends Activity{
 
     }
     //设置地图中心点
-    public void setMapCenter(double latitude,double longitude){
-        //先创建个坐标对象，往里面传递经纬度
-        LatLng point = new LatLng(latitude,longitude);
+    public void setMapCenter(LatLng point){
         //定义地图状态
         MapStatus mapStatus = new MapStatus.Builder()
                 .target(point)
