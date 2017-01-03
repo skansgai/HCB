@@ -51,6 +51,7 @@ public class BaiduMapActivity extends Activity{
     double latitude=116.357428;
     double longitude=39.93923;
     private boolean istraffic=false;
+    private boolean isHot=false;
     private boolean isFirstIn=true;
     private LocationClient locationClient = null;
     private MyOrientationListener myOrientationListener;
@@ -107,7 +108,6 @@ public class BaiduMapActivity extends Activity{
             }
         });
     }
-
     //控件监听
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
@@ -122,25 +122,26 @@ public class BaiduMapActivity extends Activity{
                 baiduMap.setMapType(BaiduMap.MAP_TYPE_SATELLITE);
                 break;
             case R.id.hot_map:
-                if (istraffic){
+                if (isHot){
                     baiduMap.setBaiduHeatMapEnabled(false);
+                    isHot=false;
                 }else {
                     baiduMap.setBaiduHeatMapEnabled(true);
+                    isHot=true;
                 }
-
                 break;
             case R.id.traffic:
                 if (istraffic){
                     baiduMap.setTrafficEnabled(false);
+                    istraffic=false;
                 }else {
                     baiduMap.setTrafficEnabled(true);
+                    istraffic=true;
                 }
                 break;
         }
         }
     };
-
-
     public void getLocation() {
         locationClient = new LocationClient(this);
         LocationClientOption option = new LocationClientOption();
@@ -170,7 +171,7 @@ public class BaiduMapActivity extends Activity{
                         MyLocationConfiguration.LocationMode.NORMAL,true,iconBitmap);
                 baiduMap.setMyLocationConfigeration(config);
                 if (isFirstIn){
-                    moveAnnotation(bdLocation.getLatitude(),bdLocation.getLongitude());
+                    annotation(bdLocation.getLatitude(),bdLocation.getLongitude());
                     setMapCenter(bdLocation.getLatitude(),bdLocation.getLongitude());
                     isFirstIn=false;
                 }
@@ -180,9 +181,9 @@ public class BaiduMapActivity extends Activity{
 
     }
     //地图标注、覆盖物
-    public void annotation(){
+    public void annotation(double latitude,double longitude){
         //定义坐标点
-        LatLng point = new LatLng(39.963175, 116.400244);
+        LatLng point = new LatLng(latitude, longitude);
         //构建图标样式
         BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.mipmap.location_icon);
         //构建MakerOption用于在地图上添加maker
@@ -249,24 +250,6 @@ public class BaiduMapActivity extends Activity{
         //开启方向传感器
         myOrientationListener.start();
 
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mapView.onDestroy();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mapView.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        mapView.onPause();
     }
 
     @Override
