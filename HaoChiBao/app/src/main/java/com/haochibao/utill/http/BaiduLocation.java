@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.View;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -14,70 +15,60 @@ import com.haochibao.utill.model.LocationInfo;
  * Created by Administrator on 2016/12/30.
  */
 
-public class BaiduLocation extends Thread{
-    private Context context;
+public class BaiduLocation  {
+    private LocationClient locationClient = null;
+    private  Context context;
     private LocationInfo locationInfo;
-    private LocationClient mLocationClient ;
-    private LocationClientOption mLocationOption = new LocationClientOption();//ingwei参数
-    private Handler handler;
-    public BaiduLocation(Context context, Handler handler){
+    double longitude=116.357428;
+    double latitude=39.93923;
+
+
+    public BaiduLocation(Context context){
         this.context=context;
-        this.handler=handler;
-        Log.i("@@@@@@@@@@@@@@@@@","成功1");
     }
 
+    public void location(final onResultListener resultListener) {
+        locationInfo = new LocationInfo();
 
-    public void init(){
-        mLocationClient = new LocationClient(context);
-        setLocationOption();
-        mLocationClient.registerLocationListener(new BDLocationListener() {
+        locationClient = new LocationClient(context);
+
+        LocationClientOption option = new LocationClientOption();
+        option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);
+        option.setCoorType("bd0911");
+        option.setScanSpan(0);
+        option.setIsNeedAddress(true);
+        option.setOpenGps(true);
+        option.setLocationNotify(true);
+        option.setIsNeedLocationDescribe(true);
+        option.setIsNeedLocationPoiList(true);
+        option.setIgnoreKillProcess(false);
+        option.SetIgnoreCacheException(true);
+        option.setEnableSimulateGps(true);
+        locationClient.setLocOption(option);
+        locationClient.registerLocationListener(new BDLocationListener() {
             @Override
-            public void onReceiveLocation(BDLocation location) {
-                    locationInfo = new LocationInfo();
-                    locationInfo.setCityName(location.getCity());
-                    locationInfo.setLongitude(location.getLongitude());
-                    locationInfo.setLatitude(location.getLatitude());
-                    locationInfo.setTime(location.getTime());
-                    locationInfo.setSpree(location.getSpeed());
-                    resultListener.onClick(locationInfo);
-                    Log.i("@@@@@@@@@@@@@@@@@","成功"+locationInfo.getLongitude());
-                    resultListener.onClick(locationInfo);
-                    Message message=new Message();
-                    message.what=1;
-                    handler.sendMessage(message);
+            public void onReceiveLocation(BDLocation bdLocation) {
+                locationInfo.setLongitude(bdLocation.getLongitude());
+                locationInfo.setLatitude(bdLocation.getLatitude());
+                locationInfo.setTime(bdLocation.getTime());
+                locationInfo.setCityName(bdLocation.getCity());
+                locationInfo.setSpree(bdLocation.getSpeed());
+                latitude=bdLocation.getLatitude();
+                longitude=bdLocation.getLongitude();
+                resultListener.onClick(latitude,longitude);
+                Log.i("================","latitude"+latitude+"longitude"+longitude+"\n城市名"+bdLocation.getCity());
             }
-        });//注册监听函数
-        mLocationClient.setLocOption(mLocationOption);
+        });
     }
-    //设置定位参数
-    public void setLocationOption(){
-            //设置高耗能模式
-            mLocationOption.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);
-            int span=1000;
-            mLocationOption.setScanSpan(span);//可选，默认0，即仅定位一次，设置发起定位请求的间隔需要大于等于1000ms才是有效的
-            mLocationOption.setIsNeedAddress(true);//可选，设置是否需要地址信息，默认不需要
-            mLocationOption.setOpenGps(true);//可选，默认false,设置是否使用gps
-            mLocationOption.setIsNeedAddress(true);
-            mLocationOption.setLocationNotify(true);//可选，默认false，设置是否当GPS有效时按照1S/1次频率输出GPS结果
-            mLocationOption.setIsNeedLocationDescribe(true);//可选，默认false，设置是否需要位置语义化结果，可以在BDLocation.getLocationDescribe里得到，结果类似于“在北京天安门附近”
-            mLocationOption.setIsNeedLocationPoiList(true);//可选，默认false，设置是否需要POI结果，可以在BDLocation.getPoiList里得到
-            mLocationOption.setIgnoreKillProcess(false);//可选，默认true，定位SDK内部是一个SERVICE，并放到了独立进程，设置是否在stop的时候杀死这个进程，默认不杀死
-            mLocationOption.SetIgnoreCacheException(false);//可选，默认false，设置是否收集CRASH信息，默认收集
-            mLocationOption.setEnableSimulateGps(false);//可选，默认false，设置是否需要过滤GPS仿真结果，默认需
-        Log.i("@@@@@@@@@@@@@@@@@","成功0");
+    public void locationStart(){
+        locationClient.start();
+        Log.i("================","执行1111");
     }
-    @Override
-    public void run() {
-
-        init();
-        mLocationClient.start();
-        Log.i("@@@@@@@@@@@@@@@@@","成功3");
-    }
-    public onResultListener resultListener;
-    public void setOnClicklistener(onResultListener onResultListener){
-        this.resultListener=onResultListener;
+    public void locationStop(){
+        locationClient.stop();
     }
     public interface onResultListener{
-        void onClick(LocationInfo data);
+        void onClick(double data1,double data2);
     }
+
 }

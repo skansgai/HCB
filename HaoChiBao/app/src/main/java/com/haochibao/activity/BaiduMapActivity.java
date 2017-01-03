@@ -9,6 +9,7 @@ import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -24,16 +25,21 @@ import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
+import com.baidu.mapapi.map.MyLocationConfiguration;
+import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.haochibao.R;
+import com.haochibao.utill.http.BaiduLocation;
 import com.haochibao.utill.http.Location;
+import com.haochibao.utill.model.LocationInfo;
+
 /**
  * Created by Administrator on 2016/12/30.
  */
 
 public class BaiduMapActivity extends Activity{
-    private TextView normal_map,satellite_map,hot_map;
+    private TextView normal_map,satellite_map,hot_map,traffic;
     private BaiduMap baiduMap;
     private MapView mapView = null;
     private Marker mMark;
@@ -41,10 +47,17 @@ public class BaiduMapActivity extends Activity{
     private Context context;
     double latitude=116.357428;
     double longitude=39.93923;
+    private boolean istraffic=false;
+    private boolean isFirstIn=true;
+    private LocationClient locationClient = null;
+
+
     Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
         if (msg.what==0){
+            moveAnnotation(longitude,latitude);
+            setMapCenter(longitude,latitude);
             }
         }
     };
@@ -54,27 +67,22 @@ public class BaiduMapActivity extends Activity{
         super.onCreate(savedInstanceState);
         SDKInitializer.initialize(getApplicationContext());
         setContentView(R.layout.activity_baidu_map);
-        context = this;
+        context = getApplicationContext();
         initView();
         initMapView();
-        Intent intent = getIntent();
-        Bundle bundle=intent.getExtras();
-        longitude= (double) bundle.get("longitude");
-        latitude= (double) bundle.get("latitude");
-        Log.i("latitude","======="+latitude+"longitude====="+longitude);
-        moveAnnotation(longitude,latitude);
-        setMapCenter(longitude,latitude);
-
+        getLocation();
     }
-
     //初始化控件
     public void initView(){
         normal_map= (TextView) findViewById(R.id.normal_map);
         satellite_map= (TextView) findViewById(R.id.satellite_map);
         hot_map= (TextView) findViewById(R.id.hot_map);
+        traffic= (TextView) findViewById(R.id.traffic);
+
         normal_map.setOnClickListener(onClickListener);
         satellite_map.setOnClickListener(onClickListener);
         hot_map.setOnClickListener(onClickListener);
+        traffic.setOnClickListener(onClickListener);
     }
 
     //初始化地图控件
@@ -99,26 +107,53 @@ public class BaiduMapActivity extends Activity{
                 baiduMap.setMapType(BaiduMap.MAP_TYPE_SATELLITE);
                 break;
             case R.id.hot_map:
-                baiduMap.setMapType(BaiduMap.MAP_TYPE_NONE);
+                if (istraffic){
+                    baiduMap.setBaiduHeatMapEnabled(false);
+                }else {
+                    baiduMap.setBaiduHeatMapEnabled(true);
+                }
+
+                break;
+            case R.id.traffic:
+                if (istraffic){
+                    baiduMap.setTrafficEnabled(false);
+                }else {
+                    baiduMap.setTrafficEnabled(true);
+                }
                 break;
         }
         }
     };
-    public void getLocation(){
-        location=new Location(context,handler);
-        location.setLocationOnClicklistener(new Location.onLocationListener() {
+
+
+    public void getLocation() {
+        locationClient = new LocationClient(this);
+        LocationClientOption option = new LocationClientOption();
+        option.setCoorType("bd0911");
+        option.setScanSpan(0);
+        option.setIsNeedAddress(true);
+        option.setOpenGps(true);
+        option.setLocationNotify(true);
+        option.setIsNeedLocationDescribe(true);
+        option.setIsNeedLocationPoiList(true);
+        option.setIgnoreKillProcess(false);
+        option.SetIgnoreCacheException(true);
+        option.setEnableSimulateGps(true);
+        locationClient.setLocOption(option);
+        locationClient.registerLocationListener(new BDLocationListener() {
             @Override
-            public void onClick(double data1,double data2) {
-                latitude=data1;
-                longitude=data2;
-                Log.i("latitude","======="+latitude+"longitude====="+longitude);
+            public void onReceiveLocation(BDLocation bdLocation) {
+
+                if (isFirstIn){
+                    moveAnnotation(bdLocation.getLatitude(),bdLocation.getLongitude());
+                    setMapCenter(bdLocation.getLatitude(),bdLocation.getLongitude());
+                    isFirstIn=false;
+                }
+                Log.i("================","latitude"+bdLocation.getLatitude()+"longitude"+bdLocation.getLongitude()+"\n城市名"+bdLocation.getCity());
             }
         });
-        location.start();
 
     }
-
-
     //地图标注、覆盖物
     public void annotation(){
         //定义坐标点
@@ -167,7 +202,6 @@ public class BaiduMapActivity extends Activity{
 
     }
     //设置地图中心点
-
     public void setMapCenter(double latitude,double longitude){
         //先创建个坐标对象，往里面传递经纬度
         LatLng point = new LatLng(latitude,longitude);
@@ -180,6 +214,16 @@ public class BaiduMapActivity extends Activity{
         MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mapStatus);
         baiduMap.setMapStatus(mMapStatusUpdate);
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (!locationClient.isStarted()){
+            locationClient.start();
+        }
+
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
