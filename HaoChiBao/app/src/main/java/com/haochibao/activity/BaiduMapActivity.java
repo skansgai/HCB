@@ -1,12 +1,14 @@
 package com.haochibao.activity;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -36,6 +38,7 @@ import com.haochibao.utill.model.MyOrientationListener;
 
 public class BaiduMapActivity extends Activity{
     private TextView normal_map,satellite_map,hot_map,traffic;
+    private ImageView mapNavi;
     private BaiduMap baiduMap;
     private MapView mapView = null;
     private Marker mMark;
@@ -68,11 +71,13 @@ public class BaiduMapActivity extends Activity{
         satellite_map= (TextView) findViewById(R.id.satellite_map);
         hot_map= (TextView) findViewById(R.id.hot_map);
         traffic= (TextView) findViewById(R.id.traffic);
+        mapNavi= (ImageView) findViewById(R.id.map_navi);
 
         normal_map.setOnClickListener(onClickListener);
         satellite_map.setOnClickListener(onClickListener);
         hot_map.setOnClickListener(onClickListener);
         traffic.setOnClickListener(onClickListener);
+        mapNavi.setOnClickListener(onClickListener);
     }
 
     //初始化地图控件
@@ -94,7 +99,8 @@ public class BaiduMapActivity extends Activity{
     //初始化导航
     public void initNavi(){
         if (Build.VERSION.SDK_INT>=23){
-            
+            //保证导航功能完备
+
         }
     }
 
@@ -130,6 +136,16 @@ public class BaiduMapActivity extends Activity{
                     baiduMap.setTrafficEnabled(true);
                     istraffic=true;
                 }
+                break;
+            case R.id.map_navi:
+                Intent intent = new Intent(BaiduMapActivity.this,BaiduNaviActivity.class);
+                Bundle bundle=new Bundle();
+                double longitude=point.longitude;
+                double latitude=point.latitude;
+                bundle.putDouble("latitude",latitude);
+                bundle.putDouble("longitude",longitude);
+                intent.putExtras(bundle);
+                startActivity(intent);
                 break;
         }
         }

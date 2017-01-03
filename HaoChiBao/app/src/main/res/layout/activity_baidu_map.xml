@@ -49,32 +49,12 @@
             android:layout_margin="5dp"
             />
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <!-- 起点输入框 -->
-        <EditText
-            android:id="@+id/editText1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="50"
-            android:layout_weight="1"
-            android:hint="请输入起点">
-        </EditText>
-        <!-- 终点输入框 -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/colorAccent"/>
-        <EditText
-            android:id="@+id/editText2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="50"
-            android:layout_weight="1"
-            android:hint="请输入终点">
-        </EditText>
-    </LinearLayout>
-
+    <ImageView
+        android:id="@+id/map_navi"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:src="@mipmap/map_navi"/>
 </RelativeLayout>
