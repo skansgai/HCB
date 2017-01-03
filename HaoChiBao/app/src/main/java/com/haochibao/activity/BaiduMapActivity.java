@@ -9,6 +9,11 @@ import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
@@ -22,10 +27,7 @@ import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.haochibao.R;
-import com.haochibao.utill.http.BaiduLocation;
 import com.haochibao.utill.http.Location;
-import com.haochibao.utill.model.LocationInfo;
-
 /**
  * Created by Administrator on 2016/12/30.
  */
@@ -36,7 +38,6 @@ public class BaiduMapActivity extends Activity{
     private MapView mapView = null;
     private Marker mMark;
     private Location location;
-    private LocationInfo locationInfo;
     private Context context;
     double latitude=116.357428;
     double longitude=39.93923;
@@ -47,16 +48,15 @@ public class BaiduMapActivity extends Activity{
             }
         }
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SDKInitializer.initialize(getApplicationContext());
         setContentView(R.layout.activity_baidu_map);
+        context = this;
         initView();
         initMapView();
-        context = this;
-       // locationInfo = new LocationInfo();
-       // getLocation();
         Intent intent = getIntent();
         Bundle bundle=intent.getExtras();
         longitude= (double) bundle.get("longitude");
@@ -76,6 +76,7 @@ public class BaiduMapActivity extends Activity{
         satellite_map.setOnClickListener(onClickListener);
         hot_map.setOnClickListener(onClickListener);
     }
+
     //初始化地图控件
     public void initMapView(){
         //获取地图控件引用
@@ -118,17 +119,6 @@ public class BaiduMapActivity extends Activity{
     }
 
 
-   /* //百度定位
-    public void getLocation(){
-      location.setOnClicklistener(new BaiduLocation.onResultListener() {
-          @Override
-          public void onClick(LocationInfo data) {
-              locationInfo =data;
-          }
-      });
-        location.start();
-    }*/
-
     //地图标注、覆盖物
     public void annotation(){
         //定义坐标点
@@ -141,6 +131,7 @@ public class BaiduMapActivity extends Activity{
                 .icon(bitmap);
         baiduMap.addOverlay(options);
     }
+
     //拖拉覆盖物
     public void moveAnnotation(double latitude,double longitude){
         //定义坐标点
@@ -179,10 +170,6 @@ public class BaiduMapActivity extends Activity{
 
     public void setMapCenter(double latitude,double longitude){
         //先创建个坐标对象，往里面传递经纬度
-       /* if (locationInfo!=null){
-            longitude = locationInfo.getLongitude();
-            latitude = locationInfo.getLatitude();
-        }*/
         LatLng point = new LatLng(latitude,longitude);
         //定义地图状态
         MapStatus mapStatus = new MapStatus.Builder()

@@ -1,6 +1,8 @@
 package com.haochibao.utill.http;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 
 import com.baidu.location.BDLocation;
@@ -17,12 +19,17 @@ public class BaiduLocation extends Thread{
     private LocationInfo locationInfo;
     private LocationClient mLocationClient ;
     private LocationClientOption mLocationOption = new LocationClientOption();//ingwei参数
-    public BaiduLocation(Context context){
+    private Handler handler;
+    public BaiduLocation(Context context, Handler handler){
         this.context=context;
-        mLocationClient = new LocationClient(context);
+        this.handler=handler;
         Log.i("@@@@@@@@@@@@@@@@@","成功1");
     }
+
+
     public void init(){
+        mLocationClient = new LocationClient(context);
+        setLocationOption();
         mLocationClient.registerLocationListener(new BDLocationListener() {
             @Override
             public void onReceiveLocation(BDLocation location) {
@@ -34,11 +41,13 @@ public class BaiduLocation extends Thread{
                     locationInfo.setSpree(location.getSpeed());
                     resultListener.onClick(locationInfo);
                     Log.i("@@@@@@@@@@@@@@@@@","成功"+locationInfo.getLongitude());
-
+                    resultListener.onClick(locationInfo);
+                    Message message=new Message();
+                    message.what=1;
+                    handler.sendMessage(message);
             }
         });//注册监听函数
-        setLocationOption();
-
+        mLocationClient.setLocOption(mLocationOption);
     }
     //设置定位参数
     public void setLocationOption(){
@@ -48,13 +57,13 @@ public class BaiduLocation extends Thread{
             mLocationOption.setScanSpan(span);//可选，默认0，即仅定位一次，设置发起定位请求的间隔需要大于等于1000ms才是有效的
             mLocationOption.setIsNeedAddress(true);//可选，设置是否需要地址信息，默认不需要
             mLocationOption.setOpenGps(true);//可选，默认false,设置是否使用gps
+            mLocationOption.setIsNeedAddress(true);
             mLocationOption.setLocationNotify(true);//可选，默认false，设置是否当GPS有效时按照1S/1次频率输出GPS结果
             mLocationOption.setIsNeedLocationDescribe(true);//可选，默认false，设置是否需要位置语义化结果，可以在BDLocation.getLocationDescribe里得到，结果类似于“在北京天安门附近”
             mLocationOption.setIsNeedLocationPoiList(true);//可选，默认false，设置是否需要POI结果，可以在BDLocation.getPoiList里得到
             mLocationOption.setIgnoreKillProcess(false);//可选，默认true，定位SDK内部是一个SERVICE，并放到了独立进程，设置是否在stop的时候杀死这个进程，默认不杀死
             mLocationOption.SetIgnoreCacheException(false);//可选，默认false，设置是否收集CRASH信息，默认收集
-            mLocationOption.setEnableSimulateGps(false);//可选，默认false，设置是否需要过滤GPS仿真结果，默认需要
-            mLocationClient.setLocOption(mLocationOption);
+            mLocationOption.setEnableSimulateGps(false);//可选，默认false，设置是否需要过滤GPS仿真结果，默认需
         Log.i("@@@@@@@@@@@@@@@@@","成功0");
     }
     @Override
