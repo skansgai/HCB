@@ -55,6 +55,19 @@ public class BaiduMapActivity extends Activity{
     //定义坐标点
     private LatLng point;
     float mCurrentX;
+
+    private Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (msg.what==1){
+                LatLng point= (LatLng) msg.obj;
+                setMapCenter(point);
+                annotation(point);
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +85,6 @@ public class BaiduMapActivity extends Activity{
         hot_map= (TextView) findViewById(R.id.hot_map);
         traffic= (TextView) findViewById(R.id.traffic);
         mapNavi= (ImageView) findViewById(R.id.map_navi);
-
         normal_map.setOnClickListener(onClickListener);
         satellite_map.setOnClickListener(onClickListener);
         hot_map.setOnClickListener(onClickListener);
@@ -180,14 +192,15 @@ public class BaiduMapActivity extends Activity{
                 baiduMap.setMyLocationConfigeration(config);
                 if (isFirstIn){
                     point = new LatLng(bdLocation.getLatitude(),bdLocation.getLongitude());
-                        setMapCenter(point);
-                        annotation(point);
+                    Message message=new Message();
+                    message.what=1;
+                    message.obj=point;
+                    handler.sendMessage(message);
                     Log.i("================hahah","latitude"+bdLocation.getLatitude()+"longitude"+bdLocation.getLongitude()+"\n城市名"+bdLocation.getCity());
                 }
                 Log.i("================","latitude"+bdLocation.getLatitude()+"longitude"+bdLocation.getLongitude()+"\n城市名"+bdLocation.getCity());
             }
         });
-
     }
     //地图标注、覆盖物
     public void annotation(LatLng point){
