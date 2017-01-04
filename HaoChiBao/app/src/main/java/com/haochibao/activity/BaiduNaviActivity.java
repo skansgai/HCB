@@ -50,6 +50,9 @@ public class BaiduNaviActivity extends Activity {
 
     private boolean hasInitSuccess = false;
     private boolean hasRequestComAuth = false;
+
+    private double latitude = 0;
+    private double longitude = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
@@ -62,7 +65,12 @@ public class BaiduNaviActivity extends Activity {
         mBdmcNaviBtn = (Button) findViewById(R.id.bdmcNaviBtn);
         mDb06ll = (Button) findViewById(R.id.mDb06llNaviBtn);
         BNOuterLogUtil.setLogSwitcher(true);
-
+        //获得定位传过来的经纬度
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        latitude = bundle.getDouble("latitude");
+        longitude = bundle.getDouble("longitude");
+        Log.i("*************","latitude"+latitude+"longitude"+longitude);
         initListener();
         if (initDirs()) {
             initNavi();
@@ -300,12 +308,12 @@ public class BaiduNaviActivity extends Activity {
         BNRoutePlanNode eNode = null;
         switch (coType) {
             case GCJ02: {
-                sNode = new BNRoutePlanNode(116.30142, 40.05087, "百度大厦", null, coType);
+                sNode = new BNRoutePlanNode(longitude, latitude, "百度大厦", null, coType);
                 eNode = new BNRoutePlanNode(116.39750, 39.90882, "北京天安门", null, coType);
                 break;
             }
             case WGS84: {
-                sNode = new BNRoutePlanNode(116.300821, 40.050969, "百度大厦", null, coType);
+                sNode = new BNRoutePlanNode(longitude, latitude, "百度大厦", null, coType);
                 eNode = new BNRoutePlanNode(116.397491, 39.908749, "北京天安门", null, coType);
                 break;
             }
@@ -315,8 +323,8 @@ public class BaiduNaviActivity extends Activity {
                 break;
             }
             case BD09LL: {
-                sNode = new BNRoutePlanNode(116.30784537597782, 40.057009624099436, "百度大厦", null, coType);
-                eNode = new BNRoutePlanNode(116.40386525193937, 39.915160800132085, "北京天安门", null, coType);
+                sNode = new BNRoutePlanNode(longitude, latitude, "百度大厦", null, coType);
+                eNode = new BNRoutePlanNode(longitude, latitude, "北京天安门", null, coType);
                 break;
             }
             default:

@@ -3,8 +3,8 @@ package com.haochibao;
 import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
-
 public class MyApplication extends Application {
+
     private static int userId;
     private static String userToken;
     private static boolean isLogin=false;
