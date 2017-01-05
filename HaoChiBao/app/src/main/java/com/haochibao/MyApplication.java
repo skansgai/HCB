@@ -9,7 +9,6 @@ public class MyApplication extends Application {
     private static String userToken;
     private static boolean isLogin=false;
     private static String LoginStyle="Normal";
-
     public static String getLoginStyle() {
         return LoginStyle;
     }

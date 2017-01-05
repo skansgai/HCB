@@ -1,5 +1,12 @@
 package com.haochibao.activity;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -11,7 +18,11 @@ import com.baidu.navisdk.adapter.BNaviSettingManager;
 import com.baidu.navisdk.adapter.BaiduNaviManager;
 import com.baidu.navisdk.adapter.BaiduNaviManager.NaviInitListener;
 import com.baidu.navisdk.adapter.BaiduNaviManager.RoutePlanListener;
+import com.haochibao.MyApplication;
 import com.haochibao.R;
+import com.haochibao.utill.http.BaiduLocation;
+import com.haochibao.utill.http.Location;
+
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
@@ -24,18 +35,25 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class BaiduNaviActivity extends Activity {
 
     public static List<Activity> activityList = new LinkedList<Activity>();
 
     private static final String APP_FOLDER_NAME = "BNSDKSimpleDemo";
-
+    private EditText editCityName=null;
     private Button mWgsNaviBtn = null;
     private Button mGcjNaviBtn = null;
     private Button mBdmcNaviBtn = null;
     private Button mDb06ll = null;
     private String mSDCardPath = null;
+    private String cityName;
 
     public static final String ROUTE_PLAN_NODE = "routePlanNode";
     public static final String SHOW_CUSTOM_ITEM = "showCustomItem";
@@ -53,6 +71,9 @@ public class BaiduNaviActivity extends Activity {
 
     private double latitude = 0;
     private double longitude = 0;
+
+    private double mLatitude = 0;
+    private double mLongitude = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
@@ -64,6 +85,8 @@ public class BaiduNaviActivity extends Activity {
         mGcjNaviBtn = (Button) findViewById(R.id.gcjNaviBtn);
         mBdmcNaviBtn = (Button) findViewById(R.id.bdmcNaviBtn);
         mDb06ll = (Button) findViewById(R.id.mDb06llNaviBtn);
+        editCityName = (EditText) findViewById(R.id.edit_city_name);
+
         BNOuterLogUtil.setLogSwitcher(true);
         //获得定位传过来的经纬度
         Intent intent = getIntent();
@@ -85,12 +108,11 @@ public class BaiduNaviActivity extends Activity {
     }
 
     private void initListener() {
-
         if (mWgsNaviBtn != null) {
             mWgsNaviBtn.setOnClickListener(new OnClickListener() {
-
                 @Override
                 public void onClick(View arg0) {
+                    getCityAddress();
                     if (BaiduNaviManager.isNaviInited()) {
                         routeplanToNavi(CoordinateType.WGS84);
                     }
@@ -103,6 +125,7 @@ public class BaiduNaviActivity extends Activity {
 
                 @Override
                 public void onClick(View arg0) {
+                    getCityAddress();
                     if (BaiduNaviManager.isNaviInited()) {
                         routeplanToNavi(CoordinateType.GCJ02);
                     }
@@ -115,7 +138,7 @@ public class BaiduNaviActivity extends Activity {
 
                 @Override
                 public void onClick(View arg0) {
-
+                    getCityAddress();
                     if (BaiduNaviManager.isNaviInited()) {
                         routeplanToNavi(CoordinateType.BD09_MC);
                     }
@@ -127,6 +150,7 @@ public class BaiduNaviActivity extends Activity {
             mDb06ll.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View arg0) {
+                    getCityAddress();
                     if (BaiduNaviManager.isNaviInited()) {
                         routeplanToNavi(CoordinateType.BD09LL);
                     }
@@ -309,26 +333,25 @@ public class BaiduNaviActivity extends Activity {
         switch (coType) {
             case GCJ02: {
                 sNode = new BNRoutePlanNode(longitude, latitude, "百度大厦", null, coType);
-                eNode = new BNRoutePlanNode(116.39750, 39.90882, "北京天安门", null, coType);
+                eNode = new BNRoutePlanNode(mLongitude,mLatitude, "北京天安门", null, coType);
                 break;
             }
             case WGS84: {
                 sNode = new BNRoutePlanNode(longitude, latitude, "百度大厦", null, coType);
-                eNode = new BNRoutePlanNode(116.397491, 39.908749, "北京天安门", null, coType);
+                eNode = new BNRoutePlanNode(mLongitude,mLatitude, "北京天安门", null, coType);
                 break;
             }
             case BD09_MC: {
-                sNode = new BNRoutePlanNode(12947471, 4846474, "百度大厦", null, coType);
-                eNode = new BNRoutePlanNode(12958160, 4825947, "北京天安门", null, coType);
+                sNode = new BNRoutePlanNode(longitude, latitude, "百度大厦", null, coType);
+                eNode = new BNRoutePlanNode(mLongitude,mLatitude, "北京天安门", null, coType);
                 break;
             }
             case BD09LL: {
                 sNode = new BNRoutePlanNode(longitude, latitude, "百度大厦", null, coType);
-                eNode = new BNRoutePlanNode(longitude, latitude, "北京天安门", null, coType);
+                eNode = new BNRoutePlanNode(mLongitude,mLatitude, "北京天安门", null, coType);
                 break;
             }
             default:
-                ;
         }
         if (sNode != null && eNode != null) {
             List<BNRoutePlanNode> list = new ArrayList<BNRoutePlanNode>();
@@ -361,6 +384,8 @@ public class BaiduNaviActivity extends Activity {
             }
             Intent intent = new Intent(BaiduNaviActivity.this, BNDemoGuideActivity.class);
             Bundle bundle = new Bundle();
+            bundle.putDouble("latitude",mLatitude);
+            bundle.putDouble("longitude",mLongitude);
             bundle.putSerializable(ROUTE_PLAN_NODE, (BNRoutePlanNode) mBNRoutePlanNode);
             intent.putExtras(bundle);
             startActivity(intent);
@@ -465,6 +490,56 @@ public class BaiduNaviActivity extends Activity {
             }
             routeplanToNavi(mCoordinateType);
         }
+
+    }
+    /**
+     * 通过调用百度的接口获得目的地的经纬度
+     * */
+    public void getCityAddress(){
+        new Thread(){
+            @Override
+            public void run() {
+                cityName = editCityName.getText().toString().trim();
+                if (cityName!=null){
+                    try {
+                        String uri="http://api.map.baidu.com/cloudgc/v1?ak=aetumvluZtsGCXqaM7PGTEn3mjGhqXdX&" +
+                                "mcode=EE:2E:62:10:F8:1B:78:8D:EB:5F:66:0A:0B:B7:0B:04:EA:28:A1:ED;com.haochibao&address="+ URLEncoder.encode(cityName,"utf-8");
+                        URL url = new URL(uri);
+                        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                        connection.setRequestMethod("GET");
+                        connection.setReadTimeout(5000);
+                        connection.connect();
+                        if (connection.getResponseCode() == HttpURLConnection.HTTP_OK){
+                            StringBuilder builder = new StringBuilder();
+                            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream(),"utf-8"));
+                            String s;
+                            while((s = bufferedReader.readLine())!=null){
+                                builder.append(s);
+                            }
+                            Log.i("CityNameInfo",builder.toString());
+                            if (builder!=null){
+                                JSONObject object = new JSONObject(builder.toString());
+                                JSONArray array = object.optJSONArray("result");
+                                JSONObject object1 = array.optJSONObject(0);
+                                JSONObject object2 = object1.optJSONObject("location");
+                                mLatitude=Double.valueOf(object2.optString("lat"));
+                                mLongitude=Double.valueOf(object2.optString("lng"));
+                                Log.i("location","mLatitude"+mLatitude+"mLongitude"+mLongitude);
+                            }
+                        }else {
+                            Log.i("requestCode","requestCode"+connection.getResponseCode());
+                        }
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+        }.start();
 
     }
 }

@@ -12,6 +12,7 @@ import com.baidu.navisdk.adapter.BaiduNaviCommonModule;
 import com.baidu.navisdk.adapter.NaviModuleFactory;
 import com.baidu.navisdk.adapter.NaviModuleImpl;
 import com.baidu.navisdk.adapter.BNRoutePlanNode.CoordinateType;
+import com.haochibao.MyApplication;
 import com.haochibao.R;
 
 import android.app.Activity;
@@ -33,7 +34,8 @@ public class BNDemoGuideActivity extends Activity {
     private final String TAG = BNDemoGuideActivity.class.getName();
     private BNRoutePlanNode mBNRoutePlanNode = null;
     private BaiduNaviCommonModule mBaiduNaviCommonModule = null;
-
+    private double latitude = 0;
+    private double longitude = 0;
     /*
      * 对于导航模块有两种方式来实现发起导航。 1：使用通用接口来实现 2：使用传统接口来实现
      * 
@@ -75,6 +77,8 @@ public class BNDemoGuideActivity extends Activity {
             Bundle bundle = intent.getExtras();
             if (bundle != null) {
                 mBNRoutePlanNode = (BNRoutePlanNode) bundle.getSerializable(BaiduNaviActivity.ROUTE_PLAN_NODE);
+                latitude = bundle.getDouble("latitude");
+                longitude = bundle.getDouble("longitude");
             }
         }
         //显示自定义图标
@@ -223,7 +227,7 @@ public class BNDemoGuideActivity extends Activity {
                         BNRouteGuideManager.getInstance().showCustomizedLayer(false);
                     } else if (msg.what == MSG_RESET_NODE) {
                         BNRouteGuideManager.getInstance().resetEndNodeInNavi(
-                                new BNRoutePlanNode(116.21142, 40.85087, "百度大厦11", null, CoordinateType.GCJ02));
+                                new BNRoutePlanNode(109.16855802826001,27.674902690624183, "百度大厦11", null, CoordinateType.GCJ02));
                     }
                 };
             };
