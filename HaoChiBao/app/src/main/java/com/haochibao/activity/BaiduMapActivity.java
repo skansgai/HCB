@@ -60,11 +60,11 @@ public class BaiduMapActivity extends Activity{
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            if (msg.what==1){
-                LatLng point= (LatLng) msg.obj;
-                setMapCenter(point);
-                annotation(point);
-            }
+//            if (msg.what==1){
+//                LatLng point= (LatLng) msg.obj;
+//                setMapCenter(point);
+//                annotation(point);
+//            }
         }
     };
 
@@ -190,12 +190,11 @@ public class BaiduMapActivity extends Activity{
                 MyLocationConfiguration config = new MyLocationConfiguration(
                         MyLocationConfiguration.LocationMode.NORMAL,true,iconBitmap);
                 baiduMap.setMyLocationConfigeration(config);
+
                 if (isFirstIn){
                     point = new LatLng(bdLocation.getLatitude(),bdLocation.getLongitude());
-                    Message message=new Message();
-                    message.what=1;
-                    message.obj=point;
-                    handler.sendMessage(message);
+                    MapStatusUpdate mapStatusUpdate=MapStatusUpdateFactory.newLatLng(point);
+                    baiduMap.animateMapStatus(mapStatusUpdate);
                     Log.i("================hahah","latitude"+bdLocation.getLatitude()+"longitude"+bdLocation.getLongitude()+"\n城市名"+bdLocation.getCity());
                 }
                 Log.i("================","latitude"+bdLocation.getLatitude()+"longitude"+bdLocation.getLongitude()+"\n城市名"+bdLocation.getCity());
@@ -253,6 +252,12 @@ public class BaiduMapActivity extends Activity{
         //定义MapStatusUpdate对象，以便描述地图状态将要发生的变化
         MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mapStatus);
         baiduMap.setMapStatus(mMapStatusUpdate);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mapView.onResume();
     }
 
     @Override
