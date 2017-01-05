@@ -22,6 +22,7 @@ import java.util.List;
  * Created by Administrator on 2017/1/3.
  */
 public class InnerAdapter extends BaseAdapter {
+    private final int TEXTCOLOR = 0xFFE65005;
     private Context context;
     LayoutInflater inflater;
     List<CommentDetail> list;
@@ -56,7 +57,7 @@ public class InnerAdapter extends BaseAdapter {
         }
         viewHolder = (InnerViewHolder) convertView.getTag();
         StyleBuilder styleBuilder = new StyleBuilder();
-        styleBuilder.addTextStyle(list.get(position).getHost()).textColor(Color.BLUE)
+        styleBuilder.addTextStyle(list.get(position).getHost()).textColor(TEXTCOLOR)
                 .click(new ClickListener() {
                     @Override
                     public void click(String text) {
@@ -64,9 +65,15 @@ public class InnerAdapter extends BaseAdapter {
                     }
                 })
                 .commit().text("回复")
-                .addTextStyle(list.get(position).getName()).textColor(Color.BLUE).commit()
-                .addTextStyle(list.get(position).getContent()).commit()
-                .newLine();
+                .addTextStyle(list.get(position).getName()+":").textColor(TEXTCOLOR)
+                .click(new ClickListener() {
+                    @Override
+                    public void click(String text) {
+                        Toast.makeText(context,"text = "+text,Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .commit()
+                .addTextStyle(list.get(position).getContent()).commit();
         styleBuilder.show(viewHolder.getTextView());
         return convertView;
     }
