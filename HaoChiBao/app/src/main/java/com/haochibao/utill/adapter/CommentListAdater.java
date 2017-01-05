@@ -42,7 +42,7 @@ public class CommentListAdater extends BaseAdapter {
             CommentDetail commentDetail = new CommentDetail();
             commentDetail.setHost("紫电");
             commentDetail.setName("李狗蛋");
-            commentDetail.setContent("挖掘机技术哪家强");
+            commentDetail.setContent("挖掘机技术哪家强,中国山东找南翔,挖掘机技术哪家强,中国山东找南翔");
             innerList.add(commentDetail);
         }
     }
