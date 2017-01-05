@@ -3,7 +3,7 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="mainRed">#E65005</color>//主色-红
+    <color name="mainRed">#FFE65005</color>//主色-红
     <color name="mainBlue">#4D9CEC</color>//主色-蓝
     <color name="bgGrayWhite">#F2F2F2</color>//主背景-灰白
 
