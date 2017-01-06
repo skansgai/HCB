@@ -1,10 +1,14 @@
 package com.haochibao.activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -187,6 +191,17 @@ public class ShopDetailsActivity extends Activity {
         View popview = layoutInflater.inflate(R.layout.popwindow_phone, null);
         poptextview = (TextView) popview.findViewById(R.id.phone);
         poptextview.setText(phone);
+        poptextview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent callIntent = new Intent(Intent.ACTION_CALL, Uri.parse(phone));
+                if (ActivityCompat.checkSelfPermission(ShopDetailsActivity.this, Manifest.permission.CALL_PHONE)
+                        != PackageManager.PERMISSION_GRANTED){
+                    return;
+                }
+                startActivity(callIntent);
+            }
+        });
         PopupWindow popupWindow = new PopupWindow(popview, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         popupWindow.setOutsideTouchable(true);
         WindowManager.LayoutParams lp = getWindow().getAttributes();

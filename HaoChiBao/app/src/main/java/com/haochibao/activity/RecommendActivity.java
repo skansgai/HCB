@@ -35,6 +35,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -216,11 +217,10 @@ public class RecommendActivity extends Activity {
     }
 
     public void getDate() {
-        list.clear();
-
+       // list.clear();
         try {
             StringBuilder stringBuilder = new StringBuilder();
-            String httpUrl = "http://192.168.7.23/index.php/home/index/getServiceType?typename="+type;
+            String httpUrl = "http://192.168.7.23/index.php/home/index/getServiceType?typename="+ URLEncoder.encode(type,"utf-8");
             URL url = new URL(httpUrl);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setRequestMethod("GET");
