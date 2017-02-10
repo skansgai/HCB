@@ -63,6 +63,7 @@ public class RegisterActivity extends Activity {
     private AuthInfo mAuthInfo;
     private SsoHandler mSsoHandler;
     private com.haochibao.utill.model.UserInfo mUserinfo;
+    private boolean islogin=false;
     //QQ登录
 
     private Tencent mTencent; //qq主操作对象
@@ -108,9 +109,11 @@ public class RegisterActivity extends Activity {
             case R.id.login_btn:
                 //登陆按钮
                 userLogin();
-                MyApplication.setLoginStyle("Normal");
-                Intent intent=new Intent(RegisterActivity.this,HomeViewPagerActivity.class);
-                startActivity(intent);
+                if (islogin){
+                    MyApplication.setLoginStyle("Normal");
+                    Intent intent=new Intent(RegisterActivity.this,HomeViewPagerActivity.class);
+                    startActivity(intent);
+                }
                 break;
             case R.id.fast_login:
                 //快速登陆
@@ -203,6 +206,7 @@ public class RegisterActivity extends Activity {
                                         intent.putExtras(bundle);
                                         MyApplication.setIsLogin(true);
                                         startActivity(intent);
+                                        islogin = true;
                                     }
                                 }
                             }
@@ -213,12 +217,15 @@ public class RegisterActivity extends Activity {
                     }
                 }else {
                     Toast.makeText(RegisterActivity.this,"密码不能为空！！",Toast.LENGTH_SHORT).show();
+                    islogin = false;
                 }
             }else {
                 Toast.makeText(RegisterActivity.this,"请输入正确的手机号码！",Toast.LENGTH_SHORT).show();
+                islogin = false;
             }
         }else {
             Toast.makeText(RegisterActivity.this,"手机号码不能为空！",Toast.LENGTH_SHORT).show();
+            islogin = false;
         }
     }
     /**
