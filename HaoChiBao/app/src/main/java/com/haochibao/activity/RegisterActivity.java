@@ -174,7 +174,7 @@ public class RegisterActivity extends Activity {
         phone=phoneEdit.getText().toString();
         password=passwordEdit.getText().toString();
         boolean isPhone=checkPhoneNumber(phone);
-        String uri="http://192.168.7.23/index.php/home/user/login?phone_num="+phone+"&password="+password;
+        String uri="http://119.29.60.248/index.php/home/user/login?phone_num="+phone+"&password="+password;
         if (phone!=null){
             if (isPhone){
                 if (password!=null){

@@ -244,7 +244,7 @@ public class ShopDetailsActivity extends Activity {
 
         try {
             StringBuilder stringBuilder = new StringBuilder();
-            String httpUrl = "http://10.0.2.2/index.php/home/index/getServiceInfo?id="+id;
+            String httpUrl = "http://119.29.60.248/index.php/home/index/getServiceInfo?id="+id;
             URL url = new URL(httpUrl);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setRequestMethod("GET");
@@ -307,7 +307,7 @@ public class ShopDetailsActivity extends Activity {
     public void getUserComment() {
         try {
             StringBuilder stringBuilder = new StringBuilder();
-            String httpUrl = "http://10.0.2.2/index.php/home/index/getServiceComment?id=1";
+            String httpUrl = "http://119.29.60.248/index.php/home/index/getServiceComment?id=1";
             URL url = new URL(httpUrl);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setRequestMethod("GET");
@@ -346,7 +346,7 @@ public class ShopDetailsActivity extends Activity {
     public void getServiceAVGrade() {
         try {
             StringBuilder stringBuilder = new StringBuilder();
-            String httpUrl = "http://10.0.2.2/index.php/home/index/getServiceAVGrade?serviceid=1";
+            String httpUrl = "http://119.29.60.248/index.php/home/index/getServiceAVGrade?serviceid=1";
             URL url = new URL(httpUrl);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setRequestMethod("GET");

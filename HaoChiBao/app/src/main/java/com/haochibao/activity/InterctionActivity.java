@@ -135,7 +135,7 @@ public class InterctionActivity extends Activity {
         }
     }
     public void cookInfo(){
-        String uri="http://192.168.7.23/index.php/home/index/getInteract";
+        String uri="http://119.29.60.248/index.php/home/index/getInteract";
         try {
             URL url=new URL(uri);
             GetHttp getHttp=new GetHttp(this,url);
@@ -170,7 +170,7 @@ public class InterctionActivity extends Activity {
     }
 
     public void getActivityImage(){
-        String uri="http://192.168.7.23/index.php/home/index/getInteracctImage?state=1";
+        String uri="http://119.29.60.248/index.php/home/index/getInteracctImage?state=1";
         try {
             URL url=new URL(uri);
             GetHttp getHttp=new GetHttp(this,url);

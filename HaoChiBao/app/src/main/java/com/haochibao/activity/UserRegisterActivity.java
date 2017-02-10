@@ -139,7 +139,7 @@ public class UserRegisterActivity extends Activity implements Handler.Callback {
         phone = phoneEdit.getText().toString();
         password = passwordEdit.getText().toString();
         String rePassword = rePasswordEdit.getText().toString();
-        String uri = "http://192.168.7.23/index.php/home/user/register?phone_num=" + phone + "&password=" + password + "&repassword=" + rePassword;
+        String uri = "http://119.29.60.248/index.php/home/user/register?phone_num=" + phone + "&password=" + password + "&repassword=" + rePassword;
         try {
             URL url = new URL(uri);
             GetHttp getHttp = new GetHttp(context, url);

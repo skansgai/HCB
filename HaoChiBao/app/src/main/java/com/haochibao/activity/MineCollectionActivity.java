@@ -63,7 +63,7 @@ public class MineCollectionActivity extends Activity {
         }
     };
     public void getData(){
-        String uri="http://192.168.7.23/index.php/home/collect/getCollection?user_id="+ MyApplication.getUserId();
+        String uri="http://119.29.60.248/index.php/home/collect/getCollection?user_id="+ MyApplication.getUserId();
         try {
             URL url=new URL(uri);
             final GetHttp getHttp=new GetHttp(MineCollectionActivity.this,url);
@@ -78,7 +78,7 @@ public class MineCollectionActivity extends Activity {
                             JSONArray array=object.optJSONArray("result");
                             for (int i=0;i<array.length();i++){
                                 JSONObject object1=array.optJSONObject(i);
-                                String uri1="http://192.168.7.23/index.php/home/index/getServiceInfo?id=" +
+                                String uri1="http://119.29.60.248/index.php/home/index/getServiceInfo?id=" +
                                         ""+Integer.valueOf(object1.optString("service_id"));
                                 URL url1=new URL(uri1);
                                 GetHttp getHttp1=new GetHttp(MineCollectionActivity.this,url1);

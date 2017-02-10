@@ -138,7 +138,7 @@ public class HotelActivity extends FragmentActivity {
    }
     public void getInternetData(){
         HttpURLConnection httpURLConnection = null;
-        String httpUrl="http://10.0.2.2/index.php/home/index/getServiceType?typename=酒店&by="+ URLEncoder.encode(rank);
+        String httpUrl="http://119.29.60.248/index.php/home/index/getServiceType?typename=酒店&by="+ URLEncoder.encode(rank);
         try {
             URL url = new URL(httpUrl);
             httpURLConnection = (HttpURLConnection) url.openConnection();

@@ -135,7 +135,7 @@ public class AttractionActivity extends FragmentActivity {
     }
     public void getInternetData(){
         HttpURLConnection httpURLConnection = null;
-        String httpUrl="http://192.168.7.22/index.php/home/index/getServiceType?typename="+ URLEncoder.encode("景点")+"&by="+rank;
+        String httpUrl="http://119.29.60.248/index.php/home/index/getServiceType?typename="+ URLEncoder.encode("景点")+"&by="+rank;
         try {
             URL url = new URL(httpUrl);
             httpURLConnection = (HttpURLConnection) url.openConnection();

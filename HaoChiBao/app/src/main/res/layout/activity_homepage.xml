@@ -30,16 +30,13 @@
         <EditText
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="20dp"
             android:background="@drawable/home_page_edittext"
             android:hint="@string/homepage_edittext"
             android:textSize="@dimen/font_32"
-            android:paddingBottom="5dp"
-            android:paddingTop="5dp"
             android:textColorHint="@color/borderGray" />
-
         <TextView
             android:id="@+id/homepage_weather"
             android:layout_width="wrap_content"

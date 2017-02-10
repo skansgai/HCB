@@ -107,7 +107,7 @@ public class CommentActivity extends Activity {
         }
     };
     public void getListData(){
-        String httpUrl = "http://192.168.7.22/index.php/home/comment/getUserComment?service_id=1";
+        String httpUrl = "http://119.29.60.248/index.php/home/comment/getUserComment?service_id=1";
         try {
             URL url = new URL(httpUrl);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();

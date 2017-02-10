@@ -159,7 +159,7 @@ public class FindFragment extends Fragment {
     }
 
     public void getShare(){
-        String uri="http://192.168.7.23/index.php/home/index/getShare";
+        String uri="http://119.29.60.248/index.php/home/index/getShare";
         try {
             URL url=new URL(uri);
             GetHttp getHttp=new GetHttp(context,url);

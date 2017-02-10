@@ -138,7 +138,7 @@ public class EntertainmentActivity extends Activity {
 
     public void getInternetData(){
         HttpURLConnection httpURLConnection = null;
-        String httpUrl="http://192.168.7.23/index.php/home/index/getServiceType?typename=娱乐&by="+rank;
+        String httpUrl="http://119.29.60.248/index.php/home/index/getServiceType?typename=娱乐&by="+rank;
         try {
             URL url = new URL(httpUrl);
             httpURLConnection = (HttpURLConnection) url.openConnection();

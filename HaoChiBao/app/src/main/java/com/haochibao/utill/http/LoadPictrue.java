@@ -47,7 +47,7 @@ public class LoadPictrue {
 Runnable runnable=new Runnable() {
     @Override
     public void run() {
-        String uri="http://192.168.7.23/image/image1.jpeg";
+        String uri="http://119.29.60.248/Public/images/image1.jpeg";
         try {
             URL url=new URL(uri);
             HttpURLConnection connection= (HttpURLConnection) url.openConnection();

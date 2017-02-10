@@ -140,7 +140,7 @@ public class ParkingActivity extends FragmentActivity {
     }
     public void getInternetData(){
         HttpURLConnection httpURLConnection = null;
-        String httpUrl="http://192.168.7.22/index.php/home/index/getServiceType?typename="+ URLEncoder.encode("停车场")+"&by="+URLEncoder.encode(rank);
+        String httpUrl="http://119.29.60.248/index.php/home/index/getServiceType?typename="+ URLEncoder.encode("停车场")+"&by="+URLEncoder.encode(rank);
         try {
             URL url = new URL(httpUrl);
             httpURLConnection = (HttpURLConnection) url.openConnection();
