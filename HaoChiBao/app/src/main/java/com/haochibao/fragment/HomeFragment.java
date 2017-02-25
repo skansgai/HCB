@@ -64,7 +64,7 @@ public class HomeFragment extends Fragment {
     ListView listView;
     String tianqi;
     private Location location;
-    String cituName="重庆";
+    String cityName="重庆";
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private final static String TAG="HaoChoBao";
@@ -73,15 +73,15 @@ public class HomeFragment extends Fragment {
     private ImageView image_view;
     double longitude=116.357428;
     double latitude=39.93923;
-    final static String HTTPUTI = "http://api.avatardata.cn/Weather/Query?key=d14a6039b7f7420c82d7d487eaa38bbe&cityname=";
+    final static String HTTPUTI = "http://api.avatardata.cn/Weather/Query?key=ac5cd86c6e2e44e1babcf4d6b95e2a98&cityname=";
     ImageLoader imageLoader;
     private Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
             if (msg.what==0){
-             homepage_address.setText(cituName);
             }
             if (msg.what==1){
+                //homepage_address.setText(cityName);
                 homepage_weather.setText(tianqi);
             }
             if (msg.what==3){
@@ -235,8 +235,9 @@ public class HomeFragment extends Fragment {
         location.setOnClicklistener(new Location.onResultListener() {
             @Override
             public void onClick(String data) {
-                editor.putString("location",location.getCityname());
+                editor.putString("location",data);
                 editor.commit();
+                Log.i("location",data);
             }
         });
         location.setLocationOnClicklistener(new Location.onLocationListener() {
@@ -251,10 +252,8 @@ public class HomeFragment extends Fragment {
     }
     public  void getWeath(){
         if (sharedPreferences.getString("location",null)!=null){
-            cituName=sharedPreferences.getString("location",null);
-            Log.i(TAG,cituName);
-        }else{
-            cituName="重庆";
+            cityName=sharedPreferences.getString("location","重庆");
+            Log.i(TAG,cityName);
         }
         weather = new Weather(HTTPUTI,"重庆",handler);
         weather.setOnClicklistener(new Weather.onResultListener() {
@@ -264,6 +263,7 @@ public class HomeFragment extends Fragment {
             }
         });
         weather.start();
+        Log.i(TAG,cityName);
     }
     public String  getHomeBanner(){
 

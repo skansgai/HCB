@@ -42,7 +42,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <meta-data android:name="com.amap.api.v2.apikey" android:value="20c065656a7289d56de0a5fcc6db70f1">//开发者申请的key
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="20c065656a7289d56de0a5fcc6db70f1">//开发者申请的key
         </meta-data>
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
