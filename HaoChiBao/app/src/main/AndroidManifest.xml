@@ -34,6 +34,8 @@
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
     <application
@@ -49,10 +51,11 @@
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="aetumvluZtsGCXqaM7PGTEn3mjGhqXdX" />
-        <!--百度导航服务-->
+        <!--百度导航服务
+        66bc4784cf07acc450e1c778296704a2-->
         <meta-data
             android:name="BaiduMobAd_STAT_ID"
-            android:value="66bc4784cf07acc450e1c778296704a2" />
+            android:value="aetumvluZtsGCXqaM7PGTEn3mjGhqXdX" />
         <activity android:name=".activity.SplashActivity"><!--引导页面-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

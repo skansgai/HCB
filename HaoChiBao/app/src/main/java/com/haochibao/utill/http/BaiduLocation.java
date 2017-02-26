@@ -38,10 +38,10 @@ public class BaiduLocation  {
         option.setScanSpan(0);
         option.setIsNeedAddress(true);
         option.setOpenGps(true);
-        option.setLocationNotify(true);
+        option.setLocationNotify(false);
         option.setIsNeedLocationDescribe(true);
         option.setIsNeedLocationPoiList(true);
-        option.setIgnoreKillProcess(false);
+        option.setIgnoreKillProcess(true);
         option.SetIgnoreCacheException(true);
         option.setEnableSimulateGps(true);
         locationClient.setLocOption(option);

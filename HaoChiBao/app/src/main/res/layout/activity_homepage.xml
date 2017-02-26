@@ -24,7 +24,7 @@
             android:drawableRight="@mipmap/home_sw_resize"
             android:text="@string/cq"
             android:textColor="@color/white"
-            android:textSize="@dimen/font_40" />
+            android:textSize="@dimen/font_32" />
 
         <EditText
             android:layout_width="0dp"
@@ -44,7 +44,7 @@
             android:text="@string/weather"
             android:layout_marginLeft="20dp"
             android:textColor="@color/white"
-            android:textSize="@dimen/font_36" />
+            android:textSize="@dimen/font_32" />
     </LinearLayout>
 
     <ScrollView

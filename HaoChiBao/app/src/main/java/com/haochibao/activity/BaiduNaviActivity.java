@@ -503,7 +503,7 @@ public class BaiduNaviActivity extends Activity {
                 if (cityName!=null){
                     try {
                         String uri="http://api.map.baidu.com/cloudgc/v1?ak=aetumvluZtsGCXqaM7PGTEn3mjGhqXdX&" +
-                                "mcode=EE:2E:62:10:F8:1B:78:8D:EB:5F:66:0A:0B:B7:0B:04:EA:28:A1:ED;com.haochibao&address="+ URLEncoder.encode(cityName,"utf-8");
+                                "mcode=45:2B:5C:36:AB:11:8B:A8:5E:BE:11:38:DF:90:0F:C9:9E:96:2A:A9;com.haochibao&address="+ URLEncoder.encode(cityName,"utf-8");
                         URL url = new URL(uri);
                         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                         connection.setRequestMethod("GET");

@@ -2,7 +2,6 @@ package com.haochibao.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -10,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -29,6 +29,7 @@ import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.haochibao.R;
+import com.haochibao.utill.http.BaiduLocation;
 import com.haochibao.utill.http.Location;
 import com.haochibao.utill.model.MyOrientationListener;
 
@@ -52,6 +53,7 @@ public class BaiduMapActivity extends Activity{
     private LocationClient locationClient = null;
     private MyOrientationListener myOrientationListener;
     private BitmapDescriptor iconBitmap;
+    private BaiduLocation baiduLocation;
     //定义坐标点
     private LatLng point;
     float mCurrentX;
@@ -60,14 +62,11 @@ public class BaiduMapActivity extends Activity{
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-//            if (msg.what==1){
-//                LatLng point= (LatLng) msg.obj;
-//                setMapCenter(point);
-//                annotation(point);
-//            }
+            if (msg.what==2){
+                moveAnnotation(point);
+            }
         }
     };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +79,7 @@ public class BaiduMapActivity extends Activity{
     }
     //初始化控件
     public void initView(){
+        point = new LatLng(longitude,latitude);
         normal_map= (TextView) findViewById(R.id.normal_map);
         satellite_map= (TextView) findViewById(R.id.satellite_map);
         hot_map= (TextView) findViewById(R.id.hot_map);
@@ -98,6 +98,7 @@ public class BaiduMapActivity extends Activity{
         mapView = (MapView) findViewById(R.id.bmapView);
         //对地图的设置
         baiduMap = mapView.getMap();
+        baiduMap.setMapType(BaiduMap.MAP_TYPE_NORMAL);
         iconBitmap =BitmapDescriptorFactory.fromResource(R.mipmap.arrow);
         myOrientationListener = new MyOrientationListener(this);
         myOrientationListener.setmOnOrientationListener(new MyOrientationListener.OnOrientationListener() {
@@ -107,16 +108,6 @@ public class BaiduMapActivity extends Activity{
             }
         });
     }
-
-    //初始化导航
-    public void initNavi(){
-        if (Build.VERSION.SDK_INT>=23){
-            //保证导航功能完备
-
-        }
-    }
-
-
 
     //控件监听
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -152,8 +143,8 @@ public class BaiduMapActivity extends Activity{
             case R.id.map_navi:
                 Intent intent = new Intent(BaiduMapActivity.this,BaiduNaviActivity.class);
                 Bundle bundle=new Bundle();
-                double longitude=point.longitude;
-                double latitude=point.latitude;
+                longitude=point.longitude;
+                latitude=point.latitude;
                 bundle.putDouble("latitude",latitude);
                 bundle.putDouble("longitude",longitude);
                 intent.putExtras(bundle);
@@ -163,48 +154,39 @@ public class BaiduMapActivity extends Activity{
         }
     };
     public void getLocation() {
-        locationClient = new LocationClient(this);
-        LocationClientOption option = new LocationClientOption();
-        option.setCoorType("bd0911");
-        option.setScanSpan(5000);
-        option.setIsNeedAddress(true);
-        option.setOpenGps(true);
-        option.setLocationNotify(true);
-        option.setIsNeedLocationDescribe(true);
-        option.setIsNeedLocationPoiList(true);
-        option.setIgnoreKillProcess(false);
-        option.SetIgnoreCacheException(true);
-        option.setEnableSimulateGps(true);
-        locationClient.setLocOption(option);
-        locationClient.registerLocationListener(new BDLocationListener() {
-            @Override
-            public void onReceiveLocation(BDLocation bdLocation) {
-                MyLocationData data = new MyLocationData.Builder()//
-                .direction(mCurrentX)
-                .accuracy(bdLocation.getRadius())//
-                .latitude(bdLocation.getLatitude())//
-                .longitude(bdLocation.getLongitude())//
-                .build();
-                baiduMap.setMyLocationData(data);
-                //自定义
-                MyLocationConfiguration config = new MyLocationConfiguration(
-                        MyLocationConfiguration.LocationMode.NORMAL,true,iconBitmap);
-                baiduMap.setMyLocationConfigeration(config);
+        baiduLocation = new BaiduLocation(context);
 
-                if (isFirstIn){
-                    point = new LatLng(bdLocation.getLatitude(),bdLocation.getLongitude());
-                    MapStatusUpdate mapStatusUpdate=MapStatusUpdateFactory.newLatLng(point);
-                    baiduMap.animateMapStatus(mapStatusUpdate);
-                    Log.i("================hahah","latitude"+bdLocation.getLatitude()+"longitude"+bdLocation.getLongitude()+"\n城市名"+bdLocation.getCity());
-                }
-                Log.i("================","latitude"+bdLocation.getLatitude()+"longitude"+bdLocation.getLongitude()+"\n城市名"+bdLocation.getCity());
+        baiduLocation.location(new BaiduLocation.onResultListener() {
+            @Override
+            public void onClick(double data1, double data2) {
+                longitude=data1;
+                latitude=data2;
+                point = new LatLng(data1,data2);
+                setMapCenter(point);
+                moveAnnotation(point);
+                Log.i("POINT",point.latitude+"****"+point.longitude+"");
             }
         });
+        baiduLocation.locationStart();
+
+        //自定义
+        MyLocationConfiguration config = new MyLocationConfiguration(
+                MyLocationConfiguration.LocationMode.NORMAL,true,iconBitmap);
+        baiduMap.setMyLocationConfigeration(config);
+
+        if (isFirstIn){
+            MapStatusUpdate mapStatusUpdate=MapStatusUpdateFactory.newLatLng(point);
+            baiduMap.animateMapStatus(mapStatusUpdate);
+        }
+
+        locationClient = new LocationClient(this);
+
+
     }
     //地图标注、覆盖物
     public void annotation(LatLng point){
         //构建图标样式
-        BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.mipmap.location_icon);
+        BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.mipmap.arrow);
         //构建MakerOption用于在地图上添加maker
         OverlayOptions options = new MarkerOptions()
                 .position(point)
@@ -215,7 +197,7 @@ public class BaiduMapActivity extends Activity{
     //拖拉覆盖物
     public void moveAnnotation(LatLng point){
         //构建图标样式
-        BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.mipmap.location_icon);
+        BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.mipmap.arrow);
         //构建MakerOption用于在地图上添加maker
         OverlayOptions options = new MarkerOptions()
                 .position(point)//设置marker的位置
@@ -249,6 +231,7 @@ public class BaiduMapActivity extends Activity{
                 .target(point)
                 .zoom(18)
                 .build();
+
         //定义MapStatusUpdate对象，以便描述地图状态将要发生的变化
         MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mapStatus);
         baiduMap.setMapStatus(mMapStatusUpdate);
@@ -278,6 +261,7 @@ public class BaiduMapActivity extends Activity{
         baiduMap.setMyLocationEnabled(false);
         locationClient.stop();
         //停止方向传感器
+        baiduLocation.locationStop();
         myOrientationListener.stop();
     }
 }

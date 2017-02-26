@@ -22,6 +22,8 @@ android {
         main{
             jniLibs.srcDirs=['libs']
         }
+        debug.setRoot('build-types/debug')
+        release.setRoot('build-types/release')
     }
 
 }

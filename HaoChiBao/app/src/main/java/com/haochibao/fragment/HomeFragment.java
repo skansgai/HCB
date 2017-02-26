@@ -81,7 +81,7 @@ public class HomeFragment extends Fragment {
             if (msg.what==0){
             }
             if (msg.what==1){
-                //homepage_address.setText(cityName);
+                homepage_address.setText(cityName);
                 homepage_weather.setText(tianqi);
             }
             if (msg.what==3){
@@ -255,7 +255,7 @@ public class HomeFragment extends Fragment {
             cityName=sharedPreferences.getString("location","重庆");
             Log.i(TAG,cityName);
         }
-        weather = new Weather(HTTPUTI,"重庆",handler);
+        weather = new Weather(HTTPUTI,cityName,handler);
         weather.setOnClicklistener(new Weather.onResultListener() {
             @Override
             public void onClick(String data) {
