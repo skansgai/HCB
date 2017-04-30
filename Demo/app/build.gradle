@@ -1,5 +1,15 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'hiBeaver'
+hiBeaver {
+    //turn this on to make it print help content, default value is true
+    showHelp = true
+    //this flag will decide whether the log of the modifying process be printed or not, default value is false
+    keepQuiet = false
+    //this is a kit feature of the plugin, set it true to see the time consume of this build
+    watchTimeConsume = false
+    //this is the most important part
+    modifyMatchMaps = [:]
+}
 android {
     compileSdkVersion 24
     buildToolsVersion "24.0.2"
@@ -29,4 +39,8 @@ dependencies {
     compile 'com.android.support:appcompat-v7:24.2.1'
     testCompile 'junit:junit:4.12'
     compile files('libs/picasso-2.5.2.jar')
+    compile files('libs/MiPush_SDK_Client_3_2_2.jar')
+    compile files('libs/netty-all-4.1.8.Final-sources.jar')
+    compile files('libs/netty-all-4.1.8.Final-javadoc.jar')
+    compile files('libs/alivc-player-2.3.0.jar')
 }
